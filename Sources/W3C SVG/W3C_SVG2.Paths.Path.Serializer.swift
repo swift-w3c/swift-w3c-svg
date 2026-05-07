@@ -30,8 +30,8 @@ extension W3C_SVG2.Paths.Path {
 
             for subpath in path.subpaths {
                 // MoveTo for subpath start
-                let startX = subpath.startPoint.x.rawValue.formatted(.number)
-                let startY = subpath.startPoint.y.rawValue.formatted(.number)
+                let startX = subpath.startPoint.x.formatted(.number)
+                let startY = subpath.startPoint.y.formatted(.number)
                 parts.append("M\(startX),\(startY)")
 
                 // Serialize each segment
@@ -54,8 +54,8 @@ extension W3C_SVG2.Paths.Path {
         ) -> String {
             switch segment {
             case .line(let line):
-                let x = line.end.x.rawValue.formatted(.number)
-                let y = line.end.y.rawValue.formatted(.number)
+                let x = line.end.x.formatted(.number)
+                let y = line.end.y.formatted(.number)
                 return "L\(x),\(y)"
 
             case .bezier(let bezier):
@@ -83,20 +83,20 @@ extension W3C_SVG2.Paths.Path {
             let endPoint = arc.endPoint
 
             // Convert rotation from radians to degrees
-            let rotationDegrees = arc.rotation.rawValue * 180 / .pi
+            let rotationDegrees = arc.rotation.underlying * 180 / .pi
 
             // Determine flags from sweep angle
-            let sweepRaw = arc.sweep.rawValue
+            let sweepRaw = arc.sweep.underlying
             let largeArcFlag = abs(sweepRaw) > .pi
             let sweepFlag = sweepRaw > 0
 
-            let rx = arc.semiMajor.rawValue.formatted(.number)
-            let ry = arc.semiMinor.rawValue.formatted(.number)
+            let rx = arc.semiMajor.formatted(.number)
+            let ry = arc.semiMinor.formatted(.number)
             let rot = rotationDegrees.formatted(.number)
             let large = largeArcFlag ? "1" : "0"
             let sweep = sweepFlag ? "1" : "0"
-            let x = endPoint.x.rawValue.formatted(.number)
-            let y = endPoint.y.rawValue.formatted(.number)
+            let x = endPoint.x.formatted(.number)
+            let y = endPoint.y.formatted(.number)
 
             return "A\(rx),\(ry) \(rot) \(large) \(sweep) \(x),\(y)"
         }
@@ -108,26 +108,26 @@ extension W3C_SVG2.Paths.Path {
             switch points.count {
             case 2:
                 // Linear (L command)
-                let x = points[1].x.rawValue.formatted(.number)
-                let y = points[1].y.rawValue.formatted(.number)
+                let x = points[1].x.formatted(.number)
+                let y = points[1].y.formatted(.number)
                 return "L\(x),\(y)"
 
             case 3:
                 // Quadratic (Q command)
-                let cx = points[1].x.rawValue.formatted(.number)
-                let cy = points[1].y.rawValue.formatted(.number)
-                let x = points[2].x.rawValue.formatted(.number)
-                let y = points[2].y.rawValue.formatted(.number)
+                let cx = points[1].x.formatted(.number)
+                let cy = points[1].y.formatted(.number)
+                let x = points[2].x.formatted(.number)
+                let y = points[2].y.formatted(.number)
                 return "Q\(cx),\(cy) \(x),\(y)"
 
             case 4:
                 // Cubic (C command)
-                let c1x = points[1].x.rawValue.formatted(.number)
-                let c1y = points[1].y.rawValue.formatted(.number)
-                let c2x = points[2].x.rawValue.formatted(.number)
-                let c2y = points[2].y.rawValue.formatted(.number)
-                let x = points[3].x.rawValue.formatted(.number)
-                let y = points[3].y.rawValue.formatted(.number)
+                let c1x = points[1].x.formatted(.number)
+                let c1y = points[1].y.formatted(.number)
+                let c2x = points[2].x.formatted(.number)
+                let c2y = points[2].y.formatted(.number)
+                let x = points[3].x.formatted(.number)
+                let y = points[3].y.formatted(.number)
                 return "C\(c1x),\(c1y) \(c2x),\(c2y) \(x),\(y)"
 
             default:

@@ -67,7 +67,7 @@ extension W3C_SVG2.Polygon {
     /// Format: space-separated list of "x,y" coordinate pairs
     public var points: String {
         vertices.map {
-            "\($0.x.rawValue.formatted(.number)),\($0.y.rawValue.formatted(.number))"
+            "\($0.x.formatted(.number)),\($0.y.formatted(.number))"
         }.joined(separator: " ")
     }
 

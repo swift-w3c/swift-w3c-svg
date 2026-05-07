@@ -66,14 +66,14 @@ extension W3C_SVG2.Ellipse {
     /// SVG attribute: `rx`
     /// Note: Maps to semiMajor (assumes axis-aligned ellipse with rx as horizontal radius)
     @inlinable
-    public var rx: W3C_SVG2.Width { W3C_SVG2.Width(semiMajor.rawValue) }
+    public var rx: W3C_SVG2.Width { W3C_SVG2.Width(semiMajor.underlying) }
 
     /// The y-axis radius of the ellipse
     ///
     /// SVG attribute: `ry`
     /// Note: Maps to semiMinor (assumes axis-aligned ellipse with ry as vertical radius)
     @inlinable
-    public var ry: W3C_SVG2.Height { W3C_SVG2.Height(semiMinor.rawValue) }
+    public var ry: W3C_SVG2.Height { W3C_SVG2.Height(semiMinor.underlying) }
 
     /// Creates an ellipse element using SVG-style parameters
     ///
@@ -91,8 +91,8 @@ extension W3C_SVG2.Ellipse {
     ) {
         self.init(
             center: .init(x: cx, y: cy),
-            semiMajor: .init(rx.rawValue),
-            semiMinor: .init(ry.rawValue)
+            semiMajor: .init(rx.underlying),
+            semiMinor: .init(ry.underlying)
         )
     }
 }

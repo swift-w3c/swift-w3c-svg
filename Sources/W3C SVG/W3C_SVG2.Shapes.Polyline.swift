@@ -58,7 +58,7 @@ extension W3C_SVG2.Shapes {
         ///   - coordinates: Array of (x, y) coordinate tuples
         public init(coordinates: [(W3C_SVG2.X, W3C_SVG2.Y)]) {
             self.points = coordinates.map {
-                "\($0.0.rawValue.formatted(.number)),\($0.1.rawValue.formatted(.number))"
+                "\($0.0.formatted(.number)),\($0.1.formatted(.number))"
             }.joined(separator: " ")
         }
 

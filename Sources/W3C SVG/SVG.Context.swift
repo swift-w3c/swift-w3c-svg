@@ -27,7 +27,7 @@ extension Geometry.Ball where N == 2, Scalar == Double, Space == W3C_SVG.Space {
         ///
         /// Returns `nil` if the radius is negative.
         public var element: W3C_SVG2.Shapes.Circle? {
-            guard circle.radius.rawValue >= 0 else { return nil }
+            guard circle.radius.underlying >= 0 else { return nil }
             return W3C_SVG2.Shapes.Circle(
                 cx: circle.center.x,
                 cy: circle.center.y,
@@ -57,7 +57,7 @@ extension Geometry.Orthotope where N == 2, Scalar == Double, Space == W3C_SVG.Sp
         ///
         /// Returns `nil` if width or height is negative.
         public var element: W3C_SVG2.Shapes.Rectangle? {
-            guard rectangle.width.rawValue >= 0, rectangle.height.rawValue >= 0 else { return nil }
+            guard rectangle.width.underlying >= 0, rectangle.height.underlying >= 0 else { return nil }
             return W3C_SVG2.Shapes.Rectangle(
                 x: rectangle.llx,
                 y: rectangle.lly,
@@ -88,12 +88,12 @@ extension Geometry.Ellipse where Scalar == Double, Space == W3C_SVG.Space {
         ///
         /// Returns `nil` if either radius is negative.
         public var element: W3C_SVG2.Shapes.Ellipse? {
-            guard ellipse.semiMajor.rawValue >= 0, ellipse.semiMinor.rawValue >= 0 else { return nil }
+            guard ellipse.semiMajor.underlying >= 0, ellipse.semiMinor.underlying >= 0 else { return nil }
             return W3C_SVG2.Shapes.Ellipse(
                 cx: ellipse.center.x,
                 cy: ellipse.center.y,
-                rx: Geometry<Double, W3C_SVG.Space>.Width(ellipse.semiMajor.rawValue),
-                ry: Geometry<Double, W3C_SVG.Space>.Height(ellipse.semiMinor.rawValue)
+                rx: Geometry<Double, W3C_SVG.Space>.Width(ellipse.semiMajor.underlying),
+                ry: Geometry<Double, W3C_SVG.Space>.Height(ellipse.semiMinor.underlying)
             )
         }
     }
