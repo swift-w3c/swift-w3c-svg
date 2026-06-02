@@ -18,9 +18,9 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../../swift-primitives/swift-format-primitives"),
-        .package(path: "../../swift-primitives/swift-geometry-primitives"),
-        .package(path: "../../swift-primitives/swift-parser-primitives"),
+        .package(url: "https://github.com/swift-primitives/swift-format-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-geometry-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-parser-primitives.git", branch: "main"),
         // .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.18.0")
     ],
     targets: [
