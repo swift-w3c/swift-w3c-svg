@@ -1,6 +1,6 @@
 # swift-w3c-svg
 
-[![CI](https://github.com/swift-standards/swift-w3c-svg/workflows/CI/badge.svg)](https://github.com/swift-standards/swift-w3c-svg/actions/workflows/ci.yml)
+[![CI](https://github.com/swift-w3c/swift-w3c-svg/workflows/CI/badge.svg)](https://github.com/swift-w3c/swift-w3c-svg/actions/workflows/ci.yml)
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
 Foundation-free Swift implementation of W3C SVG 2 specification.
@@ -42,7 +42,7 @@ Add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-standards/swift-w3c-svg", from: "0.1.0")
+    .package(url: "https://github.com/swift-w3c/swift-w3c-svg", from: "0.3.0")
 ]
 ```
 
@@ -315,7 +315,7 @@ All types are:
 
 ### Used By
 
-- [swift-svg](https://github.com/coenttb/swift-svg): A Swift package for type-safe SVG generation.
+- [swift-svg](https://github.com/swift-foundations/swift-svg): A Swift package for type-safe SVG generation.
 - [swift-svg-printer](https://github.com/coenttb/swift-svg-printer): A Swift package for rendering SVG to String or bytes.
 
 ## Requirements
