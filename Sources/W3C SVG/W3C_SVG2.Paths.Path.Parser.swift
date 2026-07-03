@@ -5,7 +5,6 @@
 //  SVG path data parser (SVG 2 Section 9)
 //
 
-import Foundation
 internal import Geometry_Primitives
 
 extension W3C_SVG2.Paths.Path {
