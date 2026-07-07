@@ -19,7 +19,10 @@ extension W3C_SVG2.Circle {
     }
 
     /// Create a styled circle with a stroke color.
-    public func stroked(_ color: W3C_SVG2.Types.Color, width: W3C_SVG2.Width? = nil) -> W3C_SVG2.Styled.Circle {
+    public func stroked(
+        _ color: W3C_SVG2.Types.Color,
+        width: W3C_SVG2.Width? = nil
+    ) -> W3C_SVG2.Styled.Circle {
         W3C_SVG2.Styled.Circle(geometry: self, stroke: .init(color: color, width: width))
     }
 }
@@ -38,7 +41,10 @@ extension W3C_SVG2.Rectangle {
     }
 
     /// Create a styled rectangle with a stroke color.
-    public func stroked(_ color: W3C_SVG2.Types.Color, width: W3C_SVG2.Width? = nil) -> W3C_SVG2.Styled.Rectangle {
+    public func stroked(
+        _ color: W3C_SVG2.Types.Color,
+        width: W3C_SVG2.Width? = nil
+    ) -> W3C_SVG2.Styled.Rectangle {
         W3C_SVG2.Styled.Rectangle(geometry: self, stroke: .init(color: color, width: width))
     }
 }
@@ -57,7 +63,10 @@ extension W3C_SVG2.Ellipse {
     }
 
     /// Create a styled ellipse with a stroke color.
-    public func stroked(_ color: W3C_SVG2.Types.Color, width: W3C_SVG2.Width? = nil) -> W3C_SVG2.Styled.Ellipse {
+    public func stroked(
+        _ color: W3C_SVG2.Types.Color,
+        width: W3C_SVG2.Width? = nil
+    ) -> W3C_SVG2.Styled.Ellipse {
         W3C_SVG2.Styled.Ellipse(geometry: self, stroke: .init(color: color, width: width))
     }
 }
@@ -71,7 +80,10 @@ extension W3C_SVG2.Line {
     }
 
     /// Create a styled line with a stroke color.
-    public func stroked(_ color: W3C_SVG2.Types.Color, width: W3C_SVG2.Width? = nil) -> W3C_SVG2.Styled.Line {
+    public func stroked(
+        _ color: W3C_SVG2.Types.Color,
+        width: W3C_SVG2.Width? = nil
+    ) -> W3C_SVG2.Styled.Line {
         W3C_SVG2.Styled.Line(geometry: self, stroke: .init(color: color, width: width))
     }
 }
@@ -90,7 +102,10 @@ extension W3C_SVG2.Polygon {
     }
 
     /// Create a styled polygon with a stroke color.
-    public func stroked(_ color: W3C_SVG2.Types.Color, width: W3C_SVG2.Width? = nil) -> W3C_SVG2.Styled.Polygon {
+    public func stroked(
+        _ color: W3C_SVG2.Types.Color,
+        width: W3C_SVG2.Width? = nil
+    ) -> W3C_SVG2.Styled.Polygon {
         W3C_SVG2.Styled.Polygon(geometry: self, stroke: .init(color: color, width: width))
     }
 }
@@ -109,7 +124,10 @@ extension W3C_SVG2.Path {
     }
 
     /// Create a styled path with a stroke color.
-    public func stroked(_ color: W3C_SVG2.Types.Color, width: W3C_SVG2.Width? = nil) -> W3C_SVG2.Styled.Path {
+    public func stroked(
+        _ color: W3C_SVG2.Types.Color,
+        width: W3C_SVG2.Width? = nil
+    ) -> W3C_SVG2.Styled.Path {
         W3C_SVG2.Styled.Path(geometry: self, stroke: .init(color: color, width: width))
     }
 }

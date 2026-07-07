@@ -14,134 +14,134 @@ struct W3C_SVG2_Tests {
 
     @Suite("Types - Length")
     struct LengthTests {
-//         @Test("Length pixels")
-//         func lengthPixels() {
-//             let length = W3C_SVG2.Types.Length.px(100)
-//             assertInlineSnapshot(of: length.description, as: .lines) {
-//                 """
-//                 100px
-//                 """
-//             }
-//         }
+        //         @Test("Length pixels")
+        //         func lengthPixels() {
+        //             let length = W3C_SVG2.Types.Length.px(100)
+        //             assertInlineSnapshot(of: length.description, as: .lines) {
+        //                 """
+        //                 100px
+        //                 """
+        //             }
+        //         }
 
-//         @Test("Length percentage")
-//         func lengthPercentage() {
-//             let length = W3C_SVG2.Types.Length.percentage(50)
-//             assertInlineSnapshot(of: length.description, as: .lines) {
-//                 """
-//                 50%
-//                 """
-//             }
-//         }
+        //         @Test("Length percentage")
+        //         func lengthPercentage() {
+        //             let length = W3C_SVG2.Types.Length.percentage(50)
+        //             assertInlineSnapshot(of: length.description, as: .lines) {
+        //                 """
+        //                 50%
+        //                 """
+        //             }
+        //         }
 
-//         @Test("Length em")
-//         func lengthEm() {
-//             let length = W3C_SVG2.Types.Length.em(2.5)
-//             assertInlineSnapshot(of: length.description, as: .lines) {
-//                 """
-//                 2.5em
-//                 """
-//             }
-//         }
+        //         @Test("Length em")
+        //         func lengthEm() {
+        //             let length = W3C_SVG2.Types.Length.em(2.5)
+        //             assertInlineSnapshot(of: length.description, as: .lines) {
+        //                 """
+        //                 2.5em
+        //                 """
+        //             }
+        //         }
 
-//         @Test("Length formatted")
-//         func lengthFormatted() {
-//             let length1: W3C_SVG2.Types.Length = 1
-//             assertInlineSnapshot(of: length1.description, as: .lines) {
-//                 """
-//                 1
-//                 """
-//             }
-//         }
+        //         @Test("Length formatted")
+        //         func lengthFormatted() {
+        //             let length1: W3C_SVG2.Types.Length = 1
+        //             assertInlineSnapshot(of: length1.description, as: .lines) {
+        //                 """
+        //                 1
+        //                 """
+        //             }
+        //         }
     }
 
     @Suite("Types - Color")
     struct ColorTests {
-//         @Test("Color named")
-//         func colorNamed() {
-//             let color = W3C_SVG2.Types.Color.named("red")
-//             assertInlineSnapshot(of: color.description, as: .lines) {
-//                 """
-//                 red
-//                 """
-//             }
-//         }
+        //         @Test("Color named")
+        //         func colorNamed() {
+        //             let color = W3C_SVG2.Types.Color.named("red")
+        //             assertInlineSnapshot(of: color.description, as: .lines) {
+        //                 """
+        //                 red
+        //                 """
+        //             }
+        //         }
 
-//         @Test("Color hex")
-//         func colorHex() {
-//             let color = W3C_SVG2.Types.Color.hex("FF0000")
-//             assertInlineSnapshot(of: color.description, as: .lines) {
-//                 """
-//                 #FF0000
-//                 """
-//             }
-//         }
+        //         @Test("Color hex")
+        //         func colorHex() {
+        //             let color = W3C_SVG2.Types.Color.hex("FF0000")
+        //             assertInlineSnapshot(of: color.description, as: .lines) {
+        //                 """
+        //                 #FF0000
+        //                 """
+        //             }
+        //         }
 
-//         @Test("Color RGB")
-//         func colorRGB() {
-//             let color = W3C_SVG2.Types.Color.rgb(r: 255, g: 0, b: 0)
-//             assertInlineSnapshot(of: color.description, as: .lines) {
-//                 """
-//                 rgb(255, 0, 0)
-//                 """
-//             }
-//         }
+        //         @Test("Color RGB")
+        //         func colorRGB() {
+        //             let color = W3C_SVG2.Types.Color.rgb(r: 255, g: 0, b: 0)
+        //             assertInlineSnapshot(of: color.description, as: .lines) {
+        //                 """
+        //                 rgb(255, 0, 0)
+        //                 """
+        //             }
+        //         }
     }
 
     @Suite("Types - Transform")
     struct TransformTests {
-//         @Test("Transform translate")
-//         func transformTranslate() {
-//             let transform = W3C_SVG2.Types.Transform.translate(x: 10, y: 20)
-//             assertInlineSnapshot(of: transform.description, as: .lines) {
-//                 """
-//                 translate(10 20)
-//                 """
-//             }
-//         }
+        //         @Test("Transform translate")
+        //         func transformTranslate() {
+        //             let transform = W3C_SVG2.Types.Transform.translate(x: 10, y: 20)
+        //             assertInlineSnapshot(of: transform.description, as: .lines) {
+        //                 """
+        //                 translate(10 20)
+        //                 """
+        //             }
+        //         }
 
-//         @Test("Transform rotate")
-//         func transformRotate() {
-//             let transform = W3C_SVG2.Types.Transform.rotate(angle: 45)
-//             assertInlineSnapshot(of: transform.description, as: .lines) {
-//                 """
-//                 rotate(45)
-//                 """
-//             }
-//         }
+        //         @Test("Transform rotate")
+        //         func transformRotate() {
+        //             let transform = W3C_SVG2.Types.Transform.rotate(angle: 45)
+        //             assertInlineSnapshot(of: transform.description, as: .lines) {
+        //                 """
+        //                 rotate(45)
+        //                 """
+        //             }
+        //         }
 
-//         @Test("Transform scale")
-//         func transformScale() {
-//             let transform = W3C_SVG2.Types.Transform.scale(x: 2, y: 3)
-//             assertInlineSnapshot(of: transform.description, as: .lines) {
-//                 """
-//                 scale(2 3)
-//                 """
-//             }
-//         }
+        //         @Test("Transform scale")
+        //         func transformScale() {
+        //             let transform = W3C_SVG2.Types.Transform.scale(x: 2, y: 3)
+        //             assertInlineSnapshot(of: transform.description, as: .lines) {
+        //                 """
+        //                 scale(2 3)
+        //                 """
+        //             }
+        //         }
     }
 
     @Suite("Types - ViewBox")
     struct ViewBoxTests {
-//         @Test("ViewBox creation")
-//         func viewBoxCreation() {
-//             let vb = W3C_SVG2.Types.ViewBox(width: 100, height: 200)
-//             assertInlineSnapshot(of: vb.description, as: .lines) {
-//                 """
-//                 0 0 100 200
-//                 """
-//             }
-//         }
+        //         @Test("ViewBox creation")
+        //         func viewBoxCreation() {
+        //             let vb = W3C_SVG2.Types.ViewBox(width: 100, height: 200)
+        //             assertInlineSnapshot(of: vb.description, as: .lines) {
+        //                 """
+        //                 0 0 100 200
+        //                 """
+        //             }
+        //         }
 
-//         @Test("ViewBox with offset")
-//         func viewBoxWithOffset() {
-//             let vb = W3C_SVG2.Types.ViewBox(minX: 10, minY: 20, width: 100, height: 200)
-//             assertInlineSnapshot(of: vb.description, as: .lines) {
-//                 """
-//                 10 20 100 200
-//                 """
-//             }
-//         }
+        //         @Test("ViewBox with offset")
+        //         func viewBoxWithOffset() {
+        //             let vb = W3C_SVG2.Types.ViewBox(minX: 10, minY: 20, width: 100, height: 200)
+        //             assertInlineSnapshot(of: vb.description, as: .lines) {
+        //                 """
+        //                 10 20 100 200
+        //                 """
+        //             }
+        //         }
     }
 
     @Suite("Shapes - Circle")

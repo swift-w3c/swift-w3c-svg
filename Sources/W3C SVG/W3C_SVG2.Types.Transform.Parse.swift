@@ -65,7 +65,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
             let byte = input[input.startIndex]
             // Check first character to determine function
             let lower = byte | 0x20
-            guard (lower >= 0x61 && lower <= 0x7A) else { break }
+            guard lower >= 0x61 && lower <= 0x7A else { break }
 
             let fn = try Self._parseFunction(&input)
             functions.append(fn)
@@ -109,17 +109,17 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
         let result: Function
 
         switch firstByte {
-        case 0x74: // t — translate
+        case 0x74:  // t — translate
             let args = try Self._parseArgs(&input, min: 1, max: 2)
             result = .translate(tx: args[0], ty: args.count > 1 ? args[1] : 0)
-        case 0x72: // r — rotate
+        case 0x72:  // r — rotate
             let args = try Self._parseArgs(&input, min: 1, max: 3)
             result = .rotate(
                 angle: args[0],
                 cx: args.count > 1 ? args[1] : 0,
                 cy: args.count > 2 ? args[2] : 0
             )
-        case 0x73: // s — scale or skewX or skewY
+        case 0x73:  // s — scale or skewX or skewY
             if nameLen == 5 {
                 // scale
                 let args = try Self._parseArgs(&input, min: 1, max: 2)
@@ -127,17 +127,21 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
             } else {
                 // skewX or skewY — disambiguate by 5th byte
                 let args = try Self._parseArgs(&input, min: 1, max: 1)
-                if fifthByte == 0x78 { // x
+                if fifthByte == 0x78 {  // x
                     result = .skewX(angle: args[0])
                 } else {
                     result = .skewY(angle: args[0])
                 }
             }
-        case 0x6D: // m — matrix
+        case 0x6D:  // m — matrix
             let args = try Self._parseArgs(&input, min: 6, max: 6)
             result = .matrix(
-                a: args[0], b: args[1], c: args[2],
-                d: args[3], e: args[4], f: args[5]
+                a: args[0],
+                b: args[1],
+                c: args[2],
+                d: args[3],
+                e: args[4],
+                f: args[5]
             )
         default:
             throw .expectedFunction
@@ -156,7 +160,9 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
 
     @inlinable
     static func _parseArgs(
-        _ input: inout Input, min: Int, max: Int
+        _ input: inout Input,
+        min: Int,
+        max: Int
     ) throws(Failure) -> [Double] {
         var args: [Double] = []
 
@@ -166,7 +172,8 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
             // Check if we have more numbers
             guard input.startIndex < input.endIndex else { break }
             let byte = input[input.startIndex]
-            let isStart = (byte >= 0x30 && byte <= 0x39)
+            let isStart =
+                (byte >= 0x30 && byte <= 0x39)
                 || byte == 0x2D || byte == 0x2B || byte == 0x2E
             guard isStart else {
                 if i >= min { break }

@@ -61,7 +61,8 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
             let hexStart = input.startIndex
             while input.startIndex < input.endIndex {
                 let byte = input[input.startIndex]
-                let isHex = (byte >= 0x30 && byte <= 0x39)
+                let isHex =
+                    (byte >= 0x30 && byte <= 0x39)
                     || (byte >= 0x41 && byte <= 0x46)
                     || (byte >= 0x61 && byte <= 0x66)
                 guard isHex else { break }
@@ -80,7 +81,8 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
         let nameStart = input.startIndex
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
-            let isAlpha = (byte >= 0x41 && byte <= 0x5A)
+            let isAlpha =
+                (byte >= 0x41 && byte <= 0x5A)
                 || (byte >= 0x61 && byte <= 0x7A)
             guard isAlpha else { break }
             input = input[input.index(after: input.startIndex)...]
@@ -90,8 +92,21 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
         let name = input[nameStart..<input.startIndex]
 
         // Check for known keywords by comparing the consumed slice
-        if Self._isKeyword(name, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6E, 0x74,
-                           0x63, 0x6F, 0x6C, 0x6F, 0x72) {
+        if Self._isKeyword(
+            name,
+            0x63,
+            0x75,
+            0x72,
+            0x72,
+            0x65,
+            0x6E,
+            0x74,
+            0x63,
+            0x6F,
+            0x6C,
+            0x6F,
+            0x72
+        ) {
             return .currentColor
         }
         if Self._isKeyword(name, 0x6E, 0x6F, 0x6E, 0x65) {
