@@ -98,11 +98,13 @@ extension W3C_SVG2.Document {
             self.width = width
             self.height = height
         }
-
-        /// SVG element tag name
-        public static let tagName = "use"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Document.Use {
+    /// SVG element tag name
+    public static let tagName = "use"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

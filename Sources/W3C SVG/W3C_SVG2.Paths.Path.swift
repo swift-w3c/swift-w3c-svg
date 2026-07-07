@@ -71,18 +71,6 @@ extension W3C_SVG2.Paths {
         /// Invalidated when geometry is modified.
         private var _originalPathData: String?
 
-        /// The path data string.
-        ///
-        /// Returns the original string if created from a string and unmodified,
-        /// otherwise serializes from geometry.
-        public var d: String? {
-            if let original = _originalPathData {
-                return original
-            }
-            guard !geometry.isEmpty else { return nil }
-            return Serializer.serialize(geometry)
-        }
-
         /// Creates a path element from a path data string.
         ///
         /// - Parameters:
@@ -112,11 +100,25 @@ extension W3C_SVG2.Paths {
             self._originalPathData = nil
             self.fillRule = fillRule
         }
-
-        /// SVG element tag name
-        public static let tagName = "path"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Paths.Path {
+    /// The path data string.
+    ///
+    /// Returns the original string if created from a string and unmodified,
+    /// otherwise serializes from geometry.
+    public var d: String? {
+        if let original = _originalPathData {
+            return original
+        }
+        guard !geometry.isEmpty else { return nil }
+        return Serializer.serialize(geometry)
+    }
+
+    /// SVG element tag name
+    public static let tagName = "path"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

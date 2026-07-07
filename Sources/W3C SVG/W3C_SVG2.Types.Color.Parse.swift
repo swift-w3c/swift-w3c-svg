@@ -176,7 +176,7 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
             Self._skipWS(&input)
 
             let a: Double
-            do {
+            do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
                 a = try W3C_SVG2.Parse.Number<Input>().parse(&input)
             } catch {
                 throw .expectedNumber

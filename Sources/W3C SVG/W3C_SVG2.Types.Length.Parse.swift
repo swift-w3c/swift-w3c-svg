@@ -50,7 +50,7 @@ extension W3C_SVG2.Types.Length.Parse: Parser.`Protocol` {
     @inlinable
     public func parse(_ input: inout Input) throws(Failure) -> Output {
         let value: Double
-        do {
+        do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
             value = try W3C_SVG2.Parse.Number<Input>().parse(&input)
         } catch {
             throw .numberError(error)

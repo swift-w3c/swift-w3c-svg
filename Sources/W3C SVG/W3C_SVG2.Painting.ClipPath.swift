@@ -41,18 +41,6 @@ extension W3C_SVG2.Painting {
         /// Default value: userSpaceOnUse
         public let clipPathUnits: Units?
 
-        /// Coordinate system for clip path geometry
-        ///
-        /// W3C SVG 2 Section 14.3.2
-        /// https://www.w3.org/TR/SVG2/masking.html#ClipPathElementClipPathUnitsAttribute
-        public enum Units: String, Sendable, Equatable {
-            /// Coordinate system established by user space
-            case userSpaceOnUse
-
-            /// Coordinate system relative to bounding box (0-1 range)
-            case objectBoundingBox
-        }
-
         /// Creates a clipPath element
         ///
         /// - Parameters:
@@ -65,11 +53,25 @@ extension W3C_SVG2.Painting {
             self.id = id
             self.clipPathUnits = clipPathUnits
         }
-
-        /// SVG element tag name
-        public static let tagName = "clipPath"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Painting.ClipPath {
+    /// Coordinate system for clip path geometry
+    ///
+    /// W3C SVG 2 Section 14.3.2
+    /// https://www.w3.org/TR/SVG2/masking.html#ClipPathElementClipPathUnitsAttribute
+    public enum Units: String, Sendable, Equatable {
+        /// Coordinate system established by user space
+        case userSpaceOnUse
+
+        /// Coordinate system relative to bounding box (0-1 range)
+        case objectBoundingBox
+    }
+
+    /// SVG element tag name
+    public static let tagName = "clipPath"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

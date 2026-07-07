@@ -50,34 +50,36 @@ extension W3C_SVG2.Types {
 
         /// Direct matrix transformation (a, b, c, d, e, f)
         case matrix(a: Double, b: Double, c: Double, d: Double, e: Double, f: Double)
+    }
+}
 
-        /// String representation for SVG output
-        public var description: String {
-            switch self {
-            case .translate(let x, let y):
+extension W3C_SVG2.Types.Transform {
+    /// String representation for SVG output
+    public var description: String {
+        switch self {
+        case .translate(let x, let y):
+            return
+                "translate(\(x.formatted(.number)) \(y.formatted(.number)))"
+        case .rotate(let angle, let cx, let cy):
+            if let cx = cx, let cy = cy {
                 return
-                    "translate(\(x.formatted(.number)) \(y.formatted(.number)))"
-            case .rotate(let angle, let cx, let cy):
-                if let cx = cx, let cy = cy {
-                    return
-                        "rotate(\(angle.formatted(.number)) \(cx.formatted(.number)) \(cy.formatted(.number)))"
-                } else {
-                    return "rotate(\(angle.formatted(.number)))"
-                }
-            case .scale(let x, let y):
-                if let y = y {
-                    return "scale(\(x.formatted(.number)) \(y.formatted(.number)))"
-                } else {
-                    return "scale(\(x.formatted(.number)))"
-                }
-            case .skewX(let angle):
-                return "skewX(\(angle.formatted(.number)))"
-            case .skewY(let angle):
-                return "skewY(\(angle.formatted(.number)))"
-            case .matrix(let a, let b, let c, let d, let e, let f):
-                return
-                    "matrix(\(a.formatted(.number)) \(b.formatted(.number)) \(c.formatted(.number)) \(d.formatted(.number)) \(e.formatted(.number)) \(f.formatted(.number)))"
+                    "rotate(\(angle.formatted(.number)) \(cx.formatted(.number)) \(cy.formatted(.number)))"
+            } else {
+                return "rotate(\(angle.formatted(.number)))"
             }
+        case .scale(let x, let y):
+            if let y = y {
+                return "scale(\(x.formatted(.number)) \(y.formatted(.number)))"
+            } else {
+                return "scale(\(x.formatted(.number)))"
+            }
+        case .skewX(let angle):
+            return "skewX(\(angle.formatted(.number)))"
+        case .skewY(let angle):
+            return "skewY(\(angle.formatted(.number)))"
+        case .matrix(let a, let b, let c, let d, let e, let f):
+            return
+                "matrix(\(a.formatted(.number)) \(b.formatted(.number)) \(c.formatted(.number)) \(d.formatted(.number)) \(e.formatted(.number)) \(f.formatted(.number)))"
         }
     }
 }

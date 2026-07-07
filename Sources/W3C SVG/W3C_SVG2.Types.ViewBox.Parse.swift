@@ -53,7 +53,7 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parser.`Protocol` {
         Self._skipWhitespaceAndComma(&input)
 
         let minX: Double
-        do {
+        do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
             minX = try W3C_SVG2.Parse.Number<Input>().parse(&input)
         } catch {
             throw .numberError(error)
@@ -61,7 +61,7 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parser.`Protocol` {
         Self._skipWhitespaceAndComma(&input)
 
         let minY: Double
-        do {
+        do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
             minY = try W3C_SVG2.Parse.Number<Input>().parse(&input)
         } catch {
             throw .numberError(error)
@@ -69,7 +69,7 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parser.`Protocol` {
         Self._skipWhitespaceAndComma(&input)
 
         let width: Double
-        do {
+        do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
             width = try W3C_SVG2.Parse.Number<Input>().parse(&input)
         } catch {
             throw .numberError(error)
@@ -77,7 +77,7 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parser.`Protocol` {
         Self._skipWhitespaceAndComma(&input)
 
         let height: Double
-        do {
+        do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
             height = try W3C_SVG2.Parse.Number<Input>().parse(&input)
         } catch {
             throw .numberError(error)

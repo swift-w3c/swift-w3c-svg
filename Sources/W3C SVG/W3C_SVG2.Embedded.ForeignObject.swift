@@ -88,11 +88,13 @@ extension W3C_SVG2.Embedded {
             self.width = width
             self.height = height
         }
-
-        /// SVG element tag name
-        public static let tagName = "foreignObject"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Embedded.ForeignObject {
+    /// SVG element tag name
+    public static let tagName = "foreignObject"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

@@ -75,11 +75,13 @@ extension W3C_SVG2.Text {
             self.dy = dy
             self.content = content
         }
-
-        /// SVG element tag name
-        public static let tagName = "tspan"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Text.TSpan {
+    /// SVG element tag name
+    public static let tagName = "tspan"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

@@ -131,11 +131,13 @@ extension W3C_SVG2.Document {
             self.refY = refY
             self.preserveAspectRatio = preserveAspectRatio
         }
-
-        /// SVG element tag name
-        public static let tagName = "symbol"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Document.Symbol {
+    /// SVG element tag name
+    public static let tagName = "symbol"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

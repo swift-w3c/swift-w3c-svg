@@ -83,11 +83,13 @@ extension W3C_SVG2.Document {
             self.height = height
             self.viewBox = viewBox
         }
-
-        /// SVG element tag name
-        public static let tagName = "svg"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Document.SVG {
+    /// SVG element tag name
+    public static let tagName = "svg"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

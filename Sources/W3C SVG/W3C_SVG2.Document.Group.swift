@@ -54,11 +54,13 @@ extension W3C_SVG2.Document {
         ) {
             self.id = id
         }
-
-        /// SVG element tag name
-        public static let tagName = "g"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Document.Group {
+    /// SVG element tag name
+    public static let tagName = "g"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

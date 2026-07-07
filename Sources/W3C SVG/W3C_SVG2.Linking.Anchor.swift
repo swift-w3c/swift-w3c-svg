@@ -98,11 +98,13 @@ extension W3C_SVG2.Linking {
             self.type = type
             self.referrerpolicy = referrerpolicy
         }
-
-        /// SVG element tag name
-        public static let tagName = "a"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Linking.Anchor {
+    /// SVG element tag name
+    public static let tagName = "a"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

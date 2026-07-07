@@ -53,18 +53,6 @@ extension W3C_SVG2.Text {
         /// Text content to render
         public let content: String?
 
-        /// Text length adjustment method
-        ///
-        /// W3C SVG 2 Section 11.7.3
-        /// https://www.w3.org/TR/SVG2/text.html#TextElementLengthAdjustAttribute
-        public enum LengthAdjust: String, Sendable, Equatable {
-            /// Adjust spacing between glyphs
-            case spacing
-
-            /// Adjust both spacing and glyph size
-            case spacingAndGlyphs
-        }
-
         /// Creates a text element
         ///
         /// - Parameters:
@@ -86,11 +74,25 @@ extension W3C_SVG2.Text {
             self.dy = dy
             self.content = content
         }
-
-        /// SVG element tag name
-        public static let tagName = "text"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Text.Text {
+    /// Text length adjustment method
+    ///
+    /// W3C SVG 2 Section 11.7.3
+    /// https://www.w3.org/TR/SVG2/text.html#TextElementLengthAdjustAttribute
+    public enum LengthAdjust: String, Sendable, Equatable {
+        /// Adjust spacing between glyphs
+        case spacing
+
+        /// Adjust both spacing and glyph size
+        case spacingAndGlyphs
+    }
+
+    /// SVG element tag name
+    public static let tagName = "text"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

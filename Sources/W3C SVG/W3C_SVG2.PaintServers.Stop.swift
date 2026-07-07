@@ -74,11 +74,13 @@ extension W3C_SVG2.PaintServers {
             self.stopColor = stopColor
             self.stopOpacity = stopOpacity
         }
-
-        /// SVG element tag name
-        public static let tagName = "stop"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.PaintServers.Stop {
+    /// SVG element tag name
+    public static let tagName = "stop"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

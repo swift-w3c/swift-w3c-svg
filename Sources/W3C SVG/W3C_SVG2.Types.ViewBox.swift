@@ -56,10 +56,12 @@ extension W3C_SVG2.Types {
             self.width = width
             self.height = height
         }
+    }
+}
 
-        /// String representation for SVG output
-        public var description: String {
-            "\(minX.formatted(.number)) \(minY.formatted(.number)) \(width.formatted(.number)) \(height.formatted(.number))"
-        }
+extension W3C_SVG2.Types.ViewBox {
+    /// String representation for SVG output
+    public var description: String {
+        "\(minX.formatted(.number)) \(minY.formatted(.number)) \(width.formatted(.number)) \(height.formatted(.number))"
     }
 }

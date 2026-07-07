@@ -99,18 +99,6 @@ extension W3C_SVG2.PaintServers {
         /// Controls aspect ratio preservation
         public let preserveAspectRatio: String?
 
-        /// Coordinate system for pattern geometry
-        ///
-        /// W3C SVG 2 Section 14.3.2
-        /// https://www.w3.org/TR/SVG2/pservers.html#PatternElementPatternUnitsAttribute
-        public enum Units: String, Sendable, Equatable {
-            /// Coordinate system established by user space
-            case userSpaceOnUse
-
-            /// Coordinate system relative to bounding box (0-1 range)
-            case objectBoundingBox
-        }
-
         /// Creates a pattern element
         ///
         /// - Parameters:
@@ -150,11 +138,25 @@ extension W3C_SVG2.PaintServers {
             self.patternTransform = patternTransform
             self.preserveAspectRatio = preserveAspectRatio
         }
-
-        /// SVG element tag name
-        public static let tagName = "pattern"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.PaintServers.Pattern {
+    /// Coordinate system for pattern geometry
+    ///
+    /// W3C SVG 2 Section 14.3.2
+    /// https://www.w3.org/TR/SVG2/pservers.html#PatternElementPatternUnitsAttribute
+    public enum Units: String, Sendable, Equatable {
+        /// Coordinate system established by user space
+        case userSpaceOnUse
+
+        /// Coordinate system relative to bounding box (0-1 range)
+        case objectBoundingBox
+    }
+
+    /// SVG element tag name
+    public static let tagName = "pattern"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

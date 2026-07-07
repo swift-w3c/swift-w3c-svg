@@ -181,7 +181,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
             }
 
             let value: Double
-            do {
+            do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
                 value = try W3C_SVG2.Parse.Number<Input>().parse(&input)
             } catch {
                 throw .numberError(error)

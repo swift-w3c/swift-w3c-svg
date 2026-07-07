@@ -111,33 +111,6 @@ extension W3C_SVG2.PaintServers {
         /// Default value: pad
         public let spreadMethod: SpreadMethod?
 
-        /// Coordinate system for gradient geometry
-        ///
-        /// W3C SVG 2 Section 14.2.4.4
-        /// https://www.w3.org/TR/SVG2/pservers.html#RadialGradientElementGradientUnitsAttribute
-        public enum GradientUnits: String, Sendable, Equatable {
-            /// Coordinate system established by user space
-            case userSpaceOnUse
-
-            /// Coordinate system relative to bounding box (0-1 range)
-            case objectBoundingBox
-        }
-
-        /// Behavior beyond gradient bounds
-        ///
-        /// W3C SVG 2 Section 14.2.4.6
-        /// https://www.w3.org/TR/SVG2/pservers.html#RadialGradientElementSpreadMethodAttribute
-        public enum SpreadMethod: String, Sendable, Equatable {
-            /// Extend with terminal colors (default)
-            case pad
-
-            /// Reflect the gradient pattern
-            case reflect
-
-            /// Repeat the gradient pattern
-            case `repeat`
-        }
-
         /// Creates a radial gradient element
         ///
         /// - Parameters:
@@ -177,11 +150,40 @@ extension W3C_SVG2.PaintServers {
             self.gradientTransform = gradientTransform
             self.spreadMethod = spreadMethod
         }
-
-        /// SVG element tag name
-        public static let tagName = "radialGradient"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.PaintServers.RadialGradient {
+    /// Coordinate system for gradient geometry
+    ///
+    /// W3C SVG 2 Section 14.2.4.4
+    /// https://www.w3.org/TR/SVG2/pservers.html#RadialGradientElementGradientUnitsAttribute
+    public enum GradientUnits: String, Sendable, Equatable {
+        /// Coordinate system established by user space
+        case userSpaceOnUse
+
+        /// Coordinate system relative to bounding box (0-1 range)
+        case objectBoundingBox
+    }
+
+    /// Behavior beyond gradient bounds
+    ///
+    /// W3C SVG 2 Section 14.2.4.6
+    /// https://www.w3.org/TR/SVG2/pservers.html#RadialGradientElementSpreadMethodAttribute
+    public enum SpreadMethod: String, Sendable, Equatable {
+        /// Extend with terminal colors (default)
+        case pad
+
+        /// Reflect the gradient pattern
+        case reflect
+
+        /// Repeat the gradient pattern
+        case `repeat`
+    }
+
+    /// SVG element tag name
+    public static let tagName = "radialGradient"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

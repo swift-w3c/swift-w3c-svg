@@ -53,11 +53,13 @@ extension W3C_SVG2.Document {
         ) {
             self.id = id
         }
-
-        /// SVG element tag name
-        public static let tagName = "defs"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Document.Defs {
+    /// SVG element tag name
+    public static let tagName = "defs"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

@@ -111,11 +111,13 @@ extension W3C_SVG2.Embedded {
             self.href = href
             self.preserveAspectRatio = preserveAspectRatio
         }
-
-        /// SVG element tag name
-        public static let tagName = "image"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Embedded.Image {
+    /// SVG element tag name
+    public static let tagName = "image"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

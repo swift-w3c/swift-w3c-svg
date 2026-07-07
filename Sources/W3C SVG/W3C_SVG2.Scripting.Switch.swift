@@ -48,11 +48,13 @@ extension W3C_SVG2.Scripting {
     public struct Switch: SVGElementType, Sendable, Equatable {
         /// Creates a switch element
         public init() {}
-
-        /// SVG element tag name
-        public static let tagName = "switch"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Scripting.Switch {
+    /// SVG element tag name
+    public static let tagName = "switch"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

@@ -85,18 +85,6 @@ extension W3C_SVG2.Painting {
         /// Controls aspect ratio preservation
         public let preserveAspectRatio: String?
 
-        /// Coordinate system for markerWidth and markerHeight
-        ///
-        /// W3C SVG 2 Section 13.6.2
-        /// https://www.w3.org/TR/SVG2/painting.html#MarkerUnitsAttribute
-        public enum Units: String, Sendable, Equatable {
-            /// Marker size relative to stroke width
-            case strokeWidth
-
-            /// Marker size in user space units
-            case userSpaceOnUse
-        }
-
         /// Creates a marker element
         ///
         /// - Parameters:
@@ -130,11 +118,25 @@ extension W3C_SVG2.Painting {
             self.markerUnits = markerUnits
             self.preserveAspectRatio = preserveAspectRatio
         }
-
-        /// SVG element tag name
-        public static let tagName = "marker"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Painting.Marker {
+    /// Coordinate system for markerWidth and markerHeight
+    ///
+    /// W3C SVG 2 Section 13.6.2
+    /// https://www.w3.org/TR/SVG2/painting.html#MarkerUnitsAttribute
+    public enum Units: String, Sendable, Equatable {
+        /// Marker size relative to stroke width
+        case strokeWidth
+
+        /// Marker size in user space units
+        case userSpaceOnUse
+    }
+
+    /// SVG element tag name
+    public static let tagName = "marker"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }

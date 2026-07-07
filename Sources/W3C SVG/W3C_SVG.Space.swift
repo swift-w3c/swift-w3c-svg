@@ -9,7 +9,9 @@
 ///
 /// This namespace provides the `Space` marker type used to parameterize
 /// geometry types for type-safe SVG coordinate handling.
-public enum W3C_SVG {
+public enum W3C_SVG {}
+
+extension W3C_SVG {
     /// SVG coordinate space marker.
     ///
     /// Used to parameterize `Geometry` types for type-safe SVG coordinates.

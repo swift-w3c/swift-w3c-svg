@@ -61,11 +61,13 @@ extension W3C_SVG2.Shapes {
                 "\($0.0.formatted(.number)),\($0.1.formatted(.number))"
             }.joined(separator: " ")
         }
-
-        /// SVG element tag name
-        public static let tagName = "polyline"
-
-        /// Whether this element is self-closing
-        public static let isSelfClosing = false
     }
+}
+
+extension W3C_SVG2.Shapes.Polyline {
+    /// SVG element tag name
+    public static let tagName = "polyline"
+
+    /// Whether this element is self-closing
+    public static let isSelfClosing = false
 }
