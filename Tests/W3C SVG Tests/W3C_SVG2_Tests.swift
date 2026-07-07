@@ -9,7 +9,7 @@
 import Testing
 import W3C_SVG
 
-@Suite("W3C SVG2 - Basic Functionality", .snapshots(record: .missing))
+@Suite("W3C SVG2 - Basic Functionality")
 struct W3C_SVG2_Tests {
 
     @Suite("Types - Length")
