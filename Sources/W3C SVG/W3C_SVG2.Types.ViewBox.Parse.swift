@@ -87,7 +87,7 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _skipWhitespaceAndComma(_ input: inout Input) {
+    package static func _skipWhitespaceAndComma(_ input: inout Input) {
         // Skip whitespace
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex]

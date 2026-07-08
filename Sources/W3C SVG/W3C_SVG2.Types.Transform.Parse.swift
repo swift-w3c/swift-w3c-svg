@@ -81,7 +81,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _parseFunction(_ input: inout Input) throws(Failure) -> Function {
+    package static func _parseFunction(_ input: inout Input) throws(Failure) -> Function {
         // Read function name, saving key bytes for dispatch
         var nameLen = 0
         var firstByte: UInt8 = 0
@@ -159,7 +159,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _parseArgs(
+    package static func _parseArgs(
         _ input: inout Input,
         min: Int,
         max: Int
@@ -193,7 +193,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _skipWS(_ input: inout Input) {
+    package static func _skipWS(_ input: inout Input) {
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
             guard byte == 0x20 || byte == 0x09 || byte == 0x0D || byte == 0x0A else { break }
@@ -202,7 +202,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _skipWSAndComma(_ input: inout Input) {
+    package static func _skipWSAndComma(_ input: inout Input) {
         Self._skipWS(&input)
         if input.startIndex < input.endIndex && input[input.startIndex] == 0x2C {
             input = input[input.index(after: input.startIndex)...]

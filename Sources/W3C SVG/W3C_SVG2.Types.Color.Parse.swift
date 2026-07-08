@@ -117,7 +117,7 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _isKeyword(_ slice: Input, _ bytes: UInt8...) -> Bool {
+    package static func _isKeyword(_ slice: Input, _ bytes: UInt8...) -> Bool {
         var idx = slice.startIndex
         for expected in bytes {
             guard idx < slice.endIndex else { return false }
@@ -128,7 +128,7 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _parseRGBFunction(_ input: inout Input) throws(Failure) -> Output {
+    package static func _parseRGBFunction(_ input: inout Input) throws(Failure) -> Output {
         // Match "rgb" case-insensitive: r(0x72) g(0x67) b(0x62)
         for expected: UInt8 in [0x72, 0x67, 0x62] {
             guard input.startIndex < input.endIndex else {
@@ -205,7 +205,7 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _parseInt(_ input: inout Input) throws(Failure) -> Int {
+    package static func _parseInt(_ input: inout Input) throws(Failure) -> Int {
         var value = 0
         var digits = 0
         while input.startIndex < input.endIndex {
@@ -220,7 +220,7 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _expectComma(_ input: inout Input) throws(Failure) {
+    package static func _expectComma(_ input: inout Input) throws(Failure) {
         guard input.startIndex < input.endIndex,
             input[input.startIndex] == 0x2C
         else {
@@ -230,7 +230,7 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
     }
 
     @inlinable
-    static func _skipWS(_ input: inout Input) {
+    package static func _skipWS(_ input: inout Input) {
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
             guard byte == 0x20 || byte == 0x09 else { break }
