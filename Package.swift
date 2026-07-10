@@ -21,7 +21,7 @@ let package = Package(
         .package(url: "https://github.com/swift-primitives/swift-format-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-geometry-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-parser-primitives.git", branch: "main"),
-        // .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.18.0")
+        // .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.18.0")
     ],
     targets: [
         .target(
