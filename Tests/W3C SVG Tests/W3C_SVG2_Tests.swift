@@ -12,38 +12,6 @@ import W3C_SVG
 @Suite("W3C SVG2 - Basic Functionality")
 struct W3C_SVG2_Tests {
 
-    @Suite("Document - SVG")
-    struct SVGTests {
-        @Test
-        func `SVG creation`() {
-            let svg = W3C_SVG2.Document.SVG(
-                width: .number(100),
-                height: .number(100),
-                viewBox: W3C_SVG2.Types.ViewBox(width: 100, height: 100)
-            )
-            #expect(svg.width == .number(100))
-            #expect(svg.height == .number(100))
-            #expect(svg.viewBox?.description == "0 0 100 100")
-        }
-
-        @Test
-        func `SVG tag name`() {
-            #expect(W3C_SVG2.Document.SVG.tagName == "svg")
-        }
-
-        @Test
-        func `SVG with position`() {
-            let svg = W3C_SVG2.Document.SVG(
-                x: .number(10),
-                y: .number(20),
-                width: .number(100),
-                height: .number(100)
-            )
-            #expect(svg.x == .number(10))
-            #expect(svg.y == .number(20))
-        }
-    }
-
     // [SWIFT-TEST-002] SKIP+NOTE: unresolvable — the tested members span three
     // distinct hosts (W3C_SVG2.PaintServers.LinearGradient, .RadialGradient, and
     // .Pattern nested Units/GradientUnits/SpreadMethod enums) with no single
@@ -93,6 +61,42 @@ struct W3C_SVG2_Tests {
             let objectBBox = W3C_SVG2.PaintServers.Pattern.Units.objectBoundingBox
             #expect(userSpace.rawValue == "userSpaceOnUse")
             #expect(objectBBox.rawValue == "objectBoundingBox")
+        }
+    }
+}
+
+// MARK: - Document - SVG
+
+extension W3C_SVG2.Document.SVG {
+    @Suite("Document - SVG")
+    struct Test {
+        @Test
+        func `SVG creation`() {
+            let svg = W3C_SVG2.Document.SVG(
+                width: .number(100),
+                height: .number(100),
+                viewBox: W3C_SVG2.Types.ViewBox(width: 100, height: 100)
+            )
+            #expect(svg.width == .number(100))
+            #expect(svg.height == .number(100))
+            #expect(svg.viewBox?.description == "0 0 100 100")
+        }
+
+        @Test
+        func `SVG tag name`() {
+            #expect(W3C_SVG2.Document.SVG.tagName == "svg")
+        }
+
+        @Test
+        func `SVG with position`() {
+            let svg = W3C_SVG2.Document.SVG(
+                x: .number(10),
+                y: .number(20),
+                width: .number(100),
+                height: .number(100)
+            )
+            #expect(svg.x == .number(10))
+            #expect(svg.y == .number(20))
         }
     }
 }
