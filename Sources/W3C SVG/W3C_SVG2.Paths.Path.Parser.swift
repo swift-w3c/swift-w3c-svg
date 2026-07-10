@@ -250,7 +250,10 @@ extension W3C_SVG2.Paths.Path.Parser {
 
     // MARK: - Command Parsers
 
-    private mutating func parseMoveTo(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command]) {
+    private mutating func parseMoveTo(
+        isRelative: Bool,
+        commands: inout [W3C_SVG2.Paths.Path.Command]
+    ) {
         var isFirst = true
         while let point = parsePoint(isRelative: isRelative) {
             if isFirst {
@@ -266,7 +269,10 @@ extension W3C_SVG2.Paths.Path.Parser {
         }
     }
 
-    private mutating func parseLineTo(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command]) {
+    private mutating func parseLineTo(
+        isRelative: Bool,
+        commands: inout [W3C_SVG2.Paths.Path.Command]
+    ) {
         while let point = parsePoint(isRelative: isRelative) {
             commands.append(.lineTo(point))
             currentPoint = point
@@ -274,7 +280,10 @@ extension W3C_SVG2.Paths.Path.Parser {
         }
     }
 
-    private mutating func parseHorizontalLineTo(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command]) {
+    private mutating func parseHorizontalLineTo(
+        isRelative: Bool,
+        commands: inout [W3C_SVG2.Paths.Path.Command]
+    ) {
         while let x = parseNumber() {
             let newX: W3C_SVG2.X =
                 isRelative
@@ -286,7 +295,10 @@ extension W3C_SVG2.Paths.Path.Parser {
         }
     }
 
-    private mutating func parseVerticalLineTo(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command]) {
+    private mutating func parseVerticalLineTo(
+        isRelative: Bool,
+        commands: inout [W3C_SVG2.Paths.Path.Command]
+    ) {
         while let y = parseNumber() {
             let newY: W3C_SVG2.Y =
                 isRelative
@@ -298,7 +310,10 @@ extension W3C_SVG2.Paths.Path.Parser {
         }
     }
 
-    private mutating func parseCubicBezier(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command]) {
+    private mutating func parseCubicBezier(
+        isRelative: Bool,
+        commands: inout [W3C_SVG2.Paths.Path.Command]
+    ) {
         while let control1 = parsePoint(isRelative: isRelative),
             let control2 = parsePoint(isRelative: isRelative),
             let end = parsePoint(isRelative: isRelative)
@@ -328,7 +343,10 @@ extension W3C_SVG2.Paths.Path.Parser {
         }
     }
 
-    private mutating func parseQuadraticBezier(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command]) {
+    private mutating func parseQuadraticBezier(
+        isRelative: Bool,
+        commands: inout [W3C_SVG2.Paths.Path.Command]
+    ) {
         while let control = parsePoint(isRelative: isRelative),
             let end = parsePoint(isRelative: isRelative)
         {
@@ -357,7 +375,8 @@ extension W3C_SVG2.Paths.Path.Parser {
         }
     }
 
-    private mutating func parseArc(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command]) {
+    private mutating func parseArc(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command])
+    {
         while let rx = parseNumber(),
             let ry = parseNumber(),
             let rotation = parseNumber(),
