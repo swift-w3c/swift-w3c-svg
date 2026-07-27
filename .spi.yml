@@ -2,4 +2,4 @@ version: 1
 builder:
   configs:
   - documentation_targets:
-    - SVGTypes
+    - W3C SVG

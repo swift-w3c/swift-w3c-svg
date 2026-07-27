@@ -1,38 +1,58 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.3.3
 
 import PackageDescription
 
 let package = Package(
-    name: "swift-svg-types",
+    name: "swift-w3c-svg",
     platforms: [
-        .macOS(.v14),
-        .iOS(.v17),
-        .tvOS(.v17),
-        .watchOS(.v10)
+        .macOS(.v26),
+        .iOS(.v26),
+        .tvOS(.v26),
+        .watchOS(.v26),
+        .visionOS(.v26)
     ],
     products: [
         .library(
-            name: "SVGTypes",
-            targets: ["SVGTypes"]
+            name: "W3C SVG",
+            targets: ["W3C SVG"]
         )
+    ],
+    dependencies: [
+        .package(url: "https://github.com/swift-primitives/swift-format-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-geometry-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-parser-primitives.git", branch: "main")
     ],
     targets: [
         .target(
-            name: "SVGTypes"
+            name: "W3C SVG",
+            dependencies: [
+                .product(name: "Format Primitives", package: "swift-format-primitives"),
+                .product(name: "Geometry Primitives", package: "swift-geometry-primitives"),
+                .product(name: "Parser Primitives", package: "swift-parser-primitives")
+            ]
         ),
         .testTarget(
-            name: "SVGTypesTests",
-            dependencies: ["SVGTypes"]
-        )
-    ]
+            name: "W3C SVG Tests",
+            dependencies: [
+                "W3C SVG",
+            ]
+        ),
+    ],
+    swiftLanguageModes: [.v6]
 )
 
-let swiftSettings: [SwiftSetting] = [
-    .enableUpcomingFeature("MemberImportVisibility"),
-    .enableUpcomingFeature("StrictUnsafe"),
-    .enableUpcomingFeature("NonisolatedNonsendingByDefault")
-]
+for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
+    let ecosystem: [SwiftSetting] = [
+        .strictMemorySafety(),
+        .enableUpcomingFeature("ExistentialAny"),
+        .enableUpcomingFeature("InternalImportsByDefault"),
+        .enableUpcomingFeature("MemberImportVisibility"),
+        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+        .enableExperimentalFeature("Lifetimes"),
+        .enableExperimentalFeature("SuppressedAssociatedTypes"),
+    ]
 
-for index in package.targets.indices {
-    package.targets[index].swiftSettings = (package.targets[index].swiftSettings ?? []) + swiftSettings
+    let package: [SwiftSetting] = []
+
+    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }
