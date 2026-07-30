@@ -172,7 +172,9 @@ extension W3C_SVG2.Types.Transform {
     struct Test {
         @Test("Transform translate")
         func transformTranslate() {
-            #expect(W3C_SVG2.Types.Transform.translate(x: 10, y: 20).description == "translate(10 20)")
+            #expect(
+                W3C_SVG2.Types.Transform.translate(x: 10, y: 20).description == "translate(10 20)"
+            )
         }
 
         @Test("Transform rotate")
