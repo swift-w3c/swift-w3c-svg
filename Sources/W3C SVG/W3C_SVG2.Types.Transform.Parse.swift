@@ -112,6 +112,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
         case 0x74:  // t — translate
             let args = try Self._parseArgs(&input, min: 1, max: 2)
             result = .translate(tx: args[0], ty: args.count > 1 ? args[1] : 0)
+
         case 0x72:  // r — rotate
             let args = try Self._parseArgs(&input, min: 1, max: 3)
             result = .rotate(
@@ -119,6 +120,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
                 cx: args.count > 1 ? args[1] : 0,
                 cy: args.count > 2 ? args[2] : 0
             )
+
         case 0x73:  // s — scale or skewX or skewY
             if nameLen == 5 {
                 // scale
@@ -133,6 +135,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
                     result = .skewY(angle: args[0])
                 }
             }
+
         case 0x6D:  // m — matrix
             let args = try Self._parseArgs(&input, min: 6, max: 6)
             result = .matrix(
@@ -143,6 +146,7 @@ extension W3C_SVG2.Types.Transform.Parse: Parser.`Protocol` {
                 e: args[4],
                 f: args[5]
             )
+
         default:
             throw .expectedFunction
         }

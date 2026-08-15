@@ -220,26 +220,36 @@ extension W3C_SVG2.Paths.Path.Parser {
             switch cmd {
             case "M":
                 parseMoveTo(isRelative: isRelative, commands: &commands)
+
             case "L":
                 parseLineTo(isRelative: isRelative, commands: &commands)
+
             case "H":
                 parseHorizontalLineTo(isRelative: isRelative, commands: &commands)
+
             case "V":
                 parseVerticalLineTo(isRelative: isRelative, commands: &commands)
+
             case "C":
                 parseCubicBezier(isRelative: isRelative, commands: &commands)
+
             case "S":
                 parseSmoothCubicBezier(isRelative: isRelative, commands: &commands)
+
             case "Q":
                 parseQuadraticBezier(isRelative: isRelative, commands: &commands)
+
             case "T":
                 parseSmoothQuadraticBezier(isRelative: isRelative, commands: &commands)
+
             case "A":
                 parseArc(isRelative: isRelative, commands: &commands)
+
             case "Z":
                 commands.append(.closePath)
                 currentPoint = startPoint
                 lastControlPoint = nil
+
             default:
                 break
             }

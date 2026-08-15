@@ -77,7 +77,7 @@ extension W3C_SVG2.Paths {
         ///   - d: The path data string (default: nil)
         ///   - fillRule: The fill rule (default: nil, uses nonzero)
         public init(d: String? = nil, fillRule: W3C_SVG2.Painting.FillRule? = nil) {
-            if let d = d {
+            if let d {
                 self.geometry = Parser.parse(d)
                 self._originalPathData = d
             } else {
