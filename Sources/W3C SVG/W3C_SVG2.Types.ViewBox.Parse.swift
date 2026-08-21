@@ -1,18 +1,7 @@
-//
-//  W3C_SVG2.Types.ViewBox.Parse.swift
-//  swift-w3c-svg
-//
-//  SVG viewBox: four whitespace/comma-separated numbers
-//
-
 public import Parser_Primitives
 
 extension W3C_SVG2.Types.ViewBox {
-    /// Parses an SVG viewBox attribute value.
-    ///
-    /// SVG 2 Section 8.2: `<min-x> <min-y> <width> <height>`
-    ///
-    /// Numbers are separated by optional whitespace and/or a single comma.
+
     public struct Parse<Input: Collection.Slice.`Protocol`>: Sendable
     where Input: Sendable, Input.Element == UInt8 {
         @inlinable
@@ -88,17 +77,17 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parser.`Protocol` {
 
     @inlinable
     package static func _skipWhitespaceAndComma(_ input: inout Input) {
-        // Skip whitespace
+
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
             guard byte == 0x20 || byte == 0x09 || byte == 0x0D || byte == 0x0A else { break }
             input = input[input.index(after: input.startIndex)...]
         }
-        // Skip optional comma
+
         if input.startIndex < input.endIndex && input[input.startIndex] == 0x2C {
             input = input[input.index(after: input.startIndex)...]
         }
-        // Skip trailing whitespace after comma
+
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
             guard byte == 0x20 || byte == 0x09 || byte == 0x0D || byte == 0x0A else { break }

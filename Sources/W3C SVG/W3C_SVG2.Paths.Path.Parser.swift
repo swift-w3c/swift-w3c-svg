@@ -1,39 +1,7 @@
-//
-//  W3C_SVG2.Paths.Path.Parser.swift
-//  swift-w3c-svg
-//
-//  SVG path data parser (SVG 2 Section 9)
-//
-
 internal import Geometry_Primitives
 
 extension W3C_SVG2.Paths.Path {
-    /// Parser for SVG path data strings.
-    ///
-    /// W3C SVG 2 Section 9.3
-    /// https://www.w3.org/TR/SVG2/paths.html#PathData
-    ///
-    /// Parses SVG path data (the 'd' attribute) into `Geometry.Path`.
-    ///
-    /// ## Supported Commands
-    ///
-    /// - M/m: moveto
-    /// - L/l: lineto
-    /// - H/h: horizontal lineto
-    /// - V/v: vertical lineto
-    /// - C/c: cubic Bezier curve
-    /// - S/s: smooth cubic Bezier curve
-    /// - Q/q: quadratic Bezier curve
-    /// - T/t: smooth quadratic Bezier curve
-    /// - A/a: elliptical arc
-    /// - Z/z: closepath
-    ///
-    /// ## Example
-    ///
-    /// ```swift
-    /// let path = Path.Parser.parse("M 100 100 L 200 100 L 200 200 Z")
-    /// // Returns: PathGeometry with one closed subpath
-    /// ```
+
     public struct Parser {
         private var input: String
         private var index: String.Index
@@ -49,29 +17,18 @@ extension W3C_SVG2.Paths.Path {
 }
 
 extension W3C_SVG2.Paths.Path.Parser {
-    /// Parse an SVG path data string into a Geometry.Path.
-    ///
-    /// - Parameter pathData: The path data string (d attribute value)
-    /// - Returns: The parsed path geometry
+
     public static func parse(_ pathData: String) -> W3C_SVG2.PathGeometry<W3C_SVG.Space> {
         var parser = Self(pathData)
         let commands = parser.parseCommands()
         return convertToGeometry(commands)
     }
 
-    /// Parse an SVG path data string into commands (for serialization).
-    ///
-    /// - Parameter pathData: The path data string (d attribute value)
-    /// - Returns: Array of parsed path commands
     public static func parseToCommands(_ pathData: String) -> [W3C_SVG2.Paths.Path.Command] {
         var parser = Self(pathData)
         return parser.parseCommands()
     }
 
-    /// Convert path commands to Geometry.Path.
-    ///
-    /// Handles smooth curves (S, T) by computing reflected control points,
-    /// and converts SVG elliptical arcs to Bezier curves.
     private static func convertToGeometry(
         _ commands: [W3C_SVG2.Paths.Path.Command]
     ) -> W3C_SVG2.PathGeometry<W3C_SVG.Space> {
@@ -100,7 +57,7 @@ extension W3C_SVG2.Paths.Path.Parser {
         for command in commands {
             switch command {
             case .moveTo(let point):
-                // Finish previous subpath (open)
+
                 finishSubpath(closed: false)
                 currentPoint = point
                 subpathStart = point
@@ -128,13 +85,13 @@ extension W3C_SVG2.Paths.Path.Parser {
                 if let end = bezier.endPoint {
                     currentPoint = end
                 }
-                // Second control point for smooth continuation
+
                 if bezier.controlPoints.count >= 3 {
                     lastControlPoint = bezier.controlPoints[bezier.controlPoints.count - 2]
                 }
 
             case .smoothCubicBezier(let control2, let end):
-                // Reflect last control point: control1 = current + (current - last)
+
                 let control1: Point
                 if let last = lastControlPoint {
                     let displacement = currentPoint - last
@@ -163,7 +120,7 @@ extension W3C_SVG2.Paths.Path.Parser {
                 currentPoint = end
 
             case .smoothQuadraticBezier(let end):
-                // Reflect last control point
+
                 let control: Point
                 if let last = lastControlPoint {
                     let displacement = currentPoint - last
@@ -181,7 +138,7 @@ extension W3C_SVG2.Paths.Path.Parser {
                 currentPoint = end
 
             case .arc(let arcCmd):
-                // Convert SVG arc command to Geometry.Ellipse.Arc segment
+
                 let ellipseArc = W3C_SVG2.Ellipse.Arc(
                     svgArc: arcCmd,
                     from: currentPoint
@@ -197,7 +154,6 @@ extension W3C_SVG2.Paths.Path.Parser {
             }
         }
 
-        // Finish any remaining open subpath
         finishSubpath(closed: false)
 
         return W3C_SVG2.PathGeometry<W3C_SVG.Space>(subpaths: subpaths)
@@ -258,8 +214,6 @@ extension W3C_SVG2.Paths.Path.Parser {
         return commands
     }
 
-    // MARK: - Command Parsers
-
     private mutating func parseMoveTo(
         isRelative: Bool,
         commands: inout [W3C_SVG2.Paths.Path.Command]
@@ -271,7 +225,7 @@ extension W3C_SVG2.Paths.Path.Parser {
                 startPoint = point
                 isFirst = false
             } else {
-                // Subsequent coordinates are implicit lineto
+
                 commands.append(.lineTo(point))
             }
             currentPoint = point
@@ -372,8 +326,7 @@ extension W3C_SVG2.Paths.Path.Parser {
     ) {
         while let end = parsePoint(isRelative: isRelative) {
             commands.append(.smoothQuadraticBezier(end: end))
-            // For smooth quadratic, control is reflection of last control
-            // Reflection formula: new = current + (current - last)
+
             if let last = lastControlPoint {
                 let newX = currentPoint.x + (currentPoint.x - last.x)
                 let newY = currentPoint.y + (currentPoint.y - last.y)
@@ -408,13 +361,11 @@ extension W3C_SVG2.Paths.Path.Parser {
         }
     }
 
-    // MARK: - Primitive Parsers
-
     private mutating func parsePoint(isRelative: Bool) -> W3C_SVG2.Point? {
         skipWhitespaceAndCommas()
         guard let x = parseNumber(), let y = parseNumber() else { return nil }
         if isRelative {
-            // Add displacement to current point
+
             let displacement = W3C_SVG2.Vector(
                 dx: W3C_SVG2.Dx(x),
                 dy: W3C_SVG2.Dy(y)
@@ -434,33 +385,29 @@ extension W3C_SVG2.Paths.Path.Parser {
 
         let startIdx = index
 
-        // Optional sign
         if index < input.endIndex && (input[index] == "-" || input[index] == "+") {
             index = input.index(after: index)
         }
 
-        // Digits before decimal
         while index < input.endIndex && input[index].isNumber {
             index = input.index(after: index)
         }
 
-        // Decimal point
         if index < input.endIndex && input[index] == "." {
             index = input.index(after: index)
-            // Digits after decimal
+
             while index < input.endIndex && input[index].isNumber {
                 index = input.index(after: index)
             }
         }
 
-        // Exponent
         if index < input.endIndex && (input[index] == "e" || input[index] == "E") {
             index = input.index(after: index)
-            // Exponent sign
+
             if index < input.endIndex && (input[index] == "-" || input[index] == "+") {
                 index = input.index(after: index)
             }
-            // Exponent digits
+
             while index < input.endIndex && input[index].isNumber {
                 index = input.index(after: index)
             }

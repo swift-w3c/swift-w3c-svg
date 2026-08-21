@@ -1,22 +1,9 @@
-//
-//  W3C_SVG2_Tests.swift
-//  swift-w3c-svg
-//
-//  Tests for W3C SVG 2 implementation
-//
-
-// import InlineSnapshotTesting
 import Testing
 import W3C_SVG
 
 @Suite("W3C SVG2 - Basic Functionality")
 struct W3C_SVG2_Tests {
 
-    // [SWIFT-TEST-002] SKIP+NOTE: unresolvable — the tested members span three
-    // distinct hosts (W3C_SVG2.PaintServers.LinearGradient, .RadialGradient, and
-    // .Pattern nested Units/GradientUnits/SpreadMethod enums) with no single
-    // owning type. Left in place pending TEST-005 (SuiteCategories) adjudication
-    // — not a worker call per the drain brief §STEP-2(c).
     @Suite("PaintServers - Gradient Units and Spread Methods")
     struct GradientNestedEnumsTests {
         @Test
@@ -65,8 +52,6 @@ struct W3C_SVG2_Tests {
     }
 }
 
-// MARK: - Document - SVG
-
 extension W3C_SVG2.Document.SVG {
     @Suite("Document - SVG")
     struct Test {
@@ -100,26 +85,6 @@ extension W3C_SVG2.Document.SVG {
         }
     }
 }
-
-// MARK: - Types - serialization
-//
-// These twelve tests had been commented out because their `assertInlineSnapshot`
-// dependency was commented out of the manifest, leaving all four `Types` suites
-// empty while still reporting green — the entire SVG serialization surface was
-// unverified, which is where documented-but-wrong API survived undetected.
-//
-// They are restored here with plain `#expect`, and the expected strings are
-// VERBATIM from the commented-out originals (verified byte-for-byte against
-// `git show HEAD:` before the move). No expectation was adjusted to make a test
-// pass.
-//
-// DEPARTURE FROM `testing-institute`, deliberate and ruled on: the skill
-// prescribes `#snapshot(value, as: .lines)`. That macro does not exist —
-// swift-testing declares five public macros and `snapshot` is not among them;
-// the real API is a function whose strategies are JSON-only, with no `.lines`.
-// There is therefore no institute path for asserting a plain `String`
-// description, so these use `#expect` on the string directly. Where the skill
-// and the compiler disagree, the compiler wins.
 
 extension W3C_SVG2.Types.Length {
     @Suite("Types - Length")
@@ -206,8 +171,6 @@ extension W3C_SVG2.Types.ViewBox {
     }
 }
 
-// MARK: - Shapes - Circle (generic-nested: W3C_SVG2.Circle = Geometry<Double, W3C_SVG.Space>.Circle)
-
 @Suite
 struct `Circle Tests` {
     @Test
@@ -224,8 +187,6 @@ struct `Circle Tests` {
     }
 }
 
-// MARK: - Shapes - Rectangle (generic-nested: W3C_SVG2.Rectangle = Geometry<Double, W3C_SVG.Space>.Rectangle)
-
 @Suite
 struct `Rectangle Tests` {
     @Test
@@ -239,8 +200,6 @@ struct `Rectangle Tests` {
 
 }
 
-// MARK: - Shapes - Ellipse (generic-nested: W3C_SVG2.Ellipse = Geometry<Double, W3C_SVG.Space>.Ellipse)
-
 @Suite
 struct `Ellipse Tests` {
     @Test
@@ -253,8 +212,6 @@ struct `Ellipse Tests` {
     }
 }
 
-// MARK: - Shapes - Line (generic-nested: W3C_SVG2.Line = Geometry<Double, W3C_SVG.Space>.Line.Segment)
-
 @Suite
 struct `Line Tests` {
     @Test
@@ -266,8 +223,6 @@ struct `Line Tests` {
         #expect(line.y2 == 100)
     }
 }
-
-// MARK: - Shapes - Polyline
 
 extension W3C_SVG2.Shapes.Polyline {
     @Suite("Shapes - Polyline")
@@ -291,8 +246,6 @@ extension W3C_SVG2.Shapes.Polyline {
     }
 }
 
-// MARK: - Shapes - Polygon (generic-nested: W3C_SVG2.Polygon = Geometry<Double, W3C_SVG.Space>.Polygon)
-
 @Suite
 struct `Polygon Tests` {
     @Test
@@ -309,8 +262,6 @@ struct `Polygon Tests` {
         #expect(triangle.vertices[0].y == 0)
     }
 }
-
-// MARK: - Document - Group
 
 extension W3C_SVG2.Document.Group {
     @Suite("Document - Group")
@@ -334,8 +285,6 @@ extension W3C_SVG2.Document.Group {
     }
 }
 
-// MARK: - Document - Defs
-
 extension W3C_SVG2.Document.Defs {
     @Suite("Document - Defs")
     struct Test {
@@ -357,8 +306,6 @@ extension W3C_SVG2.Document.Defs {
         }
     }
 }
-
-// MARK: - Document - Symbol
 
 extension W3C_SVG2.Document.Symbol {
     @Suite("Document - Symbol")
@@ -395,8 +342,6 @@ extension W3C_SVG2.Document.Symbol {
     }
 }
 
-// MARK: - Document - Use
-
 extension W3C_SVG2.Document.Use {
     @Suite("Document - Use")
     struct Test {
@@ -427,8 +372,6 @@ extension W3C_SVG2.Document.Use {
         }
     }
 }
-
-// MARK: - PaintServers - LinearGradient
 
 extension W3C_SVG2.PaintServers.LinearGradient {
     @Suite("PaintServers - LinearGradient")
@@ -464,8 +407,6 @@ extension W3C_SVG2.PaintServers.LinearGradient {
         }
     }
 }
-
-// MARK: - PaintServers - RadialGradient
 
 extension W3C_SVG2.PaintServers.RadialGradient {
     @Suite("PaintServers - RadialGradient")
@@ -507,8 +448,6 @@ extension W3C_SVG2.PaintServers.RadialGradient {
     }
 }
 
-// MARK: - PaintServers - Stop
-
 extension W3C_SVG2.PaintServers.Stop {
     @Suite("PaintServers - Stop")
     struct Test {
@@ -530,8 +469,6 @@ extension W3C_SVG2.PaintServers.Stop {
         }
     }
 }
-
-// MARK: - PaintServers - Pattern
 
 extension W3C_SVG2.PaintServers.Pattern {
     @Suite("PaintServers - Pattern")
@@ -570,8 +507,6 @@ extension W3C_SVG2.PaintServers.Pattern {
     }
 }
 
-// MARK: - Painting - LineCap
-
 extension W3C_SVG2.Painting.LineCap {
     @Suite("Painting - LineCap")
     struct Test {
@@ -594,8 +529,6 @@ extension W3C_SVG2.Painting.LineCap {
         }
     }
 }
-
-// MARK: - Painting - LineJoin
 
 extension W3C_SVG2.Painting.LineJoin {
     @Suite("Painting - LineJoin")
@@ -620,8 +553,6 @@ extension W3C_SVG2.Painting.LineJoin {
     }
 }
 
-// MARK: - Painting - FillRule
-
 extension W3C_SVG2.Painting.FillRule {
     @Suite("Painting - FillRule")
     struct Test {
@@ -638,8 +569,6 @@ extension W3C_SVG2.Painting.FillRule {
         }
     }
 }
-
-// MARK: - Painting - ClipPath
 
 extension W3C_SVG2.Painting.ClipPath {
     @Suite("Painting - ClipPath")
@@ -664,8 +593,6 @@ extension W3C_SVG2.Painting.ClipPath {
         }
     }
 }
-
-// MARK: - Painting - Mask
 
 extension W3C_SVG2.Painting.Mask {
     @Suite("Painting - Mask")
@@ -700,8 +627,6 @@ extension W3C_SVG2.Painting.Mask {
         }
     }
 }
-
-// MARK: - Painting - Marker
 
 extension W3C_SVG2.Painting.Marker {
     @Suite("Painting - Marker")
@@ -739,8 +664,6 @@ extension W3C_SVG2.Painting.Marker {
         }
     }
 }
-
-// MARK: - Text - Text
 
 extension W3C_SVG2.Text.Text {
     @Suite("Text - Text")
@@ -784,8 +707,6 @@ extension W3C_SVG2.Text.Text {
         }
     }
 }
-
-// MARK: - Text - TSpan
 
 extension W3C_SVG2.Text.TSpan {
     @Suite("Text - TSpan")

@@ -1,21 +1,7 @@
-//
-//  W3C_SVG2.Types.Color.Parse.swift
-//  swift-w3c-svg
-//
-//  SVG color: hex | rgb() | rgba() | named | currentColor | none
-//
-
 public import Parser_Primitives
 
 extension W3C_SVG2.Types.Color {
-    /// Parses an SVG color value.
-    ///
-    /// SVG 2 Section 4.2: `<color>` grammar.
-    ///
-    /// Supported formats:
-    /// - Hex: `#RGB`, `#RRGGBB`
-    /// - Functional: `rgb(r,g,b)`, `rgba(r,g,b,a)`
-    /// - Keywords: `currentColor`, `none`, named colors
+
     public struct Parse<Input: Collection.Slice.`Protocol`>: Sendable
     where Input: Sendable, Input.Element == UInt8 {
         @inlinable
@@ -55,7 +41,6 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
 
         let first = input[input.startIndex]
 
-        // '#' (0x23) — hex color
         if first == 0x23 {
             input = input[input.index(after: input.startIndex)...]
             let hexStart = input.startIndex
@@ -72,12 +57,10 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
             return .hex(input[hexStart..<input.startIndex])
         }
 
-        // 'r' (0x72) — rgb() or rgba()
         if (first | 0x20) == 0x72 {
             return try Self._parseRGBFunction(&input)
         }
 
-        // Consume alpha identifier
         let nameStart = input.startIndex
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
@@ -91,7 +74,6 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
         guard nameStart < input.startIndex else { throw .empty }
         let name = input[nameStart..<input.startIndex]
 
-        // Check for known keywords by comparing the consumed slice
         if Self._isKeyword(
             name,
             0x63,
@@ -129,7 +111,7 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
 
     @inlinable
     package static func _parseRGBFunction(_ input: inout Input) throws(Failure) -> Output {
-        // Match "rgb" case-insensitive: r(0x72) g(0x67) b(0x62)
+
         for expected: UInt8 in [0x72, 0x67, 0x62] {
             guard input.startIndex < input.endIndex else {
                 throw .expectedOpenParen
@@ -140,7 +122,6 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
             input = input[input.index(after: input.startIndex)...]
         }
 
-        // Check for 'a' (0x61)
         var isRGBA = false
         if input.startIndex < input.endIndex
             && (input[input.startIndex] | 0x20) == 0x61
@@ -151,7 +132,6 @@ extension W3C_SVG2.Types.Color.Parse: Parser.`Protocol` {
 
         Self._skipWS(&input)
 
-        // Expect '(' (0x28)
         guard input.startIndex < input.endIndex,
             input[input.startIndex] == 0x28
         else {

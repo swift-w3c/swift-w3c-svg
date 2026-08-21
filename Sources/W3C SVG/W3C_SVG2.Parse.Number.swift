@@ -1,22 +1,7 @@
-//
-//  W3C_SVG2.Parse.Number.swift
-//  swift-w3c-svg
-//
-//  SVG number: [sign] integer [fraction] [exponent]
-//
-
 public import Parser_Primitives
 
 extension W3C_SVG2.Parse {
-    /// Parses an SVG number value.
-    ///
-    /// SVG 2 Section 4.1: `<number>` grammar.
-    ///
-    /// `sign? integer? ("." digit+)? (("e"|"E") sign? digit+)?`
-    ///
-    /// At least one digit must be present (integer or fractional part).
-    ///
-    /// Returns the parsed value as a `Double`.
+
     public struct Number<Input: Collection.Slice.`Protocol`>: Sendable
     where Input: Sendable, Input.Element == UInt8 {
         @inlinable
@@ -41,7 +26,6 @@ extension W3C_SVG2.Parse.Number: Parser.`Protocol` {
         var negative = false
         var hasDigits = false
 
-        // Optional sign: '+' (0x2B) or '-' (0x2D)
         if input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
             if byte == 0x2D {
@@ -52,7 +36,6 @@ extension W3C_SVG2.Parse.Number: Parser.`Protocol` {
             }
         }
 
-        // Integer part
         var integerPart: Double = 0
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
@@ -62,7 +45,6 @@ extension W3C_SVG2.Parse.Number: Parser.`Protocol` {
             hasDigits = true
         }
 
-        // Fractional part: '.' (0x2E)
         var fractionalPart: Double = 0
         if input.startIndex < input.endIndex && input[input.startIndex] == 0x2E {
             input = input[input.index(after: input.startIndex)...]
@@ -81,7 +63,6 @@ extension W3C_SVG2.Parse.Number: Parser.`Protocol` {
 
         var value = integerPart + fractionalPart
 
-        // Exponent: 'e' (0x65) or 'E' (0x45)
         if input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
             if byte == 0x65 || byte == 0x45 {
