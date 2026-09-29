@@ -1,4 +1,4 @@
-import Format
+import Formatter
 public import Geometry
 
 extension W3C_SVG2.Paths {

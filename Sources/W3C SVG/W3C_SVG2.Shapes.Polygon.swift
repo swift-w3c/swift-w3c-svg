@@ -1,4 +1,4 @@
-import Format
+import Formatter
 
 extension W3C_SVG2.Shapes {
 
@@ -9,7 +9,7 @@ extension W3C_SVG2.Polygon {
 
     public var points: String {
         vertices.map {
-            "\($0.x.formatted(.number)),\($0.y.formatted(.number))"
+            "\($0.x.formatted(Formatter.Number())),\($0.y.formatted(Formatter.Number()))"
         }.joined(separator: " ")
     }
 

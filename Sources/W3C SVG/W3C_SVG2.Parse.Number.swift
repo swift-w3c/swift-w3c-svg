@@ -18,7 +18,7 @@ extension W3C_SVG2.Parse.Number {
     public typealias Error = __W3C_SVG2ParseNumberError
 }
 
-extension W3C_SVG2.Parse.Number: Parser.`Protocol` {
+extension W3C_SVG2.Parse.Number: Parsing {
     public typealias Failure = W3C_SVG2.Parse.Number<Input>.Error
 
     @inlinable

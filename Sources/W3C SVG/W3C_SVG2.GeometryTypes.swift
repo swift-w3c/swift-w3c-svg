@@ -51,7 +51,8 @@ extension W3C_SVG2 {
 
 extension W3C_SVG2 {
 
-    public typealias Transform = SVGGeometry.Transform
+    /// Homogeneous column-vector matrix; Space remains part of the type.
+    public typealias Transform = Linear<Double, W3C_SVG.Space>.Matrix<3, 3>
 }
 
 extension W3C_SVG2 {

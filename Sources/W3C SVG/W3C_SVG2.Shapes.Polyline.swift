@@ -1,4 +1,4 @@
-import Format
+import Formatter
 
 extension W3C_SVG2.Shapes {
 
@@ -14,7 +14,7 @@ extension W3C_SVG2.Shapes {
 
         public init(coordinates: [(W3C_SVG2.X, W3C_SVG2.Y)]) {
             self.points = coordinates.map {
-                "\($0.0.formatted(.number)),\($0.1.formatted(.number))"
+                "\($0.0.formatted(Formatter.Number())),\($0.1.formatted(Formatter.Number()))"
             }.joined(separator: " ")
         }
     }

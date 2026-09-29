@@ -1,4 +1,4 @@
-import Format
+import Formatter
 public import Geometry
 
 extension W3C_SVG2.Paths.Path {
@@ -73,17 +73,17 @@ extension W3C_SVG2.Paths.Path.Command: CustomStringConvertible {
         switch self {
         case .moveTo(let point):
             return
-                "M \(point.x.formatted(.number)) \(point.y.formatted(.number))"
+                "M \(point.x.formatted(Formatter.Number())) \(point.y.formatted(Formatter.Number()))"
 
         case .lineTo(let point):
             return
-                "L \(point.x.formatted(.number)) \(point.y.formatted(.number))"
+                "L \(point.x.formatted(Formatter.Number())) \(point.y.formatted(Formatter.Number()))"
 
         case .horizontalLineTo(let x):
-            return "H \(x.formatted(.number))"
+            return "H \(x.formatted(Formatter.Number()))"
 
         case .verticalLineTo(let y):
-            return "V \(y.formatted(.number))"
+            return "V \(y.formatted(Formatter.Number()))"
 
         case .cubicBezier(let bezier):
             guard bezier.controlPoints.count >= 4 else { return "" }
@@ -91,24 +91,24 @@ extension W3C_SVG2.Paths.Path.Command: CustomStringConvertible {
             let c2 = bezier.controlPoints[2]
             let end = bezier.controlPoints[3]
             return
-                "C \(c1.x.formatted(.number)) \(c1.y.formatted(.number)) \(c2.x.formatted(.number)) \(c2.y.formatted(.number)) \(end.x.formatted(.number)) \(end.y.formatted(.number))"
+                "C \(c1.x.formatted(Formatter.Number())) \(c1.y.formatted(Formatter.Number())) \(c2.x.formatted(Formatter.Number())) \(c2.y.formatted(Formatter.Number())) \(end.x.formatted(Formatter.Number())) \(end.y.formatted(Formatter.Number()))"
 
         case .smoothCubicBezier(let control2, let end):
             return
-                "S \(control2.x.formatted(.number)) \(control2.y.formatted(.number)) \(end.x.formatted(.number)) \(end.y.formatted(.number))"
+                "S \(control2.x.formatted(Formatter.Number())) \(control2.y.formatted(Formatter.Number())) \(end.x.formatted(Formatter.Number())) \(end.y.formatted(Formatter.Number()))"
 
         case .quadraticBezier(let control, let end):
             return
-                "Q \(control.x.formatted(.number)) \(control.y.formatted(.number)) \(end.x.formatted(.number)) \(end.y.formatted(.number))"
+                "Q \(control.x.formatted(Formatter.Number())) \(control.y.formatted(Formatter.Number())) \(end.x.formatted(Formatter.Number())) \(end.y.formatted(Formatter.Number()))"
 
         case .smoothQuadraticBezier(let end):
-            return "T \(end.x.formatted(.number)) \(end.y.formatted(.number))"
+            return "T \(end.x.formatted(Formatter.Number())) \(end.y.formatted(Formatter.Number()))"
 
         case .arc(let arc):
             let largeArc = arc.largeArcFlag ? "1" : "0"
             let sweep = arc.sweepFlag ? "1" : "0"
             return
-                "A \(arc.rx.formatted(.number)) \(arc.ry.formatted(.number)) \(arc.xAxisRotation.formatted(.number)) \(largeArc) \(sweep) \(arc.end.x.formatted(.number)) \(arc.end.y.formatted(.number))"
+                "A \(arc.rx.formatted(Formatter.Number())) \(arc.ry.formatted(Formatter.Number())) \(arc.xAxisRotation.formatted(Formatter.Number())) \(largeArc) \(sweep) \(arc.end.x.formatted(Formatter.Number())) \(arc.end.y.formatted(Formatter.Number()))"
 
         case .closePath:
             return "Z"

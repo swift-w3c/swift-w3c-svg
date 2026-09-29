@@ -18,26 +18,28 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-segment.git", branch: "main"),
         .package(
-            url: "https://github.com/swift-molecules/swift-format.git",
+            url: "https://github.com/swift-atoms/swift-formatter.git",
+            branch: "main", traits: ["Number", "Conversions", "Tagged"]),
+        .package(
+            url: "https://github.com/swift-atoms/swift-geometry.git",
+            branch: "main", traits: ["Affine"]),
+        .package(
+            url: "https://github.com/swift-atoms/swift-parser.git",
             branch: "main"
         ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-geometry.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-parser.git",
-            branch: "main"
-        ),
+        .package(url: "https://github.com/swift-atoms/swift-linear.git", branch: "main"),
     ],
     targets: [
         .target(
             name: "W3C SVG",
             dependencies: [
-                .product(name: "Format", package: "swift-format"),
+                .product(name: "Segment", package: "swift-segment"),
+                .product(name: "Formatter", package: "swift-formatter"),
                 .product(name: "Geometry", package: "swift-geometry"),
                 .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Linear", package: "swift-linear"),
             ]
         ),
         .testTarget(

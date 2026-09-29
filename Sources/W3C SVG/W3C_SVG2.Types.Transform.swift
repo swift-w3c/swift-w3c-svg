@@ -1,4 +1,4 @@
-import Format
+import Formatter
 
 extension W3C_SVG2.Types {
 
@@ -24,32 +24,32 @@ extension W3C_SVG2.Types.Transform {
         switch self {
         case .translate(let x, let y):
             return
-                "translate(\(x.formatted(.number)) \(y.formatted(.number)))"
+                "translate(\(x.formatted(Formatter.Number())) \(y.formatted(Formatter.Number())))"
 
         case .rotate(let angle, let cx, let cy):
             if let cx, let cy {
                 return
-                    "rotate(\(angle.formatted(.number)) \(cx.formatted(.number)) \(cy.formatted(.number)))"
+                    "rotate(\(angle.formatted(Formatter.Number())) \(cx.formatted(Formatter.Number())) \(cy.formatted(Formatter.Number())))"
             } else {
-                return "rotate(\(angle.formatted(.number)))"
+                return "rotate(\(angle.formatted(Formatter.Number())))"
             }
 
         case .scale(let x, let y):
             if let y {
-                return "scale(\(x.formatted(.number)) \(y.formatted(.number)))"
+                return "scale(\(x.formatted(Formatter.Number())) \(y.formatted(Formatter.Number())))"
             } else {
-                return "scale(\(x.formatted(.number)))"
+                return "scale(\(x.formatted(Formatter.Number())))"
             }
 
         case .skewX(let angle):
-            return "skewX(\(angle.formatted(.number)))"
+            return "skewX(\(angle.formatted(Formatter.Number())))"
 
         case .skewY(let angle):
-            return "skewY(\(angle.formatted(.number)))"
+            return "skewY(\(angle.formatted(Formatter.Number())))"
 
         case .matrix(let a, let b, let c, let d, let e, let f):
             return
-                "matrix(\(a.formatted(.number)) \(b.formatted(.number)) \(c.formatted(.number)) \(d.formatted(.number)) \(e.formatted(.number)) \(f.formatted(.number)))"
+                "matrix(\(a.formatted(Formatter.Number())) \(b.formatted(Formatter.Number())) \(c.formatted(Formatter.Number())) \(d.formatted(Formatter.Number())) \(e.formatted(Formatter.Number())) \(f.formatted(Formatter.Number())))"
         }
     }
 }

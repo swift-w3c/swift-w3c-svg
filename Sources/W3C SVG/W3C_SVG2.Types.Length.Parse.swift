@@ -30,7 +30,7 @@ extension W3C_SVG2.Types.Length.Parse {
     public typealias Error = __W3C_SVG2TypesLengthParseError
 }
 
-extension W3C_SVG2.Types.Length.Parse: Parser.`Protocol` {
+extension W3C_SVG2.Types.Length.Parse: Parsing {
     public typealias Failure = W3C_SVG2.Types.Length.Parse<Input>.Error
 
     @inlinable

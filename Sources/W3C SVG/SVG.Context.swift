@@ -1,4 +1,6 @@
-import Format
+import Formatter
+public import Geometry
+public import Segment
 
 extension Geometry.Ball where N == 2, Scalar == Double, Space == W3C_SVG.Space {
 
@@ -84,11 +86,13 @@ extension Geometry.Ellipse.SVGContext where Scalar == Double, Space == W3C_SVG.S
     }
 }
 
-extension Geometry.Line.Segment where Scalar == Double, Space == W3C_SVG.Space {
+extension W3C_SVG {
+    public enum Context {}
+}
 
-    public var svg: SVGContext { SVGContext(self) }
-
-    public struct SVGContext {
+extension W3C_SVG.Context {
+    /// An owned SVG interpretation; the generic endpoint atom is not an SVG view.
+    public struct Segment {
 
         public let segment: Geometry<Double, W3C_SVG.Space>.Line.Segment
 
@@ -98,7 +102,11 @@ extension Geometry.Line.Segment where Scalar == Double, Space == W3C_SVG.Space {
     }
 }
 
-extension Geometry.Line.Segment.SVGContext where Scalar == Double, Space == W3C_SVG.Space {
+extension Segment::Segment where Point == Geometry<Double, W3C_SVG.Space>.Point<2> {
+    public var svg: W3C_SVG.Context.Segment { .init(self) }
+}
+
+extension W3C_SVG.Context.Segment {
 
     public var element: W3C_SVG2.Shapes.Line {
         W3C_SVG2.Shapes.Line(

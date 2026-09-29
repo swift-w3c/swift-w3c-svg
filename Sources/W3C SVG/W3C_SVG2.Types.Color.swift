@@ -1,4 +1,4 @@
-import Format
+import Formatter
 
 extension W3C_SVG2.Types {
 
@@ -32,7 +32,7 @@ extension W3C_SVG2.Types.Color {
             return "rgb(\(r), \(g), \(b))"
 
         case .rgba(let r, let g, let b, let a):
-            return "rgba(\(r), \(g), \(b), \(a.formatted(.number)))"
+            return "rgba(\(r), \(g), \(b), \(a.formatted(Formatter.Number())))"
 
         case .currentColor:
             return "currentColor"

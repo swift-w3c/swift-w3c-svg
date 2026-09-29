@@ -1,4 +1,4 @@
-import Format
+import Formatter
 
 extension W3C_SVG2.Types {
 
@@ -29,6 +29,6 @@ extension W3C_SVG2.Types {
 extension W3C_SVG2.Types.ViewBox {
 
     public var description: String {
-        "\(minX.formatted(.number)) \(minY.formatted(.number)) \(width.formatted(.number)) \(height.formatted(.number))"
+        "\(minX.formatted(Formatter.Number())) \(minY.formatted(Formatter.Number())) \(width.formatted(Formatter.Number())) \(height.formatted(Formatter.Number()))"
     }
 }

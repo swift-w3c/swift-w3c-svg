@@ -1,4 +1,4 @@
-import Format
+import Formatter
 
 extension W3C_SVG2.Types {
 
@@ -31,34 +31,34 @@ extension W3C_SVG2.Types.Length {
     public var description: String {
         switch self {
         case .number(let value):
-            return value.formatted(.number)
+            return value.formatted(Formatter.Number())
 
         case .percentage(let value):
-            return value.formatted(.number) + "%"
+            return value.formatted(Formatter.Number()) + "%"
 
         case .px(let value):
-            return value.formatted(.number) + "px"
+            return value.formatted(Formatter.Number()) + "px"
 
         case .em(let value):
-            return value.formatted(.number) + "em"
+            return value.formatted(Formatter.Number()) + "em"
 
         case .ex(let value):
-            return value.formatted(.number) + "ex"
+            return value.formatted(Formatter.Number()) + "ex"
 
         case .pt(let value):
-            return value.formatted(.number) + "pt"
+            return value.formatted(Formatter.Number()) + "pt"
 
         case .pc(let value):
-            return value.formatted(.number) + "pc"
+            return value.formatted(Formatter.Number()) + "pc"
 
         case .mm(let value):
-            return value.formatted(.number) + "mm"
+            return value.formatted(Formatter.Number()) + "mm"
 
         case .cm(let value):
-            return value.formatted(.number) + "cm"
+            return value.formatted(Formatter.Number()) + "cm"
 
         case .in(let value):
-            return value.formatted(.number) + "in"
+            return value.formatted(Formatter.Number()) + "in"
         }
     }
 }
