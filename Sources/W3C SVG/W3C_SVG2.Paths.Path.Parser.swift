@@ -94,8 +94,8 @@ extension W3C_SVG2.Paths.Path.Parser {
 
                 let control1: Point
                 if let last = lastControlPoint {
-                    let displacement = currentPoint - last
-                    control1 = currentPoint + displacement
+                    let displacement = W3C_SVG2.Point.cartesian.displacement(from: last, to: currentPoint)
+                    control1 = currentPoint.translated(by: displacement, using: W3C_SVG2.Point.cartesian)
                 } else {
                     control1 = currentPoint
                 }
@@ -123,8 +123,8 @@ extension W3C_SVG2.Paths.Path.Parser {
 
                 let control: Point
                 if let last = lastControlPoint {
-                    let displacement = currentPoint - last
-                    control = currentPoint + displacement
+                    let displacement = W3C_SVG2.Point.cartesian.displacement(from: last, to: currentPoint)
+                    control = currentPoint.translated(by: displacement, using: W3C_SVG2.Point.cartesian)
                 } else {
                     control = currentPoint
                 }
@@ -366,11 +366,10 @@ extension W3C_SVG2.Paths.Path.Parser {
         guard let x = parseNumber(), let y = parseNumber() else { return nil }
         if isRelative {
 
-            let displacement = W3C_SVG2.Vector(
-                dx: W3C_SVG2.Dx(x),
-                dy: W3C_SVG2.Dy(y)
+            return currentPoint.translated(
+                by: Displacement::Displacement(components: .init([x, y])),
+                using: W3C_SVG2.Point.cartesian
             )
-            return currentPoint + displacement
         } else {
             return W3C_SVG2.Point(
                 x: W3C_SVG2.X(x),
