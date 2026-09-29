@@ -27,7 +27,8 @@ let package = Package(
             branch: "main", traits: ["Affine"]),
         .package(
             url: "https://github.com/swift-atoms/swift-parser.git",
-            branch: "main"
+            branch: "main",
+            traits: ["Collection"]
         ),
         .package(url: "https://github.com/swift-atoms/swift-linear.git", branch: "main"),
     ],
