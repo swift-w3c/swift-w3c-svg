@@ -83,7 +83,7 @@ extension W3C_SVG2.Parse.Number: Parsing {
                 while input.startIndex < input.endIndex {
                     let d = input[input.startIndex]
                     guard d >= 0x30 && d <= 0x39 else { break }
-                    exp = exp &* 10 &+ Int(d &- 0x30)
+                    if exp < 400 { exp = exp * 10 + Int(d &- 0x30) }
                     input = input[input.index(after: input.startIndex)...]
                 }
 

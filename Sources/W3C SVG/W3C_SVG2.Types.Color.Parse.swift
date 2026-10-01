@@ -191,7 +191,9 @@ extension W3C_SVG2.Types.Color.Parse: Parsing {
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex]
             guard byte >= 0x30 && byte <= 0x39 else { break }
-            value = value &* 10 &+ Int(byte &- 0x30)
+            let shifted = value.multipliedReportingOverflow(by: 10)
+            let sum = shifted.partialValue.addingReportingOverflow(Int(byte &- 0x30))
+            value = shifted.overflow || sum.overflow ? Int.max : sum.partialValue
             input = input[input.index(after: input.startIndex)...]
             digits += 1
         }
