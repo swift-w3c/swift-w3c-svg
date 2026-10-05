@@ -19,6 +19,12 @@ extension W3C_SVG2.Parse.Number {
 }
 
 extension W3C_SVG2.Parse.Number: Parsing {
+    public var body: Never {
+        borrowing get {
+            return fatalError("\(Self.self) is a leaf: implement its conformance requirements directly")
+        }
+    }
+
     public typealias Failure = W3C_SVG2.Parse.Number<Input>.Error
 
     @inlinable
