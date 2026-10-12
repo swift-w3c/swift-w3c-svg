@@ -9,7 +9,7 @@ extension W3C_SVG2.Types.Transform {
     }
 }
 
-public enum __W3C_SVG2TypesTransformParseError: Swift.Error, Sendable, Equatable {
+public enum __W3C_SVG2TypesTransformParseError: Swift::Error, Sendable, Equatable {
     case expectedFunction
     case expectedOpenParen
     case expectedCloseParen

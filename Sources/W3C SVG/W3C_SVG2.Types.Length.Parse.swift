@@ -9,7 +9,7 @@ extension W3C_SVG2.Types.Length {
     }
 }
 
-public enum __W3C_SVG2TypesLengthParseError: Swift.Error, Sendable, Equatable {
+public enum __W3C_SVG2TypesLengthParseError: Swift::Error, Sendable, Equatable {
     case numberError(__W3C_SVG2ParseNumberError)
 }
 

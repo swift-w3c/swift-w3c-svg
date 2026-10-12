@@ -9,7 +9,7 @@ extension W3C_SVG2.Types.Color {
     }
 }
 
-public enum __W3C_SVG2TypesColorParseError: Swift.Error, Sendable, Equatable {
+public enum __W3C_SVG2TypesColorParseError: Swift::Error, Sendable, Equatable {
     case empty
     case invalidHex
     case expectedOpenParen
