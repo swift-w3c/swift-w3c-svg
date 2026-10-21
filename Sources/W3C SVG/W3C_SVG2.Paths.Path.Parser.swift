@@ -171,7 +171,9 @@ extension W3C_SVG2.Paths.Path.Parser {
             index = input.index(after: index)
 
             let isRelative = command.isLowercase
-            let cmd = command.uppercased().first!
+            guard let cmd = command.uppercased().first else {
+                preconditionFailure("An uppercased letter is never empty")
+            }
 
             switch cmd {
             case "M":
@@ -338,8 +340,7 @@ extension W3C_SVG2.Paths.Path.Parser {
         }
     }
 
-    private mutating func parseArc(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command])
-    {
+    private mutating func parseArc(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command]) {
         while let rx = parseNumber(),
             let ry = parseNumber(),
             let rotation = parseNumber(),
@@ -364,18 +365,17 @@ extension W3C_SVG2.Paths.Path.Parser {
     private mutating func parsePoint(isRelative: Bool) -> W3C_SVG2.Point? {
         skipWhitespaceAndCommas()
         guard let x = parseNumber(), let y = parseNumber() else { return nil }
-        if isRelative {
-
-            return currentPoint.translated(
-                by: Displacement::Displacement(components: .init([x, y])),
-                using: W3C_SVG2.Point.cartesian
-            )
-        } else {
+        guard isRelative else {
             return W3C_SVG2.Point(
                 x: W3C_SVG2.X(x),
                 y: W3C_SVG2.Y(y)
             )
         }
+
+        return currentPoint.translated(
+            by: Displacement::Displacement(components: .init([x, y])),
+            using: W3C_SVG2.Point.cartesian
+        )
     }
 
     private mutating func parseNumber() -> Double? {
@@ -434,11 +434,10 @@ extension W3C_SVG2.Paths.Path.Parser {
     private mutating func skipWhitespaceAndCommas() {
         while index < input.endIndex {
             let char = input[index]
-            if char == " " || char == "\t" || char == "\n" || char == "\r" || char == "," {
-                index = input.index(after: index)
-            } else {
+            guard char == " " || char == "\t" || char == "\n" || char == "\r" || char == "," else {
                 break
             }
+            index = input.index(after: index)
         }
     }
 }

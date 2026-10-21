@@ -27,19 +27,17 @@ extension W3C_SVG2.Types.Transform {
                 "translate(\(x.formatted(Formatter.Number())) \(y.formatted(Formatter.Number())))"
 
         case .rotate(let angle, let cx, let cy):
-            if let cx, let cy {
-                return
-                    "rotate(\(angle.formatted(Formatter.Number())) \(cx.formatted(Formatter.Number())) \(cy.formatted(Formatter.Number())))"
-            } else {
+            guard let cx, let cy else {
                 return "rotate(\(angle.formatted(Formatter.Number())))"
             }
+            return
+                "rotate(\(angle.formatted(Formatter.Number())) \(cx.formatted(Formatter.Number())) \(cy.formatted(Formatter.Number())))"
 
         case .scale(let x, let y):
-            if let y {
-                return "scale(\(x.formatted(Formatter.Number())) \(y.formatted(Formatter.Number())))"
-            } else {
+            guard let y else {
                 return "scale(\(x.formatted(Formatter.Number())))"
             }
+            return "scale(\(x.formatted(Formatter.Number())) \(y.formatted(Formatter.Number())))"
 
         case .skewX(let angle):
             return "skewX(\(angle.formatted(Formatter.Number())))"
