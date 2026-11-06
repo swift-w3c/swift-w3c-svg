@@ -1,3 +1,4 @@
+import RFC_3987
 import Testing
 import W3C_SVG
 
@@ -346,9 +347,9 @@ extension W3C_SVG2.Document.Use {
     @Suite("Document - Use")
     struct Test {
         @Test
-        func `Use creation`() {
-            let use = W3C_SVG2.Document.Use(href: "#icon", x: 50, y: 50)
-            #expect(use.href == "#icon")
+        func `Use creation`() throws {
+            let use = W3C_SVG2.Document.Use(href: try RFC_3987.IRI.Reference("#icon"), x: 50, y: 50)
+            #expect(use.href?.value == "#icon")
             #expect(use.x == 50)
             #expect(use.y == 50)
         }
@@ -359,9 +360,9 @@ extension W3C_SVG2.Document.Use {
         }
 
         @Test
-        func `Use with dimensions`() {
+        func `Use with dimensions`() throws {
             let use = W3C_SVG2.Document.Use(
-                href: "#icon",
+                href: try RFC_3987.IRI.Reference("#icon"),
                 x: 10,
                 y: 20,
                 width: 100,
@@ -398,12 +399,12 @@ extension W3C_SVG2.PaintServers.LinearGradient {
         }
 
         @Test
-        func `LinearGradient with href`() {
+        func `LinearGradient with href`() throws {
             let gradient = W3C_SVG2.PaintServers.LinearGradient(
                 id: "gradient2",
-                href: "#gradient1"
+                href: try RFC_3987.IRI.Reference("#gradient1")
             )
-            #expect(gradient.href == "#gradient1")
+            #expect(gradient.href?.value == "#gradient1")
         }
     }
 }

@@ -1,3 +1,5 @@
+public import RFC_3987
+
 extension W3C_SVG2.PaintServers {
 
     public struct RadialGradient: SVGElementType, Sendable, Equatable {
@@ -16,7 +18,7 @@ extension W3C_SVG2.PaintServers {
 
         public let fr: String?
 
-        public let href: String?
+        public let href: RFC_3987.IRI.Reference?
 
         public let gradientUnits: GradientUnits?
 
@@ -32,7 +34,7 @@ extension W3C_SVG2.PaintServers {
             fx: String? = nil,
             fy: String? = nil,
             fr: String? = nil,
-            href: String? = nil,
+            href: RFC_3987.IRI.Reference? = nil,
             gradientUnits: GradientUnits? = nil,
             gradientTransform: String? = nil,
             spreadMethod: SpreadMethod? = nil

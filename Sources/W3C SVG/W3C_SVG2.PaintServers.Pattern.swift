@@ -1,3 +1,5 @@
+public import RFC_3987
+
 extension W3C_SVG2.PaintServers {
 
     public struct Pattern: SVGElementType, Sendable, Equatable {
@@ -14,7 +16,7 @@ extension W3C_SVG2.PaintServers {
 
         public let viewBox: W3C_SVG2.Types.ViewBox?
 
-        public let href: String?
+        public let href: RFC_3987.IRI.Reference?
 
         public let patternUnits: Units?
 
@@ -31,7 +33,7 @@ extension W3C_SVG2.PaintServers {
             width: W3C_SVG2.Width? = nil,
             height: W3C_SVG2.Height? = nil,
             viewBox: W3C_SVG2.Types.ViewBox? = nil,
-            href: String? = nil,
+            href: RFC_3987.IRI.Reference? = nil,
             patternUnits: Units? = nil,
             patternContentUnits: Units? = nil,
             patternTransform: String? = nil,

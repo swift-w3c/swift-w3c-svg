@@ -1,3 +1,5 @@
+public import RFC_3987
+
 extension W3C_SVG2.Embedded {
 
     public struct Image: SVGElementType, Sendable, Equatable {
@@ -10,7 +12,7 @@ extension W3C_SVG2.Embedded {
 
         public let height: W3C_SVG2.Height?
 
-        public let href: String?
+        public let href: RFC_3987.IRI.Reference?
 
         public let preserveAspectRatio: String?
 
@@ -19,7 +21,7 @@ extension W3C_SVG2.Embedded {
             y: W3C_SVG2.Y? = nil,
             width: W3C_SVG2.Width? = nil,
             height: W3C_SVG2.Height? = nil,
-            href: String? = nil,
+            href: RFC_3987.IRI.Reference? = nil,
             preserveAspectRatio: String? = nil
         ) {
             self.x = x

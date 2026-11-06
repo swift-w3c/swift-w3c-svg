@@ -35,6 +35,7 @@ let package = Package(
             traits: ["Collection"]
         ),
         .package(url: "https://github.com/swift-atoms/swift-linear.git", branch: "main"),
+        .package(url: "https://github.com/swift-ietf/swift-rfc-3987.git", branch: "main"),
     ],
     targets: [
         .target(
@@ -45,12 +46,14 @@ let package = Package(
                 .product(name: "Geometry", package: "swift-geometry"),
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Linear", package: "swift-linear"),
+                .product(name: "RFC 3987", package: "swift-rfc-3987"),
             ]
         ),
         .testTarget(
             name: "W3C SVG Tests",
             dependencies: [
-                .target(name: "W3C SVG")
+                .target(name: "W3C SVG"),
+                .product(name: "RFC 3987", package: "swift-rfc-3987"),
             ]
         ),
     ],
