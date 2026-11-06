@@ -53,7 +53,9 @@ struct W3C_SVG2_Tests {
     }
 }
 
-extension W3C_SVG2.Document.SVG {
+enum `W3C_SVG2.Document.SVG Tests` {}
+
+extension `W3C_SVG2.Document.SVG Tests` {
     @Suite("Document - SVG")
     struct Test {
         @Test
@@ -87,7 +89,9 @@ extension W3C_SVG2.Document.SVG {
     }
 }
 
-extension W3C_SVG2.Types.Length {
+enum `W3C_SVG2.Types.Length Tests` {}
+
+extension `W3C_SVG2.Types.Length Tests` {
     @Suite("Types - Length")
     struct Test {
         @Test("Length pixels")
@@ -113,7 +117,9 @@ extension W3C_SVG2.Types.Length {
     }
 }
 
-extension W3C_SVG2.Types.Color {
+enum `W3C_SVG2.Types.Color Tests` {}
+
+extension `W3C_SVG2.Types.Color Tests` {
     @Suite("Types - Color")
     struct Test {
         @Test("Color named")
@@ -133,7 +139,9 @@ extension W3C_SVG2.Types.Color {
     }
 }
 
-extension W3C_SVG2.Types.Transform {
+enum `W3C_SVG2.Types.Transform Tests` {}
+
+extension `W3C_SVG2.Types.Transform Tests` {
     @Suite("Types - Transform")
     struct Test {
         @Test("Transform translate")
@@ -155,7 +163,9 @@ extension W3C_SVG2.Types.Transform {
     }
 }
 
-extension W3C_SVG2.Types.ViewBox {
+enum `W3C_SVG2.Types.ViewBox Tests` {}
+
+extension `W3C_SVG2.Types.ViewBox Tests` {
     @Suite("Types - ViewBox")
     struct Test {
         @Test("ViewBox creation")
@@ -225,7 +235,9 @@ struct `Line Tests` {
     }
 }
 
-extension W3C_SVG2.Shapes.Polyline {
+enum `W3C_SVG2.Shapes.Polyline Tests` {}
+
+extension `W3C_SVG2.Shapes.Polyline Tests` {
     @Suite("Shapes - Polyline")
     struct Test {
         @Test
@@ -264,7 +276,9 @@ struct `Polygon Tests` {
     }
 }
 
-extension W3C_SVG2.Document.Group {
+enum `W3C_SVG2.Document.Group Tests` {}
+
+extension `W3C_SVG2.Document.Group Tests` {
     @Suite("Document - Group")
     struct Test {
         @Test
@@ -286,7 +300,9 @@ extension W3C_SVG2.Document.Group {
     }
 }
 
-extension W3C_SVG2.Document.Defs {
+enum `W3C_SVG2.Document.Defs Tests` {}
+
+extension `W3C_SVG2.Document.Defs Tests` {
     @Suite("Document - Defs")
     struct Test {
         @Test
@@ -308,7 +324,9 @@ extension W3C_SVG2.Document.Defs {
     }
 }
 
-extension W3C_SVG2.Document.Symbol {
+enum `W3C_SVG2.Document.Symbol Tests` {}
+
+extension `W3C_SVG2.Document.Symbol Tests` {
     @Suite("Document - Symbol")
     struct Test {
         @Test
@@ -343,7 +361,9 @@ extension W3C_SVG2.Document.Symbol {
     }
 }
 
-extension W3C_SVG2.Document.Use {
+enum `W3C_SVG2.Document.Use Tests` {}
+
+extension `W3C_SVG2.Document.Use Tests` {
     @Suite("Document - Use")
     struct Test {
         @Test
@@ -374,7 +394,9 @@ extension W3C_SVG2.Document.Use {
     }
 }
 
-extension W3C_SVG2.PaintServers.LinearGradient {
+enum `W3C_SVG2.PaintServers.LinearGradient Tests` {}
+
+extension `W3C_SVG2.PaintServers.LinearGradient Tests` {
     @Suite("PaintServers - LinearGradient")
     struct Test {
         @Test
@@ -409,7 +431,9 @@ extension W3C_SVG2.PaintServers.LinearGradient {
     }
 }
 
-extension W3C_SVG2.PaintServers.RadialGradient {
+enum `W3C_SVG2.PaintServers.RadialGradient Tests` {}
+
+extension `W3C_SVG2.PaintServers.RadialGradient Tests` {
     @Suite("PaintServers - RadialGradient")
     struct Test {
         @Test
@@ -449,7 +473,9 @@ extension W3C_SVG2.PaintServers.RadialGradient {
     }
 }
 
-extension W3C_SVG2.PaintServers.Stop {
+enum `W3C_SVG2.PaintServers.Stop Tests` {}
+
+extension `W3C_SVG2.PaintServers.Stop Tests` {
     @Suite("PaintServers - Stop")
     struct Test {
         @Test
@@ -471,7 +497,9 @@ extension W3C_SVG2.PaintServers.Stop {
     }
 }
 
-extension W3C_SVG2.PaintServers.Pattern {
+enum `W3C_SVG2.PaintServers.Pattern Tests` {}
+
+extension `W3C_SVG2.PaintServers.Pattern Tests` {
     @Suite("PaintServers - Pattern")
     struct Test {
         @Test
@@ -508,7 +536,9 @@ extension W3C_SVG2.PaintServers.Pattern {
     }
 }
 
-extension W3C_SVG2.Painting.LineCap {
+enum `W3C_SVG2.Painting.LineCap Tests` {}
+
+extension `W3C_SVG2.Painting.LineCap Tests` {
     @Suite("Painting - LineCap")
     struct Test {
         @Test
@@ -531,7 +561,9 @@ extension W3C_SVG2.Painting.LineCap {
     }
 }
 
-extension W3C_SVG2.Painting.LineJoin {
+enum `W3C_SVG2.Painting.LineJoin Tests` {}
+
+extension `W3C_SVG2.Painting.LineJoin Tests` {
     @Suite("Painting - LineJoin")
     struct Test {
         @Test
@@ -554,7 +586,9 @@ extension W3C_SVG2.Painting.LineJoin {
     }
 }
 
-extension W3C_SVG2.Painting.FillRule {
+enum `W3C_SVG2.Painting.FillRule Tests` {}
+
+extension `W3C_SVG2.Painting.FillRule Tests` {
     @Suite("Painting - FillRule")
     struct Test {
         @Test
@@ -571,7 +605,9 @@ extension W3C_SVG2.Painting.FillRule {
     }
 }
 
-extension W3C_SVG2.Painting.ClipPath {
+enum `W3C_SVG2.Painting.ClipPath Tests` {}
+
+extension `W3C_SVG2.Painting.ClipPath Tests` {
     @Suite("Painting - ClipPath")
     struct Test {
         @Test
@@ -595,7 +631,9 @@ extension W3C_SVG2.Painting.ClipPath {
     }
 }
 
-extension W3C_SVG2.Painting.Mask {
+enum `W3C_SVG2.Painting.Mask Tests` {}
+
+extension `W3C_SVG2.Painting.Mask Tests` {
     @Suite("Painting - Mask")
     struct Test {
         @Test
@@ -629,7 +667,9 @@ extension W3C_SVG2.Painting.Mask {
     }
 }
 
-extension W3C_SVG2.Painting.Marker {
+enum `W3C_SVG2.Painting.Marker Tests` {}
+
+extension `W3C_SVG2.Painting.Marker Tests` {
     @Suite("Painting - Marker")
     struct Test {
         @Test
@@ -666,7 +706,9 @@ extension W3C_SVG2.Painting.Marker {
     }
 }
 
-extension W3C_SVG2.Text.Text {
+enum `W3C_SVG2.Text.Text Tests` {}
+
+extension `W3C_SVG2.Text.Text Tests` {
     @Suite("Text - Text")
     struct Test {
         @Test
@@ -709,7 +751,9 @@ extension W3C_SVG2.Text.Text {
     }
 }
 
-extension W3C_SVG2.Text.TSpan {
+enum `W3C_SVG2.Text.TSpan Tests` {}
+
+extension `W3C_SVG2.Text.TSpan Tests` {
     @Suite("Text - TSpan")
     struct Test {
         @Test
