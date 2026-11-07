@@ -94,23 +94,23 @@ enum `W3C_SVG2.Types.Length Tests` {}
 extension `W3C_SVG2.Types.Length Tests` {
     @Suite("Types - Length")
     struct Test {
-        @Test("Length pixels")
-        func lengthPixels() {
+        @Test
+        func `Length pixels`() {
             #expect(W3C_SVG2.Types.Length.px(100).description == "100px")
         }
 
-        @Test("Length percentage")
-        func lengthPercentage() {
+        @Test
+        func `Length percentage`() {
             #expect(W3C_SVG2.Types.Length.percentage(50).description == "50%")
         }
 
-        @Test("Length em")
-        func lengthEm() {
+        @Test
+        func `Length em`() {
             #expect(W3C_SVG2.Types.Length.em(2.5).description == "2.5em")
         }
 
-        @Test("Length formatted")
-        func lengthFormatted() {
+        @Test
+        func `Length formatted`() {
             let length1: W3C_SVG2.Types.Length = 1
             #expect(length1.description == "1")
         }
@@ -122,18 +122,18 @@ enum `W3C_SVG2.Types.Color Tests` {}
 extension `W3C_SVG2.Types.Color Tests` {
     @Suite("Types - Color")
     struct Test {
-        @Test("Color named")
-        func colorNamed() {
+        @Test
+        func `Color named`() {
             #expect(W3C_SVG2.Types.Color.named("red").description == "red")
         }
 
-        @Test("Color hex")
-        func colorHex() {
+        @Test
+        func `Color hex`() {
             #expect(W3C_SVG2.Types.Color.hex("FF0000").description == "#FF0000")
         }
 
-        @Test("Color RGB")
-        func colorRGB() {
+        @Test
+        func `Color RGB`() {
             #expect(W3C_SVG2.Types.Color.rgb(r: 255, g: 0, b: 0).description == "rgb(255, 0, 0)")
         }
     }
@@ -144,20 +144,20 @@ enum `W3C_SVG2.Types.Transform Tests` {}
 extension `W3C_SVG2.Types.Transform Tests` {
     @Suite("Types - Transform")
     struct Test {
-        @Test("Transform translate")
-        func transformTranslate() {
+        @Test
+        func `Transform translate`() {
             #expect(
                 W3C_SVG2.Types.Transform.translate(x: 10, y: 20).description == "translate(10 20)"
             )
         }
 
-        @Test("Transform rotate")
-        func transformRotate() {
+        @Test
+        func `Transform rotate`() {
             #expect(W3C_SVG2.Types.Transform.rotate(angle: 45).description == "rotate(45)")
         }
 
-        @Test("Transform scale")
-        func transformScale() {
+        @Test
+        func `Transform scale`() {
             #expect(W3C_SVG2.Types.Transform.scale(x: 2, y: 3).description == "scale(2 3)")
         }
     }
@@ -168,14 +168,14 @@ enum `W3C_SVG2.Types.ViewBox Tests` {}
 extension `W3C_SVG2.Types.ViewBox Tests` {
     @Suite("Types - ViewBox")
     struct Test {
-        @Test("ViewBox creation")
-        func viewBoxCreation() {
+        @Test
+        func `ViewBox creation`() {
             let vb = W3C_SVG2.Types.ViewBox(width: 100, height: 200)
             #expect(vb.description == "0 0 100 200")
         }
 
-        @Test("ViewBox with offset")
-        func viewBoxWithOffset() {
+        @Test
+        func `ViewBox with offset`() {
             let vb = W3C_SVG2.Types.ViewBox(minX: 10, minY: 20, width: 100, height: 200)
             #expect(vb.description == "10 20 100 200")
         }
