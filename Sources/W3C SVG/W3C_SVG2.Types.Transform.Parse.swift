@@ -9,10 +9,24 @@ extension W3C_SVG2.Types.Transform {
     }
 }
 
+public enum __W3C_SVG2TypesTransformParseError: Swift::Error, Sendable, Equatable {
+    case expectedFunction
+    case expectedOpenParen
+    case expectedCloseParen
+    case numberError(__W3C_SVG2ParseNumberError)
+}
 
 extension W3C_SVG2.Types.Transform.Parse {
     public typealias Error = __W3C_SVG2TypesTransformParseError
 
+    public enum Function: Sendable, Equatable {
+        case translate(tx: Double, ty: Double)
+        case rotate(angle: Double, cx: Double, cy: Double)
+        case scale(sx: Double, sy: Double)
+        case skewX(angle: Double)
+        case skewY(angle: Double)
+        case matrix(a: Double, b: Double, c: Double, d: Double, e: Double, f: Double)
+    }
 
     public typealias Output = [Function]
 

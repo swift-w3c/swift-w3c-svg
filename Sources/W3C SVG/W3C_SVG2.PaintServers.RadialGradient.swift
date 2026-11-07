@@ -56,7 +56,21 @@ extension W3C_SVG2.PaintServers {
 
 extension W3C_SVG2.PaintServers.RadialGradient {
 
+    public enum GradientUnits: String, Sendable, Equatable {
 
+        case userSpaceOnUse
+
+        case objectBoundingBox
+    }
+
+    public enum SpreadMethod: String, Sendable, Equatable {
+
+        case pad
+
+        case reflect
+
+        case `repeat`
+    }
 
     public static let tagName = "radialGradient"
 

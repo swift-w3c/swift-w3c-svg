@@ -56,6 +56,12 @@ extension W3C_SVG2.PaintServers {
 
 extension W3C_SVG2.PaintServers.Pattern {
 
+    public enum Units: String, Sendable, Equatable {
+
+        case userSpaceOnUse
+
+        case objectBoundingBox
+    }
 
     public static let tagName = "pattern"
 
