@@ -2,11 +2,11 @@ import RFC_3987
 import Testing
 import W3C_SVG
 
-@Suite("W3C SVG2 - Basic Functionality")
-struct W3C_SVG2_Tests {
+@Suite
+struct `W3C SVG2 - Basic Functionality` {
 
-    @Suite("PaintServers - Gradient Units and Spread Methods")
-    struct GradientNestedEnumsTests {
+    @Suite
+    struct `PaintServers - Gradient Units and Spread Methods` {
         @Test
         func `LinearGradient GradientUnits`() {
             let userSpace = W3C_SVG2.PaintServers.LinearGradient.GradientUnits.userSpaceOnUse
