@@ -9,9 +9,6 @@ extension W3C_SVG2.Parse {
     }
 }
 
-public enum __W3C_SVG2ParseNumberError: Swift::Error, Sendable, Equatable {
-    case expectedDigit
-}
 
 extension W3C_SVG2.Parse.Number {
     public typealias Output = Double
