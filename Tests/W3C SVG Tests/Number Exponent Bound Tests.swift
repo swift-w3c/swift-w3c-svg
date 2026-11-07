@@ -55,43 +55,47 @@ extension ByteSlice: Collection.Slice.`Protocol` {
     }
 }
 
-@Suite
-struct `Number and integer bounds` {
-    private static func number(_ text: String) throws -> Double {
-        var input = ByteSlice(text)
-        return try W3C_SVG2.Parse.Number<ByteSlice>().parse(&input)
-    }
+enum `Number Exponent Bound Tests` {}
 
-    @Test
-    func `a huge positive exponent is infinity without looping per unit of exponent`() throws {
-        #expect(try Self.number("1e999999999999") == .infinity)
-    }
-
-    @Test
-    func `a huge negative exponent is zero`() throws {
-        #expect(try Self.number("1e-999999999999") == 0)
-    }
-
-    @Test
-    func `an exponent longer than Int is not wrapped into a crash`() throws {
-        #expect(try Self.number("1e99999999999999999999999") == .infinity)
-    }
-
-    @Test
-    func `an ordinary exponent is exact`() throws {
-        #expect(try Self.number("1.5e3") == 1500)
-        #expect(try Self.number("25e-2") == 0.25)
-    }
-
-    @Test
-    func `an rgb component longer than Int saturates instead of wrapping`() throws {
-        var input = ByteSlice("rgb(99999999999999999999999, 0, 0)")
-        let color = try W3C_SVG2.Types.Color.Parse<ByteSlice>().parse(&input)
-        guard case .rgb(let r, let g, let b) = color else {
-            Issue.record("expected an rgb color, got \(color)")
-            return
+extension `Number Exponent Bound Tests` {
+    @Suite
+    struct `Number and integer bounds` {
+        private static func number(_ text: String) throws -> Double {
+            var input = ByteSlice(text)
+            return try W3C_SVG2.Parse.Number<ByteSlice>().parse(&input)
         }
-        #expect(r == Int.max)
-        #expect(g == 0 && b == 0)
+
+        @Test
+        func `a huge positive exponent is infinity without looping per unit of exponent`() throws {
+            #expect(try Self.number("1e999999999999") == .infinity)
+        }
+
+        @Test
+        func `a huge negative exponent is zero`() throws {
+            #expect(try Self.number("1e-999999999999") == 0)
+        }
+
+        @Test
+        func `an exponent longer than Int is not wrapped into a crash`() throws {
+            #expect(try Self.number("1e99999999999999999999999") == .infinity)
+        }
+
+        @Test
+        func `an ordinary exponent is exact`() throws {
+            #expect(try Self.number("1.5e3") == 1500)
+            #expect(try Self.number("25e-2") == 0.25)
+        }
+
+        @Test
+        func `an rgb component longer than Int saturates instead of wrapping`() throws {
+            var input = ByteSlice("rgb(99999999999999999999999, 0, 0)")
+            let color = try W3C_SVG2.Types.Color.Parse<ByteSlice>().parse(&input)
+            guard case .rgb(let r, let g, let b) = color else {
+                Issue.record("expected an rgb color, got \(color)")
+                return
+            }
+            #expect(r == Int.max)
+            #expect(g == 0 && b == 0)
+        }
     }
 }

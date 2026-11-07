@@ -2,9 +2,15 @@ import RFC_3987
 import Testing
 import W3C_SVG
 
-@Suite
-struct `W3C SVG2 - Basic Functionality` {
+enum `W3C_SVG2_ Tests` {}
 
+extension `W3C_SVG2_ Tests` {
+    @Suite
+    struct `W3C SVG2 - Basic Functionality` {
+    }
+}
+
+extension `W3C_SVG2_ Tests`.`W3C SVG2 - Basic Functionality` {
     @Suite
     struct `PaintServers - Gradient Units and Spread Methods` {
         @Test
