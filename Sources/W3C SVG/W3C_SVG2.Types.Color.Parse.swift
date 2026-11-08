@@ -9,10 +9,8 @@ extension W3C_SVG2.Types.Color {
     }
 }
 
-
 extension W3C_SVG2.Types.Color.Parse {
     public typealias Error = __W3C_SVG2TypesColorParseError
-
 
 }
 

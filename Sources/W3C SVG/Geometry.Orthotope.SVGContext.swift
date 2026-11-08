@@ -2,7 +2,6 @@ import Formatter
 public import Geometry
 public import Segment
 
-
 extension Geometry.Orthotope where N == 2, Scalar == Double, Space == W3C_SVG.Space {
     public struct SVGContext {
 

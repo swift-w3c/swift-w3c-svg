@@ -9,10 +9,8 @@ extension W3C_SVG2.Types.ViewBox {
     }
 }
 
-
 extension W3C_SVG2.Types.ViewBox.Parse {
     public typealias Error = __W3C_SVG2TypesViewBoxParseError
-
 
 }
 

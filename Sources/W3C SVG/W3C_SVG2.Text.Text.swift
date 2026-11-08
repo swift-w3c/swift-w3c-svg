@@ -30,7 +30,6 @@ extension W3C_SVG2.Text {
 
 extension W3C_SVG2.Text.Text {
 
-
     public static let tagName = "text"
 
     public static let isSelfClosing = false

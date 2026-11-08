@@ -48,8 +48,6 @@ extension W3C_SVG2.PaintServers {
 
 extension W3C_SVG2.PaintServers.LinearGradient {
 
-
-
     public static let tagName = "linearGradient"
 
     public static let isSelfClosing = false

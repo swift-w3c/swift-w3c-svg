@@ -18,7 +18,6 @@ extension W3C_SVG2.Painting {
 
 extension W3C_SVG2.Painting.ClipPath {
 
-
     public static let tagName = "clipPath"
 
     public static let isSelfClosing = false

@@ -9,9 +9,7 @@ extension W3C_SVG2.Types.Length {
     }
 }
 
-
 extension W3C_SVG2.Types.Length.Parse {
-
 
     public typealias Error = __W3C_SVG2TypesLengthParseError
 }

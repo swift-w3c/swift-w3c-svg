@@ -56,7 +56,6 @@ extension W3C_SVG2.PaintServers {
 
 extension W3C_SVG2.PaintServers.Pattern {
 
-
     public static let tagName = "pattern"
 
     public static let isSelfClosing = false

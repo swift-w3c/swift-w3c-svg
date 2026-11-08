@@ -1,6 +1,5 @@
 public import Parser
 
-
 extension W3C_SVG2.Types.Length.Parse {
     public enum Output: Sendable, Equatable {
         case number(Double)

@@ -56,8 +56,6 @@ extension W3C_SVG2.PaintServers {
 
 extension W3C_SVG2.PaintServers.RadialGradient {
 
-
-
     public static let tagName = "radialGradient"
 
     public static let isSelfClosing = false

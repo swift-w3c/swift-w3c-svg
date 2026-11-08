@@ -2,7 +2,6 @@ import Formatter
 public import Geometry
 public import Segment
 
-
 extension W3C_SVG.Context {
     /// An owned SVG interpretation; the generic endpoint atom is not an SVG view.
     public struct Segment {

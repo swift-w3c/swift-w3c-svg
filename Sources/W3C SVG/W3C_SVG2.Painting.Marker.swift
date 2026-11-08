@@ -46,7 +46,6 @@ extension W3C_SVG2.Painting {
 
 extension W3C_SVG2.Painting.Marker {
 
-
     public static let tagName = "marker"
 
     public static let isSelfClosing = false

@@ -1,4 +1,3 @@
-
 extension W3C_SVG2.Styled {
     public struct Circle: Sendable, Hashable {
 

@@ -38,7 +38,6 @@ extension W3C_SVG2.Painting {
 
 extension W3C_SVG2.Painting.Mask {
 
-
     public static let tagName = "mask"
 
     public static let isSelfClosing = false

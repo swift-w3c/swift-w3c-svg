@@ -1,6 +1,5 @@
 public import Parser
 
-
 extension W3C_SVG2.Types.ViewBox.Parse {
     public struct Output: Sendable, Equatable {
         public let minX: Double

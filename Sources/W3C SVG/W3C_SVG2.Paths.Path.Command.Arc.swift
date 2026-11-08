@@ -1,7 +1,6 @@
 import Formatter
 public import Geometry
 
-
 extension W3C_SVG2.Paths.Path.Command {
     public struct Arc: Sendable, Equatable {
 

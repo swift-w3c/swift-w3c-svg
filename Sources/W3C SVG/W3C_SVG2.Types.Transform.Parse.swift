@@ -9,10 +9,8 @@ extension W3C_SVG2.Types.Transform {
     }
 }
 
-
 extension W3C_SVG2.Types.Transform.Parse {
     public typealias Error = __W3C_SVG2TypesTransformParseError
-
 
     public typealias Output = [Function]
 
@@ -95,11 +93,12 @@ extension W3C_SVG2.Types.Transform.Parse: Parsing {
             } else {
 
                 let args = try Self._parseArgs(&input, min: 1, max: 1)
-                result = if fifthByte == 0x78 {
-                    .skewX(angle: args[0])
-                } else {
-                    .skewY(angle: args[0])
-                }
+                result =
+                    if fifthByte == 0x78 {
+                        .skewX(angle: args[0])
+                    } else {
+                        .skewY(angle: args[0])
+                    }
             }
 
         case 0x6D:

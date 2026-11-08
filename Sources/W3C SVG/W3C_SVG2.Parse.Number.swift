@@ -9,7 +9,6 @@ extension W3C_SVG2.Parse {
     }
 }
 
-
 extension W3C_SVG2.Parse.Number {
     public typealias Output = Double
     public typealias Error = __W3C_SVG2ParseNumberError
