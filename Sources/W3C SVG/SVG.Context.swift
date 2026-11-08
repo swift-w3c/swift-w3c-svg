@@ -32,14 +32,6 @@ extension Geometry.Orthotope where N == 2, Scalar == Double, Space == W3C_SVG.Sp
 
     public var svg: SVGContext { SVGContext(self) }
 
-    public struct SVGContext {
-
-        public let rectangle: Geometry<Double, W3C_SVG.Space>.Rectangle
-
-        public init(_ rectangle: Geometry<Double, W3C_SVG.Space>.Rectangle) {
-            self.rectangle = rectangle
-        }
-    }
 }
 
 extension Geometry.Orthotope.SVGContext where N == 2, Scalar == Double, Space == W3C_SVG.Space {
@@ -61,14 +53,6 @@ extension Geometry.Ellipse where Scalar == Double, Space == W3C_SVG.Space {
 
     public var svg: SVGContext { SVGContext(self) }
 
-    public struct SVGContext {
-
-        public let ellipse: Geometry<Double, W3C_SVG.Space>.Ellipse
-
-        public init(_ ellipse: Geometry<Double, W3C_SVG.Space>.Ellipse) {
-            self.ellipse = ellipse
-        }
-    }
 }
 
 extension Geometry.Ellipse.SVGContext where Scalar == Double, Space == W3C_SVG.Space {
@@ -87,19 +71,9 @@ extension Geometry.Ellipse.SVGContext where Scalar == Double, Space == W3C_SVG.S
 }
 
 extension W3C_SVG {
-    public enum Context {}
 }
 
 extension W3C_SVG.Context {
-    /// An owned SVG interpretation; the generic endpoint atom is not an SVG view.
-    public struct Segment {
-
-        public let segment: Geometry<Double, W3C_SVG.Space>.Line.Segment
-
-        public init(_ segment: Geometry<Double, W3C_SVG.Space>.Line.Segment) {
-            self.segment = segment
-        }
-    }
 }
 
 extension Segment::Segment where Point == Geometry<Double, W3C_SVG.Space>.Point<2> {
@@ -122,14 +96,6 @@ extension Geometry.Polygon where Scalar == Double, Space == W3C_SVG.Space {
 
     public var svg: SVGContext { SVGContext(self) }
 
-    public struct SVGContext {
-
-        public let polygon: Geometry<Double, W3C_SVG.Space>.Polygon
-
-        public init(_ polygon: Geometry<Double, W3C_SVG.Space>.Polygon) {
-            self.polygon = polygon
-        }
-    }
 }
 
 extension Geometry.Polygon.SVGContext where Scalar == Double, Space == W3C_SVG.Space {
@@ -144,14 +110,6 @@ extension Geometry.Path where Scalar == Double, Space == W3C_SVG.Space {
 
     public var svg: SVGContext { SVGContext(self) }
 
-    public struct SVGContext {
-
-        public let path: Geometry<Double, W3C_SVG.Space>.Path
-
-        public init(_ path: Geometry<Double, W3C_SVG.Space>.Path) {
-            self.path = path
-        }
-    }
 }
 
 extension Geometry.Path.SVGContext where Scalar == Double, Space == W3C_SVG.Space {

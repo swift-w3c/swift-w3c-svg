@@ -30,12 +30,6 @@ extension W3C_SVG2.Text {
 
 extension W3C_SVG2.Text.Text {
 
-    public enum LengthAdjust: String, Sendable, Equatable {
-
-        case spacing
-
-        case spacingAndGlyphs
-    }
 
     public static let tagName = "text"
 
