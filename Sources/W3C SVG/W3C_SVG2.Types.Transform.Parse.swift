@@ -95,10 +95,10 @@ extension W3C_SVG2.Types.Transform.Parse: Parsing {
             } else {
 
                 let args = try Self._parseArgs(&input, min: 1, max: 1)
-                if fifthByte == 0x78 {
-                    result = .skewX(angle: args[0])
+                result = if fifthByte == 0x78 {
+                    .skewX(angle: args[0])
                 } else {
-                    result = .skewY(angle: args[0])
+                    .skewY(angle: args[0])
                 }
             }
 
