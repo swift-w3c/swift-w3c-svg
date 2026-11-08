@@ -1,4 +1,4 @@
-public import Parser
+import Parser
 
 extension W3C_SVG2.Types.Color.Parse {
     public enum Output: Sendable {

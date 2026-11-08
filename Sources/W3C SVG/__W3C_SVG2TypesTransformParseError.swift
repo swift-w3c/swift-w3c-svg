@@ -1,4 +1,4 @@
-public import Parser
+import Parser
 
 public enum __W3C_SVG2TypesTransformParseError: Swift::Error, Sendable, Equatable {
     case expectedFunction

@@ -1,4 +1,4 @@
-public import Parser
+import Parser
 
 extension W3C_SVG2.Types.ViewBox.Parse {
     public struct Output: Sendable, Equatable {

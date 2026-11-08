@@ -1,4 +1,4 @@
-public import Parser
+import Parser
 
 extension W3C_SVG2.Types.Transform.Parse {
     public enum Function: Sendable, Equatable {
