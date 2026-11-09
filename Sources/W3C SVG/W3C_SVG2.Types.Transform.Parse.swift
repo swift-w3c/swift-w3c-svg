@@ -48,18 +48,19 @@ extension W3C_SVG2.Types.Transform.Parse: Parsing {
     @inlinable
     package static func _parseFunction(_ input: inout Input) throws(Failure) -> Function {
 
-        var nameLen = 0
-        var firstByte: UInt8 = 0
-        var fifthByte: UInt8 = 0
+        var name: [UInt8] = []
         while input.startIndex < input.endIndex {
             let byte = input[input.startIndex] | 0x20
             guard byte >= 0x61 && byte <= 0x7A else { break }
-            if nameLen == 0 { firstByte = byte }
-            if nameLen == 4 { fifthByte = byte }
+            if name.count <= 9 { name.append(byte) }
             input = input[input.index(after: input.startIndex)...]
-            nameLen += 1
         }
-        guard nameLen > 0 else { throw .expectedFunction }
+
+        let known: [[UInt8]] = [
+            [UInt8]("matrix".utf8), [UInt8]("translate".utf8), [UInt8]("scale".utf8),
+            [UInt8]("rotate".utf8), [UInt8]("skewx".utf8), [UInt8]("skewy".utf8),
+        ]
+        guard known.contains(name) else { throw .expectedFunction }
 
         Self._skipWS(&input)
 
@@ -72,12 +73,12 @@ extension W3C_SVG2.Types.Transform.Parse: Parsing {
 
         let result: Function
 
-        switch firstByte {
-        case 0x74:
+        switch name {
+        case [UInt8]("translate".utf8):
             let args = try Self._parseArgs(&input, min: 1, max: 2)
             result = .translate(tx: args[0], ty: args.count > 1 ? args[1] : 0)
 
-        case 0x72:
+        case [UInt8]("rotate".utf8):
             let args = try Self._parseArgs(&input, min: 1, max: 3)
             result = .rotate(
                 angle: args[0],
@@ -85,23 +86,19 @@ extension W3C_SVG2.Types.Transform.Parse: Parsing {
                 cy: args.count > 2 ? args[2] : 0
             )
 
-        case 0x73:
-            if nameLen == 5 {
+        case [UInt8]("scale".utf8):
+            let args = try Self._parseArgs(&input, min: 1, max: 2)
+            result = .scale(sx: args[0], sy: args.count > 1 ? args[1] : args[0])
 
-                let args = try Self._parseArgs(&input, min: 1, max: 2)
-                result = .scale(sx: args[0], sy: args.count > 1 ? args[1] : args[0])
-            } else {
+        case [UInt8]("skewx".utf8):
+            let args = try Self._parseArgs(&input, min: 1, max: 1)
+            result = .skewX(angle: args[0])
 
-                let args = try Self._parseArgs(&input, min: 1, max: 1)
-                result =
-                    if fifthByte == 0x78 {
-                        .skewX(angle: args[0])
-                    } else {
-                        .skewY(angle: args[0])
-                    }
-            }
+        case [UInt8]("skewy".utf8):
+            let args = try Self._parseArgs(&input, min: 1, max: 1)
+            result = .skewY(angle: args[0])
 
-        case 0x6D:
+        case [UInt8]("matrix".utf8):
             let args = try Self._parseArgs(&input, min: 6, max: 6)
             result = .matrix(
                 a: args[0],
