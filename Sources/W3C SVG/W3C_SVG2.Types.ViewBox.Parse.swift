@@ -22,6 +22,7 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parsing {
     public func parse(_ input: inout Input) throws(Failure) -> Output {
         Self._skipWhitespaceAndComma(&input)
 
+        guard input.startIndex < input.endIndex else { throw .expectedFourNumbers }
         let minX: Double
         do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
             minX = try W3C_SVG2.Parse.Number<Input>().parse(&input)
@@ -30,6 +31,7 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parsing {
         }
         Self._skipWhitespaceAndComma(&input)
 
+        guard input.startIndex < input.endIndex else { throw .expectedFourNumbers }
         let minY: Double
         do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
             minY = try W3C_SVG2.Parse.Number<Input>().parse(&input)
@@ -38,6 +40,7 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parsing {
         }
         Self._skipWhitespaceAndComma(&input)
 
+        guard input.startIndex < input.endIndex else { throw .expectedFourNumbers }
         let width: Double
         do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
             width = try W3C_SVG2.Parse.Number<Input>().parse(&input)
@@ -46,12 +49,15 @@ extension W3C_SVG2.Types.ViewBox.Parse: Parsing {
         }
         Self._skipWhitespaceAndComma(&input)
 
+        guard input.startIndex < input.endIndex else { throw .expectedFourNumbers }
         let height: Double
         do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
             height = try W3C_SVG2.Parse.Number<Input>().parse(&input)
         } catch {
             throw .numberError(error)
         }
+
+        guard width >= 0, height >= 0 else { throw .negativeSize }
 
         return Output(minX: minX, minY: minY, width: width, height: height)
     }
