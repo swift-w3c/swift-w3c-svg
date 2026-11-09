@@ -57,10 +57,13 @@ extension Geometry.Ellipse where Scalar == Double, Space == W3C_SVG.Space {
 
 extension Geometry.Ellipse.SVGContext where Scalar == Double, Space == W3C_SVG.Space {
 
+    /// The `<ellipse>` element, or `nil` when the ellipse has a negative axis or is rotated:
+    /// `<ellipse>` has no rotation, so `rx` and `ry` lie along the x and y axes.
     public var element: W3C_SVG2.Shapes.Ellipse? {
         guard ellipse.semiMajor.underlying >= 0, ellipse.semiMinor.underlying >= 0 else {
             return nil
         }
+        guard ellipse.rotation.underlying == 0 else { return nil }
         return W3C_SVG2.Shapes.Ellipse(
             cx: ellipse.center.x,
             cy: ellipse.center.y,
