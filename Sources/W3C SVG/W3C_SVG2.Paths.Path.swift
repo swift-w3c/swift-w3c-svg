@@ -15,9 +15,13 @@ extension W3C_SVG2.Paths {
 
         private var _originalPathData: String?
 
+        /// Creates a path from path data, keeping `d` as written.
+        ///
+        /// As SVG 2 renders path data up to its first error, ``geometry`` holds the commands
+        /// before the first error; use ``Parser/parse(_:)`` to detect one.
         public init(d: String? = nil, fillRule: W3C_SVG2.Painting.FillRule? = nil) {
             if let d {
-                self.geometry = Parser.parse(d)
+                self.geometry = Parser.parsePrefix(d)
                 self._originalPathData = d
             } else {
                 self.geometry = .init(subpaths: [])

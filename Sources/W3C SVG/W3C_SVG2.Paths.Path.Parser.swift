@@ -18,15 +18,34 @@ extension W3C_SVG2.Paths.Path {
 
 extension W3C_SVG2.Paths.Path.Parser {
 
-    public static func parse(_ pathData: String) -> W3C_SVG2.PathGeometry<W3C_SVG.Space> {
-        var parser = Self(pathData)
-        let commands = parser.parseCommands()
-        return convertToGeometry(commands)
+    /// Parses path data into geometry.
+    ///
+    /// Throws ``Error`` with the UTF-8 offset of the first token that does not continue
+    /// well-formed path data, so truncated data is never mistaken for complete data.
+    public static func parse(
+        _ pathData: String
+    ) throws(Error) -> W3C_SVG2.PathGeometry<W3C_SVG.Space> {
+        convertToGeometry(try parseToCommands(pathData))
     }
 
-    public static func parseToCommands(_ pathData: String) -> [W3C_SVG2.Paths.Path.Command] {
+    /// Parses path data into commands.
+    ///
+    /// Throws ``Error`` with the UTF-8 offset of the first token that does not continue
+    /// well-formed path data.
+    public static func parseToCommands(
+        _ pathData: String
+    ) throws(Error) -> [W3C_SVG2.Paths.Path.Command] {
         var parser = Self(pathData)
-        return parser.parseCommands()
+        let result = parser.parseCommands()
+        if let error = result.error { throw error }
+        return result.commands
+    }
+
+    /// The geometry of the commands before the first error, as SVG 2 renders path data
+    /// up to the first error.
+    static func parsePrefix(_ pathData: String) -> W3C_SVG2.PathGeometry<W3C_SVG.Space> {
+        var parser = Self(pathData)
+        return convertToGeometry(parser.parseCommands().commands)
     }
 
     private static func convertToGeometry(
@@ -155,97 +174,120 @@ extension W3C_SVG2.Paths.Path.Parser {
         return W3C_SVG2.PathGeometry<W3C_SVG.Space>(subpaths: subpaths)
     }
 
-    private mutating func parseCommands() -> [W3C_SVG2.Paths.Path.Command] {
+    private mutating func failure() -> Error {
+        skipWhitespaceAndCommas()
+        return Error(offset: input.utf8.distance(from: input.startIndex, to: index))
+    }
+
+    private mutating func parseCommands() -> (commands: [W3C_SVG2.Paths.Path.Command], error: Error?) {
         var commands: [W3C_SVG2.Paths.Path.Command] = []
 
-        while index < input.endIndex {
+        while true {
             skipWhitespaceAndCommas()
             guard index < input.endIndex else { break }
 
+            let commandStart = index
             let command = input[index]
-            guard command.isLetter else { break }
+            let isRelative = command.isLowercase
+            guard commands.isEmpty == false || command == "M" || command == "m" else {
+                return (commands, failure())
+            }
             index = input.index(after: index)
 
-            let isRelative = command.isLowercase
-            guard let cmd = command.uppercased().first else {
-                preconditionFailure("An uppercased letter is never empty")
-            }
+            let groups: Int
+            switch command {
+            case "M", "m":
+                groups = parseMoveTo(isRelative: isRelative, commands: &commands)
 
-            switch cmd {
-            case "M":
-                parseMoveTo(isRelative: isRelative, commands: &commands)
+            case "L", "l":
+                groups = parseLineTo(isRelative: isRelative, commands: &commands)
 
-            case "L":
-                parseLineTo(isRelative: isRelative, commands: &commands)
+            case "H", "h":
+                groups = parseHorizontalLineTo(isRelative: isRelative, commands: &commands)
 
-            case "H":
-                parseHorizontalLineTo(isRelative: isRelative, commands: &commands)
+            case "V", "v":
+                groups = parseVerticalLineTo(isRelative: isRelative, commands: &commands)
 
-            case "V":
-                parseVerticalLineTo(isRelative: isRelative, commands: &commands)
+            case "C", "c":
+                groups = parseCubicBezier(isRelative: isRelative, commands: &commands)
 
-            case "C":
-                parseCubicBezier(isRelative: isRelative, commands: &commands)
+            case "S", "s":
+                groups = parseSmoothCubicBezier(isRelative: isRelative, commands: &commands)
 
-            case "S":
-                parseSmoothCubicBezier(isRelative: isRelative, commands: &commands)
+            case "Q", "q":
+                groups = parseQuadraticBezier(isRelative: isRelative, commands: &commands)
 
-            case "Q":
-                parseQuadraticBezier(isRelative: isRelative, commands: &commands)
+            case "T", "t":
+                groups = parseSmoothQuadraticBezier(isRelative: isRelative, commands: &commands)
 
-            case "T":
-                parseSmoothQuadraticBezier(isRelative: isRelative, commands: &commands)
+            case "A", "a":
+                groups = parseArc(isRelative: isRelative, commands: &commands)
 
-            case "A":
-                parseArc(isRelative: isRelative, commands: &commands)
-
-            case "Z":
+            case "Z", "z":
                 commands.append(.closePath)
                 currentPoint = startPoint
                 lastControlPoint = nil
+                groups = 1
 
             default:
-                break
+                index = commandStart
+                return (commands, failure())
             }
+
+            guard groups > 0 else { return (commands, failure()) }
         }
 
-        return commands
+        return (commands, nil)
     }
 
     private mutating func parseMoveTo(
         isRelative: Bool,
         commands: inout [W3C_SVG2.Paths.Path.Command]
-    ) {
-        var isFirst = true
-        while let point = parsePoint(isRelative: isRelative) {
-            if isFirst {
+    ) -> Int {
+        var groups = 0
+        while true {
+            let groupStart = index
+            guard let point = parsePoint(isRelative: isRelative) else {
+                index = groupStart
+                break
+            }
+            if groups == 0 {
                 commands.append(.moveTo(point))
                 startPoint = point
-                isFirst = false
             } else {
-
                 commands.append(.lineTo(point))
             }
             currentPoint = point
             lastControlPoint = nil
+            groups += 1
         }
+        return groups
     }
 
     private mutating func parseLineTo(
         isRelative: Bool,
         commands: inout [W3C_SVG2.Paths.Path.Command]
-    ) {
-        while let point = parsePoint(isRelative: isRelative) {
+    ) -> Int {
+        var groups = 0
+        while true {
+            let groupStart = index
+            guard let point = parsePoint(isRelative: isRelative) else {
+                index = groupStart
+                break
+            }
             commands.append(.lineTo(point))
             currentPoint = point
             lastControlPoint = nil
+            groups += 1
         }
+        return groups
     }
 
     private mutating func parseHorizontalLineTo(
         isRelative: Bool,
         commands: inout [W3C_SVG2.Paths.Path.Command]
-    ) {
+    ) -> Int {
+        var groups = 0
         while let x = parseNumber() {
             let newX: W3C_SVG2.X =
                 isRelative
@@ -254,13 +296,16 @@ extension W3C_SVG2.Paths.Path.Parser {
             commands.append(.horizontalLineTo(x: newX))
             currentPoint = W3C_SVG2.Point(x: newX, y: currentPoint.y)
             lastControlPoint = nil
+            groups += 1
         }
+        return groups
     }
 
     private mutating func parseVerticalLineTo(
         isRelative: Bool,
         commands: inout [W3C_SVG2.Paths.Path.Command]
-    ) {
+    ) -> Int {
+        var groups = 0
         while let y = parseNumber() {
             let newY: W3C_SVG2.Y =
                 isRelative
@@ -269,17 +314,25 @@ extension W3C_SVG2.Paths.Path.Parser {
             commands.append(.verticalLineTo(y: newY))
             currentPoint = W3C_SVG2.Point(x: currentPoint.x, y: newY)
             lastControlPoint = nil
+            groups += 1
         }
+        return groups
     }
 
     private mutating func parseCubicBezier(
         isRelative: Bool,
         commands: inout [W3C_SVG2.Paths.Path.Command]
-    ) {
-        while let control1 = parsePoint(isRelative: isRelative),
-            let control2 = parsePoint(isRelative: isRelative),
-            let end = parsePoint(isRelative: isRelative)
-        {
+    ) -> Int {
+        var groups = 0
+        while true {
+            let groupStart = index
+            guard let control1 = parsePoint(isRelative: isRelative),
+                let control2 = parsePoint(isRelative: isRelative),
+                let end = parsePoint(isRelative: isRelative)
+            else {
+                index = groupStart
+                break
+            }
             let bezier = W3C_SVG2.Bezier.cubic(
                 from: currentPoint,
                 control1: control1,
@@ -289,40 +342,64 @@ extension W3C_SVG2.Paths.Path.Parser {
             commands.append(.cubicBezier(bezier))
             lastControlPoint = control2
             currentPoint = end
+            groups += 1
         }
+        return groups
     }
 
     private mutating func parseSmoothCubicBezier(
         isRelative: Bool,
         commands: inout [W3C_SVG2.Paths.Path.Command]
-    ) {
-        while let control2 = parsePoint(isRelative: isRelative),
-            let end = parsePoint(isRelative: isRelative)
-        {
+    ) -> Int {
+        var groups = 0
+        while true {
+            let groupStart = index
+            guard let control2 = parsePoint(isRelative: isRelative),
+                let end = parsePoint(isRelative: isRelative)
+            else {
+                index = groupStart
+                break
+            }
             commands.append(.smoothCubicBezier(control2: control2, end: end))
             lastControlPoint = control2
             currentPoint = end
+            groups += 1
         }
+        return groups
     }
 
     private mutating func parseQuadraticBezier(
         isRelative: Bool,
         commands: inout [W3C_SVG2.Paths.Path.Command]
-    ) {
-        while let control = parsePoint(isRelative: isRelative),
-            let end = parsePoint(isRelative: isRelative)
-        {
+    ) -> Int {
+        var groups = 0
+        while true {
+            let groupStart = index
+            guard let control = parsePoint(isRelative: isRelative),
+                let end = parsePoint(isRelative: isRelative)
+            else {
+                index = groupStart
+                break
+            }
             commands.append(.quadraticBezier(control: control, end: end))
             lastControlPoint = control
             currentPoint = end
+            groups += 1
         }
+        return groups
     }
 
     private mutating func parseSmoothQuadraticBezier(
         isRelative: Bool,
         commands: inout [W3C_SVG2.Paths.Path.Command]
-    ) {
-        while let end = parsePoint(isRelative: isRelative) {
+    ) -> Int {
+        var groups = 0
+        while true {
+            let groupStart = index
+            guard let end = parsePoint(isRelative: isRelative) else {
+                index = groupStart
+                break
+            }
             commands.append(.smoothQuadraticBezier(end: end))
 
             if let last = lastControlPoint {
@@ -333,17 +410,28 @@ extension W3C_SVG2.Paths.Path.Parser {
                 lastControlPoint = currentPoint
             }
             currentPoint = end
+            groups += 1
         }
+        return groups
     }
 
-    private mutating func parseArc(isRelative: Bool, commands: inout [W3C_SVG2.Paths.Path.Command]) {
-        while let rx = parseNumber(),
-            let ry = parseNumber(),
-            let rotation = parseNumber(),
-            let largeArc = parseFlag(),
-            let sweep = parseFlag(),
-            let end = parsePoint(isRelative: isRelative)
-        {
+    private mutating func parseArc(
+        isRelative: Bool,
+        commands: inout [W3C_SVG2.Paths.Path.Command]
+    ) -> Int {
+        var groups = 0
+        while true {
+            let groupStart = index
+            guard let rx = parseNumber(),
+                let ry = parseNumber(),
+                let rotation = parseNumber(),
+                let largeArc = parseFlag(),
+                let sweep = parseFlag(),
+                let end = parsePoint(isRelative: isRelative)
+            else {
+                index = groupStart
+                break
+            }
             let arcCmd = W3C_SVG2.Paths.Path.Command.Arc(
                 rx: rx,
                 ry: ry,
@@ -355,7 +443,9 @@ extension W3C_SVG2.Paths.Path.Parser {
             commands.append(.arc(arcCmd))
             currentPoint = end
             lastControlPoint = nil
+            groups += 1
         }
+        return groups
     }
 
     private mutating func parsePoint(isRelative: Bool) -> W3C_SVG2.Point? {
@@ -374,43 +464,57 @@ extension W3C_SVG2.Paths.Path.Parser {
         )
     }
 
+    private static func isDigit(_ character: Character) -> Bool {
+        guard let ascii = character.asciiValue else { return false }
+        return ascii >= 0x30 && ascii <= 0x39
+    }
+
+    private mutating func skipDigits() -> Bool {
+        let digitsStart = index
+        while index < input.endIndex && Self.isDigit(input[index]) {
+            index = input.index(after: index)
+        }
+        return index > digitsStart
+    }
+
     private mutating func parseNumber() -> Double? {
         skipWhitespaceAndCommas()
-        guard index < input.endIndex else { return nil }
-
         let startIdx = index
 
         if index < input.endIndex && (input[index] == "-" || input[index] == "+") {
             index = input.index(after: index)
         }
 
-        while index < input.endIndex && input[index].isNumber {
-            index = input.index(after: index)
-        }
+        var hasDigits = skipDigits()
 
         if index < input.endIndex && input[index] == "." {
             index = input.index(after: index)
+            if skipDigits() { hasDigits = true }
+        }
 
-            while index < input.endIndex && input[index].isNumber {
-                index = input.index(after: index)
-            }
+        guard hasDigits else {
+            index = startIdx
+            return nil
         }
 
         if index < input.endIndex && (input[index] == "e" || input[index] == "E") {
+            let exponentStart = index
             index = input.index(after: index)
 
             if index < input.endIndex && (input[index] == "-" || input[index] == "+") {
                 index = input.index(after: index)
             }
 
-            while index < input.endIndex && input[index].isNumber {
-                index = input.index(after: index)
+            if skipDigits() == false {
+                index = exponentStart
             }
         }
 
-        guard index > startIdx else { return nil }
-        let numberStr = String(input[startIdx..<index])
-        return Double(numberStr)
+        guard let value = Double(String(input[startIdx..<index])) else {
+            index = startIdx
+            return nil
+        }
+        return value
     }
 
     private mutating func parseFlag() -> Bool? {
