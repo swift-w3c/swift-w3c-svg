@@ -139,11 +139,7 @@ extension W3C_SVG2.Paths.Path.Parser {
 
             case .arc(let arcCmd):
 
-                let ellipseArc = W3C_SVG2.Ellipse.Arc(
-                    svgArc: arcCmd,
-                    from: currentPoint
-                )
-                currentSegments.append(.ellipticalArc(ellipseArc))
+                currentSegments.append(Segment(svgArc: arcCmd, from: currentPoint))
                 currentPoint = arcCmd.end
                 lastControlPoint = nil
 
