@@ -27,6 +27,7 @@ extension W3C_SVG2.Types.Color.Parse: Parsing {
         if first == 0x23 {
             input = input[input.index(after: input.startIndex)...]
             let hexStart = input.startIndex
+            var count = 0
             while input.startIndex < input.endIndex {
                 let byte = input[input.startIndex]
                 let isHex =
@@ -35,8 +36,9 @@ extension W3C_SVG2.Types.Color.Parse: Parsing {
                     || (byte >= 0x61 && byte <= 0x66)
                 guard isHex else { break }
                 input = input[input.index(after: input.startIndex)...]
+                count += 1
             }
-            guard hexStart < input.startIndex else { throw .invalidHex }
+            guard count == 3 || count == 4 || count == 6 || count == 8 else { throw .invalidHex }
             return .hex(input[hexStart..<input.startIndex])
         }
 
@@ -138,12 +140,13 @@ extension W3C_SVG2.Types.Color.Parse: Parsing {
             try Self._expectComma(&input)
             Self._skipWS(&input)
 
-            let a: Double
+            let alpha: Double
             do throws(W3C_SVG2.Parse.Number<Input>.Failure) {
-                a = try W3C_SVG2.Parse.Number<Input>().parse(&input)
+                alpha = try W3C_SVG2.Parse.Number<Input>().parse(&input)
             } catch {
                 throw .expectedNumber
             }
+            let a = Swift.min(Swift.max(alpha, 0), 1)
 
             Self._skipWS(&input)
             guard input.startIndex < input.endIndex,
@@ -167,6 +170,7 @@ extension W3C_SVG2.Types.Color.Parse: Parsing {
         return .rgb(r: r, g: g, b: b)
     }
 
+    /// Parses an `rgb()` component, clamped to 0...255 as CSS Color 4 clamps out-of-range values.
     @inlinable
     package static func _parseInt(_ input: inout Input) throws(Failure) -> Int {
         var value = 0
@@ -181,7 +185,7 @@ extension W3C_SVG2.Types.Color.Parse: Parsing {
             digits += 1
         }
         guard digits > 0 else { throw .expectedNumber }
-        return value
+        return Swift.min(value, 255)
     }
 
     @inlinable

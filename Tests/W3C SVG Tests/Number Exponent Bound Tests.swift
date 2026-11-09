@@ -87,14 +87,14 @@ extension `Number Exponent Bound Tests` {
         }
 
         @Test
-        func `an rgb component longer than Int saturates instead of wrapping`() throws {
+        func `an rgb component longer than Int clamps to 255 instead of wrapping`() throws {
             var input = ByteSlice("rgb(99999999999999999999999, 0, 0)")
             let color = try W3C_SVG2.Types.Color.Parse<ByteSlice>().parse(&input)
             guard case .rgb(let r, let g, let b) = color else {
                 Issue.record("expected an rgb color, got \(color)")
                 return
             }
-            #expect(r == Int.max)
+            #expect(r == 255)
             #expect(g == 0 && b == 0)
         }
     }
