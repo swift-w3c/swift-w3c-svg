@@ -1,5 +1,5 @@
 import Testing
-import W3C_SVG
+@testable import W3C_SVG
 
 enum `W3C_SVG2.Paths.Path.Parser Tests` {}
 

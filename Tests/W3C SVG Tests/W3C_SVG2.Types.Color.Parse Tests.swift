@@ -21,7 +21,7 @@ extension `W3C_SVG2.Types.Color.Parse Tests` {
                     Issue.record("expected a hex color for \(text)")
                     continue
                 }
-                #expect(digits.end - digits.start == text.utf8.count - 1)
+                #expect(digits.end - digits.start == text.utf8.dropFirst().count)
             }
         }
 
