@@ -35,6 +35,7 @@ let package = Package(
             traits: ["Collection"]
         ),
         .package(url: "https://github.com/swift-atoms/swift-linear.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-numeric.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-3987.git", branch: "main"),
     ],
     targets: [
@@ -46,6 +47,7 @@ let package = Package(
                 .product(name: "Geometry", package: "swift-geometry"),
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Linear", package: "swift-linear"),
+                .product(name: "Numeric", package: "swift-numeric"),
                 .product(name: "RFC 3987", package: "swift-rfc-3987"),
             ]
         ),

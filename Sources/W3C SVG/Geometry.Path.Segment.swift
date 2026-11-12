@@ -1,4 +1,5 @@
 public import Geometry
+import Numeric
 
 extension Geometry.Path.Segment where Scalar == Double, Space == W3C_SVG.Space {
 

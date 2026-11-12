@@ -1,5 +1,6 @@
 import Formatter
 internal import Geometry
+import Numeric
 
 extension W3C_SVG2.Paths.Path {
 
