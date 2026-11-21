@@ -1,26 +1,27 @@
 import Formatter
 public import Geometry
 public import Segment
+public import W3C
 
-extension Geometry.Ball where N == 2, Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Ball where N == 2, Scalar == Double, Space == W3C.SVG.Space {
 
     public var svg: SVGContext { SVGContext(self) }
 
     public struct SVGContext {
 
-        public let circle: Geometry<Double, W3C_SVG.Space>.Circle
+        public let circle: Geometry<Double, W3C.SVG.Space>.Circle
 
-        public init(_ circle: Geometry<Double, W3C_SVG.Space>.Circle) {
+        public init(_ circle: Geometry<Double, W3C.SVG.Space>.Circle) {
             self.circle = circle
         }
     }
 }
 
-extension Geometry.Ball.SVGContext where N == 2, Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Ball.SVGContext where N == 2, Scalar == Double, Space == W3C.SVG.Space {
 
-    public var element: W3C_SVG2.Shapes.Circle? {
+    public var element: W3C.SVG.`2`.Shapes.Circle? {
         guard circle.radius.underlying >= 0 else { return nil }
-        return W3C_SVG2.Shapes.Circle(
+        return W3C.SVG.`2`.Shapes.Circle(
             cx: circle.center.x,
             cy: circle.center.y,
             r: circle.radius
@@ -28,19 +29,19 @@ extension Geometry.Ball.SVGContext where N == 2, Scalar == Double, Space == W3C_
     }
 }
 
-extension Geometry.Orthotope where N == 2, Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Orthotope where N == 2, Scalar == Double, Space == W3C.SVG.Space {
 
     public var svg: SVGContext { SVGContext(self) }
 
 }
 
-extension Geometry.Orthotope.SVGContext where N == 2, Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Orthotope.SVGContext where N == 2, Scalar == Double, Space == W3C.SVG.Space {
 
-    public var element: W3C_SVG2.Shapes.Rectangle? {
+    public var element: W3C.SVG.`2`.Shapes.Rectangle? {
         guard rectangle.width.underlying >= 0, rectangle.height.underlying >= 0 else {
             return nil
         }
-        return W3C_SVG2.Shapes.Rectangle(
+        return W3C.SVG.`2`.Shapes.Rectangle(
             x: rectangle.llx,
             y: rectangle.lly,
             width: rectangle.width,
@@ -49,44 +50,44 @@ extension Geometry.Orthotope.SVGContext where N == 2, Scalar == Double, Space ==
     }
 }
 
-extension Geometry.Ellipse where Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Ellipse where Scalar == Double, Space == W3C.SVG.Space {
 
     public var svg: SVGContext { SVGContext(self) }
 
 }
 
-extension Geometry.Ellipse.SVGContext where Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Ellipse.SVGContext where Scalar == Double, Space == W3C.SVG.Space {
 
     /// The `<ellipse>` element, or `nil` when the ellipse has a negative axis or is rotated:
     /// `<ellipse>` has no rotation, so `rx` and `ry` lie along the x and y axes.
-    public var element: W3C_SVG2.Shapes.Ellipse? {
+    public var element: W3C.SVG.`2`.Shapes.Ellipse? {
         guard ellipse.semiMajor.underlying >= 0, ellipse.semiMinor.underlying >= 0 else {
             return nil
         }
         guard ellipse.rotation.underlying == 0 else { return nil }
-        return W3C_SVG2.Shapes.Ellipse(
+        return W3C.SVG.`2`.Shapes.Ellipse(
             cx: ellipse.center.x,
             cy: ellipse.center.y,
-            rx: Geometry<Double, W3C_SVG.Space>.Width(ellipse.semiMajor.underlying),
-            ry: Geometry<Double, W3C_SVG.Space>.Height(ellipse.semiMinor.underlying)
+            rx: Geometry<Double, W3C.SVG.Space>.Width(ellipse.semiMajor.underlying),
+            ry: Geometry<Double, W3C.SVG.Space>.Height(ellipse.semiMinor.underlying)
         )
     }
 }
 
-extension W3C_SVG {
+extension W3C.SVG {
 }
 
-extension W3C_SVG.Context {
+extension W3C.SVG.Context {
 }
 
-extension Segment::Segment where Point == Geometry<Double, W3C_SVG.Space>.Point<2> {
-    public var svg: W3C_SVG.Context.Segment { .init(self) }
+extension Segment::Segment where Point == Geometry<Double, W3C.SVG.Space>.Point<2> {
+    public var svg: W3C.SVG.Context.Segment { .init(self) }
 }
 
-extension W3C_SVG.Context.Segment {
+extension W3C.SVG.Context.Segment {
 
-    public var element: W3C_SVG2.Shapes.Line {
-        W3C_SVG2.Shapes.Line(
+    public var element: W3C.SVG.`2`.Shapes.Line {
+        W3C.SVG.`2`.Shapes.Line(
             x1: segment.start.x,
             y1: segment.start.y,
             x2: segment.end.x,
@@ -95,29 +96,29 @@ extension W3C_SVG.Context.Segment {
     }
 }
 
-extension Geometry.Polygon where Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Polygon where Scalar == Double, Space == W3C.SVG.Space {
 
     public var svg: SVGContext { SVGContext(self) }
 
 }
 
-extension Geometry.Polygon.SVGContext where Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Polygon.SVGContext where Scalar == Double, Space == W3C.SVG.Space {
 
-    public var element: W3C_SVG2.Shapes.Polygon {
+    public var element: W3C.SVG.`2`.Shapes.Polygon {
         let coordinates = polygon.vertices.map { ($0.x, $0.y) }
-        return W3C_SVG2.Shapes.Polygon(coordinates: coordinates)
+        return W3C.SVG.`2`.Shapes.Polygon(coordinates: coordinates)
     }
 }
 
-extension Geometry.Path where Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Path where Scalar == Double, Space == W3C.SVG.Space {
 
     public var svg: SVGContext { SVGContext(self) }
 
 }
 
-extension Geometry.Path.SVGContext where Scalar == Double, Space == W3C_SVG.Space {
+extension Geometry.Path.SVGContext where Scalar == Double, Space == W3C.SVG.Space {
 
-    public var element: W3C_SVG2.Paths.Path {
-        W3C_SVG2.Paths.Path(geometry: path)
+    public var element: W3C.SVG.`2`.Paths.Path {
+        W3C.SVG.`2`.Paths.Path(geometry: path)
     }
 }

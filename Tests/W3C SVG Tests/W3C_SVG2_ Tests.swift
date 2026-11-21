@@ -15,17 +15,17 @@ extension `W3C_SVG2_ Tests`.`W3C SVG2 - Basic Functionality` {
     struct `PaintServers - Gradient Units and Spread Methods` {
         @Test
         func `LinearGradient GradientUnits`() {
-            let userSpace = W3C_SVG2.PaintServers.LinearGradient.GradientUnits.userSpaceOnUse
-            let objectBBox = W3C_SVG2.PaintServers.LinearGradient.GradientUnits.objectBoundingBox
+            let userSpace = W3C.SVG.`2`.PaintServers.LinearGradient.GradientUnits.userSpaceOnUse
+            let objectBBox = W3C.SVG.`2`.PaintServers.LinearGradient.GradientUnits.objectBoundingBox
             #expect(userSpace.rawValue == "userSpaceOnUse")
             #expect(objectBBox.rawValue == "objectBoundingBox")
         }
 
         @Test
         func `LinearGradient SpreadMethod`() {
-            let pad = W3C_SVG2.PaintServers.LinearGradient.SpreadMethod.pad
-            let reflect = W3C_SVG2.PaintServers.LinearGradient.SpreadMethod.reflect
-            let repeatSpread = W3C_SVG2.PaintServers.LinearGradient.SpreadMethod.repeat
+            let pad = W3C.SVG.`2`.PaintServers.LinearGradient.SpreadMethod.pad
+            let reflect = W3C.SVG.`2`.PaintServers.LinearGradient.SpreadMethod.reflect
+            let repeatSpread = W3C.SVG.`2`.PaintServers.LinearGradient.SpreadMethod.repeat
             #expect(pad.rawValue == "pad")
             #expect(reflect.rawValue == "reflect")
             #expect(repeatSpread.rawValue == "repeat")
@@ -33,17 +33,17 @@ extension `W3C_SVG2_ Tests`.`W3C SVG2 - Basic Functionality` {
 
         @Test
         func `RadialGradient GradientUnits`() {
-            let userSpace = W3C_SVG2.PaintServers.RadialGradient.GradientUnits.userSpaceOnUse
-            let objectBBox = W3C_SVG2.PaintServers.RadialGradient.GradientUnits.objectBoundingBox
+            let userSpace = W3C.SVG.`2`.PaintServers.RadialGradient.GradientUnits.userSpaceOnUse
+            let objectBBox = W3C.SVG.`2`.PaintServers.RadialGradient.GradientUnits.objectBoundingBox
             #expect(userSpace.rawValue == "userSpaceOnUse")
             #expect(objectBBox.rawValue == "objectBoundingBox")
         }
 
         @Test
         func `RadialGradient SpreadMethod`() {
-            let pad = W3C_SVG2.PaintServers.RadialGradient.SpreadMethod.pad
-            let reflect = W3C_SVG2.PaintServers.RadialGradient.SpreadMethod.reflect
-            let repeatSpread = W3C_SVG2.PaintServers.RadialGradient.SpreadMethod.repeat
+            let pad = W3C.SVG.`2`.PaintServers.RadialGradient.SpreadMethod.pad
+            let reflect = W3C.SVG.`2`.PaintServers.RadialGradient.SpreadMethod.reflect
+            let repeatSpread = W3C.SVG.`2`.PaintServers.RadialGradient.SpreadMethod.repeat
             #expect(pad.rawValue == "pad")
             #expect(reflect.rawValue == "reflect")
             #expect(repeatSpread.rawValue == "repeat")
@@ -51,25 +51,25 @@ extension `W3C_SVG2_ Tests`.`W3C SVG2 - Basic Functionality` {
 
         @Test
         func `Pattern Units`() {
-            let userSpace = W3C_SVG2.PaintServers.Pattern.Units.userSpaceOnUse
-            let objectBBox = W3C_SVG2.PaintServers.Pattern.Units.objectBoundingBox
+            let userSpace = W3C.SVG.`2`.PaintServers.Pattern.Units.userSpaceOnUse
+            let objectBBox = W3C.SVG.`2`.PaintServers.Pattern.Units.objectBoundingBox
             #expect(userSpace.rawValue == "userSpaceOnUse")
             #expect(objectBBox.rawValue == "objectBoundingBox")
         }
     }
 }
 
-enum `W3C_SVG2.Document.SVG Tests` {}
+enum `W3C.SVG.2.Document.SVG Tests` {}
 
-extension `W3C_SVG2.Document.SVG Tests` {
+extension `W3C.SVG.2.Document.SVG Tests` {
     @Suite
     struct Test {
         @Test
         func `SVG creation`() {
-            let svg = W3C_SVG2.Document.SVG(
+            let svg = W3C.SVG.`2`.Document.SVG(
                 width: .number(100),
                 height: .number(100),
-                viewBox: W3C_SVG2.Types.ViewBox(width: 100, height: 100)
+                viewBox: W3C.SVG.`2`.Types.ViewBox(width: 100, height: 100)
             )
             #expect(svg.width == .number(100))
             #expect(svg.height == .number(100))
@@ -78,12 +78,12 @@ extension `W3C_SVG2.Document.SVG Tests` {
 
         @Test
         func `SVG tag name`() {
-            #expect(W3C_SVG2.Document.SVG.tagName == "svg")
+            #expect(W3C.SVG.`2`.Document.SVG.tagName == "svg")
         }
 
         @Test
         func `SVG with position`() {
-            let svg = W3C_SVG2.Document.SVG(
+            let svg = W3C.SVG.`2`.Document.SVG(
                 x: .number(10),
                 y: .number(20),
                 width: .number(100),
@@ -95,94 +95,94 @@ extension `W3C_SVG2.Document.SVG Tests` {
     }
 }
 
-enum `W3C_SVG2.Types.Length Tests` {}
+enum `W3C.SVG.2.Types.Length Tests` {}
 
-extension `W3C_SVG2.Types.Length Tests` {
+extension `W3C.SVG.2.Types.Length Tests` {
     @Suite
     struct Test {
         @Test
         func `Length pixels`() {
-            #expect(W3C_SVG2.Types.Length.px(100).description == "100px")
+            #expect(W3C.SVG.`2`.Types.Length.px(100).description == "100px")
         }
 
         @Test
         func `Length percentage`() {
-            #expect(W3C_SVG2.Types.Length.percentage(50).description == "50%")
+            #expect(W3C.SVG.`2`.Types.Length.percentage(50).description == "50%")
         }
 
         @Test
         func `Length em`() {
-            #expect(W3C_SVG2.Types.Length.em(2.5).description == "2.5em")
+            #expect(W3C.SVG.`2`.Types.Length.em(2.5).description == "2.5em")
         }
 
         @Test
         func `Length formatted`() {
-            let length1: W3C_SVG2.Types.Length = 1
+            let length1: W3C.SVG.`2`.Types.Length = 1
             #expect(length1.description == "1")
         }
     }
 }
 
-enum `W3C_SVG2.Types.Color Tests` {}
+enum `W3C.SVG.2.Types.Color Tests` {}
 
-extension `W3C_SVG2.Types.Color Tests` {
+extension `W3C.SVG.2.Types.Color Tests` {
     @Suite
     struct Test {
         @Test
         func `Color named`() {
-            #expect(W3C_SVG2.Types.Color.named("red").description == "red")
+            #expect(W3C.SVG.`2`.Types.Color.named("red").description == "red")
         }
 
         @Test
         func `Color hex`() {
-            #expect(W3C_SVG2.Types.Color.hex("FF0000").description == "#FF0000")
+            #expect(W3C.SVG.`2`.Types.Color.hex("FF0000").description == "#FF0000")
         }
 
         @Test
         func `Color RGB`() {
-            #expect(W3C_SVG2.Types.Color.rgb(r: 255, g: 0, b: 0).description == "rgb(255, 0, 0)")
+            #expect(W3C.SVG.`2`.Types.Color.rgb(r: 255, g: 0, b: 0).description == "rgb(255, 0, 0)")
         }
     }
 }
 
-enum `W3C_SVG2.Types.Transform Tests` {}
+enum `W3C.SVG.2.Types.Transform Tests` {}
 
-extension `W3C_SVG2.Types.Transform Tests` {
+extension `W3C.SVG.2.Types.Transform Tests` {
     @Suite
     struct Test {
         @Test
         func `Transform translate`() {
             #expect(
-                W3C_SVG2.Types.Transform.translate(x: 10, y: 20).description == "translate(10 20)"
+                W3C.SVG.`2`.Types.Transform.translate(x: 10, y: 20).description == "translate(10 20)"
             )
         }
 
         @Test
         func `Transform rotate`() {
-            #expect(W3C_SVG2.Types.Transform.rotate(angle: 45).description == "rotate(45)")
+            #expect(W3C.SVG.`2`.Types.Transform.rotate(angle: 45).description == "rotate(45)")
         }
 
         @Test
         func `Transform scale`() {
-            #expect(W3C_SVG2.Types.Transform.scale(x: 2, y: 3).description == "scale(2 3)")
+            #expect(W3C.SVG.`2`.Types.Transform.scale(x: 2, y: 3).description == "scale(2 3)")
         }
     }
 }
 
-enum `W3C_SVG2.Types.ViewBox Tests` {}
+enum `W3C.SVG.2.Types.ViewBox Tests` {}
 
-extension `W3C_SVG2.Types.ViewBox Tests` {
+extension `W3C.SVG.2.Types.ViewBox Tests` {
     @Suite
     struct Test {
         @Test
         func `ViewBox creation`() {
-            let vb = W3C_SVG2.Types.ViewBox(width: 100, height: 200)
+            let vb = W3C.SVG.`2`.Types.ViewBox(width: 100, height: 200)
             #expect(vb.description == "0 0 100 200")
         }
 
         @Test
         func `ViewBox with offset`() {
-            let vb = W3C_SVG2.Types.ViewBox(minX: 10, minY: 20, width: 100, height: 200)
+            let vb = W3C.SVG.`2`.Types.ViewBox(minX: 10, minY: 20, width: 100, height: 200)
             #expect(vb.description == "10 20 100 200")
         }
     }
@@ -192,7 +192,7 @@ extension `W3C_SVG2.Types.ViewBox Tests` {
 struct `Circle Tests` {
     @Test
     func `Circle creation`() {
-        let circle = W3C_SVG2.Shapes.Circle(cx: 50, cy: 50, r: 40)
+        let circle = W3C.SVG.`2`.Shapes.Circle(cx: 50, cy: 50, r: 40)
         #expect(circle.cx == 50)
         #expect(circle.cy == 50)
         #expect(circle.r == 40)
@@ -200,7 +200,7 @@ struct `Circle Tests` {
 
     @Test
     func `Circle tag name`() {
-        #expect(W3C_SVG2.Shapes.Circle.tagName == "circle")
+        #expect(W3C.SVG.`2`.Shapes.Circle.tagName == "circle")
     }
 }
 
@@ -208,7 +208,7 @@ struct `Circle Tests` {
 struct `Rectangle Tests` {
     @Test
     func `Rectangle creation`() {
-        let rect = W3C_SVG2.Shapes.Rectangle(x: 10, y: 10, width: 100, height: 80)
+        let rect = W3C.SVG.`2`.Shapes.Rectangle(x: 10, y: 10, width: 100, height: 80)
         #expect(rect.x == 10)
         #expect(rect.y == 10)
         #expect(rect.width == 100)
@@ -221,7 +221,7 @@ struct `Rectangle Tests` {
 struct `Ellipse Tests` {
     @Test
     func `Ellipse creation`() {
-        let ellipse = W3C_SVG2.Shapes.Ellipse(cx: 100, cy: 50, rx: 80, ry: 40)
+        let ellipse = W3C.SVG.`2`.Shapes.Ellipse(cx: 100, cy: 50, rx: 80, ry: 40)
         #expect(ellipse.cx == 100)
         #expect(ellipse.cy == 50)
         #expect(ellipse.rx == 80)
@@ -233,7 +233,7 @@ struct `Ellipse Tests` {
 struct `Line Tests` {
     @Test
     func `Line creation`() {
-        let line = W3C_SVG2.Shapes.Line(x1: 0, y1: 0, x2: 100, y2: 100)
+        let line = W3C.SVG.`2`.Shapes.Line(x1: 0, y1: 0, x2: 100, y2: 100)
         #expect(line.x1 == 0)
         #expect(line.y1 == 0)
         #expect(line.x2 == 100)
@@ -241,25 +241,25 @@ struct `Line Tests` {
     }
 }
 
-enum `W3C_SVG2.Shapes.Polyline Tests` {}
+enum `W3C.SVG.2.Shapes.Polyline Tests` {}
 
-extension `W3C_SVG2.Shapes.Polyline Tests` {
+extension `W3C.SVG.2.Shapes.Polyline Tests` {
     @Suite
     struct Test {
         @Test
         func `Polyline creation`() {
-            let polyline = W3C_SVG2.Shapes.Polyline(points: "0,0 50,50 100,0")
+            let polyline = W3C.SVG.`2`.Shapes.Polyline(points: "0,0 50,50 100,0")
             #expect(polyline.points == "0,0 50,50 100,0")
         }
 
         @Test
         func `Polyline tag name`() {
-            #expect(W3C_SVG2.Shapes.Polyline.tagName == "polyline")
+            #expect(W3C.SVG.`2`.Shapes.Polyline.tagName == "polyline")
         }
 
         @Test
         func `Polyline with space-separated points`() {
-            let polyline = W3C_SVG2.Shapes.Polyline(points: "0 0 50 50 100 0")
+            let polyline = W3C.SVG.`2`.Shapes.Polyline(points: "0 0 50 50 100 0")
             #expect(polyline.points == "0 0 50 50 100 0")
         }
     }
@@ -269,77 +269,77 @@ extension `W3C_SVG2.Shapes.Polyline Tests` {
 struct `Polygon Tests` {
     @Test
     func `Polygon creation`() {
-        let polygon = W3C_SVG2.Shapes.Polygon(coordinates: [(50, 0), (100, 100), (0, 100)])
+        let polygon = W3C.SVG.`2`.Shapes.Polygon(coordinates: [(50, 0), (100, 100), (0, 100)])
         #expect(polygon.vertices.count == 3)
     }
 
     @Test
     func `Polygon triangle`() {
-        let triangle = W3C_SVG2.Shapes.Polygon(coordinates: [(50, 0), (100, 100), (0, 100)])
+        let triangle = W3C.SVG.`2`.Shapes.Polygon(coordinates: [(50, 0), (100, 100), (0, 100)])
         #expect(triangle.vertices.count == 3)
         #expect(triangle.vertices[0].x == 50)
         #expect(triangle.vertices[0].y == 0)
     }
 }
 
-enum `W3C_SVG2.Document.Group Tests` {}
+enum `W3C.SVG.2.Document.Group Tests` {}
 
-extension `W3C_SVG2.Document.Group Tests` {
+extension `W3C.SVG.2.Document.Group Tests` {
     @Suite
     struct Test {
         @Test
         func `Group creation`() {
-            let group = W3C_SVG2.Document.Group(id: "myGroup")
+            let group = W3C.SVG.`2`.Document.Group(id: "myGroup")
             #expect(group.id == "myGroup")
         }
 
         @Test
         func `Group tag name`() {
-            #expect(W3C_SVG2.Document.Group.tagName == "g")
+            #expect(W3C.SVG.`2`.Document.Group.tagName == "g")
         }
 
         @Test
         func `Group without id`() {
-            let group = W3C_SVG2.Document.Group()
+            let group = W3C.SVG.`2`.Document.Group()
             #expect(group.id == nil)
         }
     }
 }
 
-enum `W3C_SVG2.Document.Defs Tests` {}
+enum `W3C.SVG.2.Document.Defs Tests` {}
 
-extension `W3C_SVG2.Document.Defs Tests` {
+extension `W3C.SVG.2.Document.Defs Tests` {
     @Suite
     struct Test {
         @Test
         func `Defs creation`() {
-            let defs = W3C_SVG2.Document.Defs()
+            let defs = W3C.SVG.`2`.Document.Defs()
             #expect(defs.id == nil)
         }
 
         @Test
         func `Defs tag name`() {
-            #expect(W3C_SVG2.Document.Defs.tagName == "defs")
+            #expect(W3C.SVG.`2`.Document.Defs.tagName == "defs")
         }
 
         @Test
         func `Defs with id`() {
-            let defs = W3C_SVG2.Document.Defs(id: "myDefs")
+            let defs = W3C.SVG.`2`.Document.Defs(id: "myDefs")
             #expect(defs.id == "myDefs")
         }
     }
 }
 
-enum `W3C_SVG2.Document.Symbol Tests` {}
+enum `W3C.SVG.2.Document.Symbol Tests` {}
 
-extension `W3C_SVG2.Document.Symbol Tests` {
+extension `W3C.SVG.2.Document.Symbol Tests` {
     @Suite
     struct Test {
         @Test
         func `Symbol creation`() {
-            let symbol = W3C_SVG2.Document.Symbol(
+            let symbol = W3C.SVG.`2`.Document.Symbol(
                 id: "icon",
-                viewBox: W3C_SVG2.Types.ViewBox(width: 24, height: 24)
+                viewBox: W3C.SVG.`2`.Types.ViewBox(width: 24, height: 24)
             )
             #expect(symbol.id == "icon")
             #expect(symbol.viewBox?.description == "0 0 24 24")
@@ -347,12 +347,12 @@ extension `W3C_SVG2.Document.Symbol Tests` {
 
         @Test
         func `Symbol tag name`() {
-            #expect(W3C_SVG2.Document.Symbol.tagName == "symbol")
+            #expect(W3C.SVG.`2`.Document.Symbol.tagName == "symbol")
         }
 
         @Test
         func `Symbol with geometry`() {
-            let symbol = W3C_SVG2.Document.Symbol(
+            let symbol = W3C.SVG.`2`.Document.Symbol(
                 id: "icon",
                 x: 10,
                 y: 20,
@@ -367,14 +367,14 @@ extension `W3C_SVG2.Document.Symbol Tests` {
     }
 }
 
-enum `W3C_SVG2.Document.Use Tests` {}
+enum `W3C.SVG.2.Document.Use Tests` {}
 
-extension `W3C_SVG2.Document.Use Tests` {
+extension `W3C.SVG.2.Document.Use Tests` {
     @Suite
     struct Test {
         @Test
         func `Use creation`() throws {
-            let use = W3C_SVG2.Document.Use(href: try RFC_3987.IRI.Reference("#icon"), x: 50, y: 50)
+            let use = W3C.SVG.`2`.Document.Use(href: try RFC_3987.IRI.Reference("#icon"), x: 50, y: 50)
             #expect(use.href?.value == "#icon")
             #expect(use.x == 50)
             #expect(use.y == 50)
@@ -382,12 +382,12 @@ extension `W3C_SVG2.Document.Use Tests` {
 
         @Test
         func `Use tag name`() {
-            #expect(W3C_SVG2.Document.Use.tagName == "use")
+            #expect(W3C.SVG.`2`.Document.Use.tagName == "use")
         }
 
         @Test
         func `Use with dimensions`() throws {
-            let use = W3C_SVG2.Document.Use(
+            let use = W3C.SVG.`2`.Document.Use(
                 href: try RFC_3987.IRI.Reference("#icon"),
                 x: 10,
                 y: 20,
@@ -400,14 +400,14 @@ extension `W3C_SVG2.Document.Use Tests` {
     }
 }
 
-enum `W3C_SVG2.PaintServers.LinearGradient Tests` {}
+enum `W3C.SVG.2.PaintServers.LinearGradient Tests` {}
 
-extension `W3C_SVG2.PaintServers.LinearGradient Tests` {
+extension `W3C.SVG.2.PaintServers.LinearGradient Tests` {
     @Suite
     struct Test {
         @Test
         func `LinearGradient creation`() {
-            let gradient = W3C_SVG2.PaintServers.LinearGradient(
+            let gradient = W3C.SVG.`2`.PaintServers.LinearGradient(
                 id: "myGradient",
                 x1: "0%",
                 y1: "0%",
@@ -423,12 +423,12 @@ extension `W3C_SVG2.PaintServers.LinearGradient Tests` {
 
         @Test
         func `LinearGradient tag name`() {
-            #expect(W3C_SVG2.PaintServers.LinearGradient.tagName == "linearGradient")
+            #expect(W3C.SVG.`2`.PaintServers.LinearGradient.tagName == "linearGradient")
         }
 
         @Test
         func `LinearGradient with href`() throws {
-            let gradient = W3C_SVG2.PaintServers.LinearGradient(
+            let gradient = W3C.SVG.`2`.PaintServers.LinearGradient(
                 id: "gradient2",
                 href: try RFC_3987.IRI.Reference("#gradient1")
             )
@@ -437,14 +437,14 @@ extension `W3C_SVG2.PaintServers.LinearGradient Tests` {
     }
 }
 
-enum `W3C_SVG2.PaintServers.RadialGradient Tests` {}
+enum `W3C.SVG.2.PaintServers.RadialGradient Tests` {}
 
-extension `W3C_SVG2.PaintServers.RadialGradient Tests` {
+extension `W3C.SVG.2.PaintServers.RadialGradient Tests` {
     @Suite
     struct Test {
         @Test
         func `RadialGradient creation`() {
-            let gradient = W3C_SVG2.PaintServers.RadialGradient(
+            let gradient = W3C.SVG.`2`.PaintServers.RadialGradient(
                 id: "radialGrad",
                 cx: "50%",
                 cy: "50%",
@@ -458,12 +458,12 @@ extension `W3C_SVG2.PaintServers.RadialGradient Tests` {
 
         @Test
         func `RadialGradient tag name`() {
-            #expect(W3C_SVG2.PaintServers.RadialGradient.tagName == "radialGradient")
+            #expect(W3C.SVG.`2`.PaintServers.RadialGradient.tagName == "radialGradient")
         }
 
         @Test
         func `RadialGradient with focal point`() {
-            let gradient = W3C_SVG2.PaintServers.RadialGradient(
+            let gradient = W3C.SVG.`2`.PaintServers.RadialGradient(
                 id: "radial",
                 cx: "50%",
                 cy: "50%",
@@ -479,38 +479,38 @@ extension `W3C_SVG2.PaintServers.RadialGradient Tests` {
     }
 }
 
-enum `W3C_SVG2.PaintServers.Stop Tests` {}
+enum `W3C.SVG.2.PaintServers.Stop Tests` {}
 
-extension `W3C_SVG2.PaintServers.Stop Tests` {
+extension `W3C.SVG.2.PaintServers.Stop Tests` {
     @Suite
     struct Test {
         @Test
         func `Stop creation`() {
-            let stop = W3C_SVG2.PaintServers.Stop(offset: "50%")
+            let stop = W3C.SVG.`2`.PaintServers.Stop(offset: "50%")
             #expect(stop.offset == "50%")
         }
 
         @Test
         func `Stop tag name`() {
-            #expect(W3C_SVG2.PaintServers.Stop.tagName == "stop")
+            #expect(W3C.SVG.`2`.PaintServers.Stop.tagName == "stop")
         }
 
         @Test
         func `Stop with numeric offset`() {
-            let stop = W3C_SVG2.PaintServers.Stop(offset: "0.5")
+            let stop = W3C.SVG.`2`.PaintServers.Stop(offset: "0.5")
             #expect(stop.offset == "0.5")
         }
     }
 }
 
-enum `W3C_SVG2.PaintServers.Pattern Tests` {}
+enum `W3C.SVG.2.PaintServers.Pattern Tests` {}
 
-extension `W3C_SVG2.PaintServers.Pattern Tests` {
+extension `W3C.SVG.2.PaintServers.Pattern Tests` {
     @Suite
     struct Test {
         @Test
         func `Pattern creation`() {
-            let pattern = W3C_SVG2.PaintServers.Pattern(
+            let pattern = W3C.SVG.`2`.PaintServers.Pattern(
                 id: "dots",
                 x: 0,
                 y: 0,
@@ -526,125 +526,125 @@ extension `W3C_SVG2.PaintServers.Pattern Tests` {
 
         @Test
         func `Pattern tag name`() {
-            #expect(W3C_SVG2.PaintServers.Pattern.tagName == "pattern")
+            #expect(W3C.SVG.`2`.PaintServers.Pattern.tagName == "pattern")
         }
 
         @Test
         func `Pattern with viewBox`() {
-            let pattern = W3C_SVG2.PaintServers.Pattern(
+            let pattern = W3C.SVG.`2`.PaintServers.Pattern(
                 id: "pattern",
                 width: 20,
                 height: 20,
-                viewBox: W3C_SVG2.Types.ViewBox(width: 10, height: 10)
+                viewBox: W3C.SVG.`2`.Types.ViewBox(width: 10, height: 10)
             )
             #expect(pattern.viewBox?.description == "0 0 10 10")
         }
     }
 }
 
-enum `W3C_SVG2.Painting.LineCap Tests` {}
+enum `W3C.SVG.2.Painting.LineCap Tests` {}
 
-extension `W3C_SVG2.Painting.LineCap Tests` {
+extension `W3C.SVG.2.Painting.LineCap Tests` {
     @Suite
     struct Test {
         @Test
         func `LineCap butt`() {
-            let lineCap = W3C_SVG2.Painting.LineCap.butt
+            let lineCap = W3C.SVG.`2`.Painting.LineCap.butt
             #expect(lineCap.rawValue == "butt")
         }
 
         @Test
         func `LineCap round`() {
-            let lineCap = W3C_SVG2.Painting.LineCap.round
+            let lineCap = W3C.SVG.`2`.Painting.LineCap.round
             #expect(lineCap.rawValue == "round")
         }
 
         @Test
         func `LineCap square`() {
-            let lineCap = W3C_SVG2.Painting.LineCap.square
+            let lineCap = W3C.SVG.`2`.Painting.LineCap.square
             #expect(lineCap.rawValue == "square")
         }
     }
 }
 
-enum `W3C_SVG2.Painting.LineJoin Tests` {}
+enum `W3C.SVG.2.Painting.LineJoin Tests` {}
 
-extension `W3C_SVG2.Painting.LineJoin Tests` {
+extension `W3C.SVG.2.Painting.LineJoin Tests` {
     @Suite
     struct Test {
         @Test
         func `LineJoin miter`() {
-            let lineJoin = W3C_SVG2.Painting.LineJoin.miter
+            let lineJoin = W3C.SVG.`2`.Painting.LineJoin.miter
             #expect(lineJoin.rawValue == "miter")
         }
 
         @Test
         func `LineJoin round`() {
-            let lineJoin = W3C_SVG2.Painting.LineJoin.round
+            let lineJoin = W3C.SVG.`2`.Painting.LineJoin.round
             #expect(lineJoin.rawValue == "round")
         }
 
         @Test
         func `LineJoin bevel`() {
-            let lineJoin = W3C_SVG2.Painting.LineJoin.bevel
+            let lineJoin = W3C.SVG.`2`.Painting.LineJoin.bevel
             #expect(lineJoin.rawValue == "bevel")
         }
     }
 }
 
-enum `W3C_SVG2.Painting.FillRule Tests` {}
+enum `W3C.SVG.2.Painting.FillRule Tests` {}
 
-extension `W3C_SVG2.Painting.FillRule Tests` {
+extension `W3C.SVG.2.Painting.FillRule Tests` {
     @Suite
     struct Test {
         @Test
         func `FillRule nonzero`() {
-            let fillRule = W3C_SVG2.Painting.FillRule.nonzero
+            let fillRule = W3C.SVG.`2`.Painting.FillRule.nonzero
             #expect(fillRule.rawValue == "nonzero")
         }
 
         @Test
         func `FillRule evenodd`() {
-            let fillRule = W3C_SVG2.Painting.FillRule.evenodd
+            let fillRule = W3C.SVG.`2`.Painting.FillRule.evenodd
             #expect(fillRule.rawValue == "evenodd")
         }
     }
 }
 
-enum `W3C_SVG2.Painting.ClipPath Tests` {}
+enum `W3C.SVG.2.Painting.ClipPath Tests` {}
 
-extension `W3C_SVG2.Painting.ClipPath Tests` {
+extension `W3C.SVG.2.Painting.ClipPath Tests` {
     @Suite
     struct Test {
         @Test
         func `ClipPath creation`() {
-            let clipPath = W3C_SVG2.Painting.ClipPath(id: "myClip")
+            let clipPath = W3C.SVG.`2`.Painting.ClipPath(id: "myClip")
             #expect(clipPath.id == "myClip")
         }
 
         @Test
         func `ClipPath tag name`() {
-            #expect(W3C_SVG2.Painting.ClipPath.tagName == "clipPath")
+            #expect(W3C.SVG.`2`.Painting.ClipPath.tagName == "clipPath")
         }
 
         @Test
         func `ClipPath units`() {
-            let userSpace = W3C_SVG2.Painting.ClipPath.Units.userSpaceOnUse
-            let objectBBox = W3C_SVG2.Painting.ClipPath.Units.objectBoundingBox
+            let userSpace = W3C.SVG.`2`.Painting.ClipPath.Units.userSpaceOnUse
+            let objectBBox = W3C.SVG.`2`.Painting.ClipPath.Units.objectBoundingBox
             #expect(userSpace.rawValue == "userSpaceOnUse")
             #expect(objectBBox.rawValue == "objectBoundingBox")
         }
     }
 }
 
-enum `W3C_SVG2.Painting.Mask Tests` {}
+enum `W3C.SVG.2.Painting.Mask Tests` {}
 
-extension `W3C_SVG2.Painting.Mask Tests` {
+extension `W3C.SVG.2.Painting.Mask Tests` {
     @Suite
     struct Test {
         @Test
         func `Mask creation`() {
-            let mask = W3C_SVG2.Painting.Mask(
+            let mask = W3C.SVG.`2`.Painting.Mask(
                 id: "myMask",
                 x: 0,
                 y: 0,
@@ -660,29 +660,29 @@ extension `W3C_SVG2.Painting.Mask Tests` {
 
         @Test
         func `Mask tag name`() {
-            #expect(W3C_SVG2.Painting.Mask.tagName == "mask")
+            #expect(W3C.SVG.`2`.Painting.Mask.tagName == "mask")
         }
 
         @Test
         func `Mask units`() {
-            let userSpace = W3C_SVG2.Painting.Mask.Units.userSpaceOnUse
-            let objectBBox = W3C_SVG2.Painting.Mask.Units.objectBoundingBox
+            let userSpace = W3C.SVG.`2`.Painting.Mask.Units.userSpaceOnUse
+            let objectBBox = W3C.SVG.`2`.Painting.Mask.Units.objectBoundingBox
             #expect(userSpace.rawValue == "userSpaceOnUse")
             #expect(objectBBox.rawValue == "objectBoundingBox")
         }
     }
 }
 
-enum `W3C_SVG2.Painting.Marker Tests` {}
+enum `W3C.SVG.2.Painting.Marker Tests` {}
 
-extension `W3C_SVG2.Painting.Marker Tests` {
+extension `W3C.SVG.2.Painting.Marker Tests` {
     @Suite
     struct Test {
         @Test
         func `Marker creation`() {
-            let marker = W3C_SVG2.Painting.Marker(
+            let marker = W3C.SVG.`2`.Painting.Marker(
                 id: "arrow",
-                viewBox: W3C_SVG2.Types.ViewBox(width: 10, height: 10),
+                viewBox: W3C.SVG.`2`.Types.ViewBox(width: 10, height: 10),
                 refX: 5,
                 refY: 5,
                 markerWidth: 6,
@@ -699,27 +699,27 @@ extension `W3C_SVG2.Painting.Marker Tests` {
 
         @Test
         func `Marker tag name`() {
-            #expect(W3C_SVG2.Painting.Marker.tagName == "marker")
+            #expect(W3C.SVG.`2`.Painting.Marker.tagName == "marker")
         }
 
         @Test
         func `Marker units`() {
-            let strokeWidth = W3C_SVG2.Painting.Marker.Units.strokeWidth
-            let userSpace = W3C_SVG2.Painting.Marker.Units.userSpaceOnUse
+            let strokeWidth = W3C.SVG.`2`.Painting.Marker.Units.strokeWidth
+            let userSpace = W3C.SVG.`2`.Painting.Marker.Units.userSpaceOnUse
             #expect(strokeWidth.rawValue == "strokeWidth")
             #expect(userSpace.rawValue == "userSpaceOnUse")
         }
     }
 }
 
-enum `W3C_SVG2.Text.Text Tests` {}
+enum `W3C.SVG.2.Text.Text Tests` {}
 
-extension `W3C_SVG2.Text.Text Tests` {
+extension `W3C.SVG.2.Text.Text Tests` {
     @Suite
     struct Test {
         @Test
         func `Text creation`() {
-            let text = W3C_SVG2.Text.Text(
+            let text = W3C.SVG.`2`.Text.Text(
                 x: 10,
                 y: 20,
                 content: "Hello SVG"
@@ -731,12 +731,12 @@ extension `W3C_SVG2.Text.Text Tests` {
 
         @Test
         func `Text tag name`() {
-            #expect(W3C_SVG2.Text.Text.tagName == "text")
+            #expect(W3C.SVG.`2`.Text.Text.tagName == "text")
         }
 
         @Test
         func `Text with offsets`() {
-            let text = W3C_SVG2.Text.Text(
+            let text = W3C.SVG.`2`.Text.Text(
                 x: 10,
                 y: 20,
                 dx: 5,
@@ -749,22 +749,22 @@ extension `W3C_SVG2.Text.Text Tests` {
 
         @Test
         func `LengthAdjust enum`() {
-            let spacing = W3C_SVG2.Text.Text.LengthAdjust.spacing
-            let spacingAndGlyphs = W3C_SVG2.Text.Text.LengthAdjust.spacingAndGlyphs
+            let spacing = W3C.SVG.`2`.Text.Text.LengthAdjust.spacing
+            let spacingAndGlyphs = W3C.SVG.`2`.Text.Text.LengthAdjust.spacingAndGlyphs
             #expect(spacing.rawValue == "spacing")
             #expect(spacingAndGlyphs.rawValue == "spacingAndGlyphs")
         }
     }
 }
 
-enum `W3C_SVG2.Text.TSpan Tests` {}
+enum `W3C.SVG.2.Text.TSpan Tests` {}
 
-extension `W3C_SVG2.Text.TSpan Tests` {
+extension `W3C.SVG.2.Text.TSpan Tests` {
     @Suite
     struct Test {
         @Test
         func `TSpan creation`() {
-            let tspan = W3C_SVG2.Text.TSpan(
+            let tspan = W3C.SVG.`2`.Text.TSpan(
                 dx: 5,
                 dy: 10,
                 content: "styled text"
@@ -776,28 +776,28 @@ extension `W3C_SVG2.Text.TSpan Tests` {
 
         @Test
         func `TSpan tag name`() {
-            #expect(W3C_SVG2.Text.TSpan.tagName == "tspan")
+            #expect(W3C.SVG.`2`.Text.TSpan.tagName == "tspan")
         }
 
         @Test
         func `TSpan with position`() {
-            let tspan = W3C_SVG2.Text.TSpan(x: 100, y: 200, content: "positioned")
+            let tspan = W3C.SVG.`2`.Text.TSpan(x: 100, y: 200, content: "positioned")
             #expect(tspan.x == 100)
             #expect(tspan.y == 200)
         }
     }
 }
 
-enum `W3C_SVG2.Types.ViewBox.Parse Tests` {}
+enum `W3C.SVG.2.Types.ViewBox.Parse Tests` {}
 
-extension `W3C_SVG2.Types.ViewBox.Parse Tests` {
+extension `W3C.SVG.2.Types.ViewBox.Parse Tests` {
     @Suite
     struct `View box values` {
         private static func parse(
             _ text: String
-        ) throws(W3C_SVG2.Types.ViewBox.Parse<ByteSlice>.Failure) -> W3C_SVG2.Types.ViewBox.Parse<ByteSlice>.Output {
+        ) throws(W3C.SVG.`2`.Types.ViewBox.Parse<ByteSlice>.Failure) -> W3C.SVG.`2`.Types.ViewBox.Parse<ByteSlice>.Output {
             var input = ByteSlice(text)
-            return try W3C_SVG2.Types.ViewBox.Parse<ByteSlice>().parse(&input)
+            return try W3C.SVG.`2`.Types.ViewBox.Parse<ByteSlice>().parse(&input)
         }
 
         @Test
@@ -807,17 +807,17 @@ extension `W3C_SVG2.Types.ViewBox.Parse Tests` {
 
         @Test
         func `a negative width or height is refused`() {
-            #expect(throws: W3C_SVG2.Types.ViewBox.Parse<ByteSlice>.Error.negativeSize) {
+            #expect(throws: W3C.SVG.`2`.Types.ViewBox.Parse<ByteSlice>.Error.negativeSize) {
                 try Self.parse("0 0 -100 50")
             }
-            #expect(throws: W3C_SVG2.Types.ViewBox.Parse<ByteSlice>.Error.negativeSize) {
+            #expect(throws: W3C.SVG.`2`.Types.ViewBox.Parse<ByteSlice>.Error.negativeSize) {
                 try Self.parse("0 0 100 -50")
             }
         }
 
         @Test
         func `fewer than four numbers is refused`() {
-            #expect(throws: W3C_SVG2.Types.ViewBox.Parse<ByteSlice>.Error.expectedFourNumbers) {
+            #expect(throws: W3C.SVG.`2`.Types.ViewBox.Parse<ByteSlice>.Error.expectedFourNumbers) {
                 try Self.parse("0 0 100")
             }
         }

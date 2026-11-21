@@ -2,16 +2,16 @@ import Testing
 
 @testable import W3C_SVG
 
-enum `W3C_SVG2.Types.Transform.Parse Tests` {}
+enum `W3C.SVG.2.Types.Transform.Parse Tests` {}
 
-extension `W3C_SVG2.Types.Transform.Parse Tests` {
+extension `W3C.SVG.2.Types.Transform.Parse Tests` {
     @Suite
     struct `Function names` {
         private static func parse(
             _ text: String
-        ) throws(W3C_SVG2.Types.Transform.Parse<ByteSlice>.Failure) -> [W3C_SVG2.Types.Transform.Parse<ByteSlice>.Function] {
+        ) throws(W3C.SVG.`2`.Types.Transform.Parse<ByteSlice>.Failure) -> [W3C.SVG.`2`.Types.Transform.Parse<ByteSlice>.Function] {
             var input = ByteSlice(text)
-            return try W3C_SVG2.Types.Transform.Parse<ByteSlice>().parse(&input)
+            return try W3C.SVG.`2`.Types.Transform.Parse<ByteSlice>().parse(&input)
         }
 
         @Test
@@ -30,27 +30,27 @@ extension `W3C_SVG2.Types.Transform.Parse Tests` {
 
         @Test
         func `a name that only shares the first letter is not translate`() {
-            #expect(throws: W3C_SVG2.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
+            #expect(throws: W3C.SVG.`2`.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
                 try Self.parse("tomato(1)")
             }
         }
 
         @Test
         func `a five letter name starting with s is not scale`() {
-            #expect(throws: W3C_SVG2.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
+            #expect(throws: W3C.SVG.`2`.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
                 try Self.parse("sale(2)")
             }
-            #expect(throws: W3C_SVG2.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
+            #expect(throws: W3C.SVG.`2`.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
                 try Self.parse("sxxxx(2)")
             }
         }
 
         @Test
         func `a name with a matching prefix is refused`() {
-            #expect(throws: W3C_SVG2.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
+            #expect(throws: W3C.SVG.`2`.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
                 try Self.parse("skewXY(2)")
             }
-            #expect(throws: W3C_SVG2.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
+            #expect(throws: W3C.SVG.`2`.Types.Transform.Parse<ByteSlice>.Error.expectedFunction) {
                 try Self.parse("matrixmatrix(1 2 3 4 5 6)")
             }
         }

@@ -1,0 +1,178 @@
+public import Parser
+public import W3C
+
+extension W3C.SVG.`2`.Types.Transform {
+
+    public struct Parse<Input: Collection.Slice.`Protocol`>: Sendable
+    where Input: Sendable, Input.Element == UInt8 {
+        @inlinable
+        public init() {}
+    }
+}
+
+extension W3C.SVG.`2`.Types.Transform.Parse {
+    public typealias Error = __W3C_SVG2TypesTransformParseError
+
+    public typealias Output = [Function]
+
+}
+
+extension W3C.SVG.`2`.Types.Transform.Parse: Parsing {
+
+    public typealias Failure = W3C.SVG.`2`.Types.Transform.Parse<Input>.Error
+
+    @inlinable
+    public func parse(_ input: inout Input) throws(Failure) -> Output {
+        var functions: [Function] = []
+
+        while true {
+            Self._skipWS(&input)
+            guard input.startIndex < input.endIndex else { break }
+
+            let byte = input[input.startIndex]
+
+            let lower = byte | 0x20
+            guard lower >= 0x61 && lower <= 0x7A else { break }
+
+            let fn = try Self._parseFunction(&input)
+            functions.append(fn)
+
+            Self._skipWS(&input)
+            if input.startIndex < input.endIndex && input[input.startIndex] == 0x2C {
+                input = input[input.index(after: input.startIndex)...]
+            }
+        }
+
+        return functions
+    }
+
+    @inlinable
+    package static func _parseFunction(_ input: inout Input) throws(Failure) -> Function {
+
+        var name: [UInt8] = []
+        while input.startIndex < input.endIndex {
+            let byte = input[input.startIndex] | 0x20
+            guard byte >= 0x61 && byte <= 0x7A else { break }
+            if name.count <= 9 { name.append(byte) }
+            input = input[input.index(after: input.startIndex)...]
+        }
+
+        let known: [[UInt8]] = [
+            [UInt8]("matrix".utf8), [UInt8]("translate".utf8), [UInt8]("scale".utf8),
+            [UInt8]("rotate".utf8), [UInt8]("skewx".utf8), [UInt8]("skewy".utf8),
+        ]
+        guard known.contains(name) else { throw .expectedFunction }
+
+        Self._skipWS(&input)
+
+        guard input.startIndex < input.endIndex,
+            input[input.startIndex] == 0x28
+        else {
+            throw .expectedOpenParen
+        }
+        input = input[input.index(after: input.startIndex)...]
+
+        let result: Function
+
+        switch name {
+        case [UInt8]("translate".utf8):
+            let args = try Self._parseArgs(&input, min: 1, max: 2)
+            result = .translate(tx: args[0], ty: args.count > 1 ? args[1] : 0)
+
+        case [UInt8]("rotate".utf8):
+            let args = try Self._parseArgs(&input, min: 1, max: 3)
+            result = .rotate(
+                angle: args[0],
+                cx: args.count > 1 ? args[1] : 0,
+                cy: args.count > 2 ? args[2] : 0
+            )
+
+        case [UInt8]("scale".utf8):
+            let args = try Self._parseArgs(&input, min: 1, max: 2)
+            result = .scale(sx: args[0], sy: args.count > 1 ? args[1] : args[0])
+
+        case [UInt8]("skewx".utf8):
+            let args = try Self._parseArgs(&input, min: 1, max: 1)
+            result = .skewX(angle: args[0])
+
+        case [UInt8]("skewy".utf8):
+            let args = try Self._parseArgs(&input, min: 1, max: 1)
+            result = .skewY(angle: args[0])
+
+        case [UInt8]("matrix".utf8):
+            let args = try Self._parseArgs(&input, min: 6, max: 6)
+            result = .matrix(
+                a: args[0],
+                b: args[1],
+                c: args[2],
+                d: args[3],
+                e: args[4],
+                f: args[5]
+            )
+
+        default:
+            throw .expectedFunction
+        }
+
+        Self._skipWS(&input)
+        guard input.startIndex < input.endIndex,
+            input[input.startIndex] == 0x29
+        else {
+            throw .expectedCloseParen
+        }
+        input = input[input.index(after: input.startIndex)...]
+
+        return result
+    }
+
+    @inlinable
+    package static func _parseArgs(
+        _ input: inout Input,
+        min: Int,
+        max: Int
+    ) throws(Failure) -> [Double] {
+        var args: [Double] = []
+
+        for i in 0..<max {
+            Self._skipWSAndComma(&input)
+
+            guard input.startIndex < input.endIndex else { break }
+            let byte = input[input.startIndex]
+            let isStart =
+                (byte >= 0x30 && byte <= 0x39)
+                || byte == 0x2D || byte == 0x2B || byte == 0x2E
+            guard isStart else {
+                if i >= min { break }
+                throw .numberError(.expectedDigit)
+            }
+
+            let value: Double
+            do throws(W3C.SVG.`2`.Parse.Number<Input>.Failure) {
+                value = try W3C.SVG.`2`.Parse.Number<Input>().parse(&input)
+            } catch {
+                throw .numberError(error)
+            }
+            args.append(value)
+        }
+
+        return args
+    }
+
+    @inlinable
+    package static func _skipWS(_ input: inout Input) {
+        while input.startIndex < input.endIndex {
+            let byte = input[input.startIndex]
+            guard byte == 0x20 || byte == 0x09 || byte == 0x0D || byte == 0x0A else { break }
+            input = input[input.index(after: input.startIndex)...]
+        }
+    }
+
+    @inlinable
+    package static func _skipWSAndComma(_ input: inout Input) {
+        Self._skipWS(&input)
+        if input.startIndex < input.endIndex && input[input.startIndex] == 0x2C {
+            input = input[input.index(after: input.startIndex)...]
+        }
+        Self._skipWS(&input)
+    }
+}

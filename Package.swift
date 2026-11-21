@@ -18,6 +18,7 @@ let package = Package(
         )
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-w3c/swift-w3c.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-segment.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-formatter.git",
@@ -42,6 +43,7 @@ let package = Package(
         .target(
             name: "W3C SVG",
             dependencies: [
+                .product(name: "W3C", package: "swift-w3c"),
                 .product(name: "Segment", package: "swift-segment"),
                 .product(name: "Formatter", package: "swift-formatter"),
                 .product(name: "Geometry", package: "swift-geometry"),

@@ -1,0 +1,63 @@
+public import RFC_3987
+public import W3C
+
+extension W3C.SVG.`2`.PaintServers {
+
+    public struct Pattern: SVGElementType, Sendable, Equatable {
+
+        public let id: String?
+
+        public let x: W3C.SVG.`2`.X?
+
+        public let y: W3C.SVG.`2`.Y?
+
+        public let width: W3C.SVG.`2`.Width?
+
+        public let height: W3C.SVG.`2`.Height?
+
+        public let viewBox: W3C.SVG.`2`.Types.ViewBox?
+
+        public let href: RFC_3987.IRI.Reference?
+
+        public let patternUnits: Units?
+
+        public let patternContentUnits: Units?
+
+        public let patternTransform: String?
+
+        public let preserveAspectRatio: String?
+
+        public init(
+            id: String? = nil,
+            x: W3C.SVG.`2`.X? = nil,
+            y: W3C.SVG.`2`.Y? = nil,
+            width: W3C.SVG.`2`.Width? = nil,
+            height: W3C.SVG.`2`.Height? = nil,
+            viewBox: W3C.SVG.`2`.Types.ViewBox? = nil,
+            href: RFC_3987.IRI.Reference? = nil,
+            patternUnits: Units? = nil,
+            patternContentUnits: Units? = nil,
+            patternTransform: String? = nil,
+            preserveAspectRatio: String? = nil
+        ) {
+            self.id = id
+            self.x = x
+            self.y = y
+            self.width = width
+            self.height = height
+            self.viewBox = viewBox
+            self.href = href
+            self.patternUnits = patternUnits
+            self.patternContentUnits = patternContentUnits
+            self.patternTransform = patternTransform
+            self.preserveAspectRatio = preserveAspectRatio
+        }
+    }
+}
+
+extension W3C.SVG.`2`.PaintServers.Pattern {
+
+    public static let tagName = "pattern"
+
+    public static let isSelfClosing = false
+}

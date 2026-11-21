@@ -1,0 +1,85 @@
+public import Parser
+public import W3C
+
+extension W3C.SVG.`2`.Types.ViewBox {
+
+    public struct Parse<Input: Collection.Slice.`Protocol`>: Sendable
+    where Input: Sendable, Input.Element == UInt8 {
+        @inlinable
+        public init() {}
+    }
+}
+
+extension W3C.SVG.`2`.Types.ViewBox.Parse {
+    public typealias Error = __W3C_SVG2TypesViewBoxParseError
+
+}
+
+extension W3C.SVG.`2`.Types.ViewBox.Parse: Parsing {
+
+    public typealias Failure = W3C.SVG.`2`.Types.ViewBox.Parse<Input>.Error
+
+    @inlinable
+    public func parse(_ input: inout Input) throws(Failure) -> Output {
+        Self._skipWhitespaceAndComma(&input)
+
+        guard input.startIndex < input.endIndex else { throw .expectedFourNumbers }
+        let minX: Double
+        do throws(W3C.SVG.`2`.Parse.Number<Input>.Failure) {
+            minX = try W3C.SVG.`2`.Parse.Number<Input>().parse(&input)
+        } catch {
+            throw .numberError(error)
+        }
+        Self._skipWhitespaceAndComma(&input)
+
+        guard input.startIndex < input.endIndex else { throw .expectedFourNumbers }
+        let minY: Double
+        do throws(W3C.SVG.`2`.Parse.Number<Input>.Failure) {
+            minY = try W3C.SVG.`2`.Parse.Number<Input>().parse(&input)
+        } catch {
+            throw .numberError(error)
+        }
+        Self._skipWhitespaceAndComma(&input)
+
+        guard input.startIndex < input.endIndex else { throw .expectedFourNumbers }
+        let width: Double
+        do throws(W3C.SVG.`2`.Parse.Number<Input>.Failure) {
+            width = try W3C.SVG.`2`.Parse.Number<Input>().parse(&input)
+        } catch {
+            throw .numberError(error)
+        }
+        Self._skipWhitespaceAndComma(&input)
+
+        guard input.startIndex < input.endIndex else { throw .expectedFourNumbers }
+        let height: Double
+        do throws(W3C.SVG.`2`.Parse.Number<Input>.Failure) {
+            height = try W3C.SVG.`2`.Parse.Number<Input>().parse(&input)
+        } catch {
+            throw .numberError(error)
+        }
+
+        guard width >= 0, height >= 0 else { throw .negativeSize }
+
+        return Output(minX: minX, minY: minY, width: width, height: height)
+    }
+
+    @inlinable
+    package static func _skipWhitespaceAndComma(_ input: inout Input) {
+
+        while input.startIndex < input.endIndex {
+            let byte = input[input.startIndex]
+            guard byte == 0x20 || byte == 0x09 || byte == 0x0D || byte == 0x0A else { break }
+            input = input[input.index(after: input.startIndex)...]
+        }
+
+        if input.startIndex < input.endIndex && input[input.startIndex] == 0x2C {
+            input = input[input.index(after: input.startIndex)...]
+        }
+
+        while input.startIndex < input.endIndex {
+            let byte = input[input.startIndex]
+            guard byte == 0x20 || byte == 0x09 || byte == 0x0D || byte == 0x0A else { break }
+            input = input[input.index(after: input.startIndex)...]
+        }
+    }
+}

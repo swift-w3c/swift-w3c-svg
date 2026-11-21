@@ -2,16 +2,16 @@ import Testing
 
 @testable import W3C_SVG
 
-enum `W3C_SVG2.Types.Color.Parse Tests` {}
+enum `W3C.SVG.2.Types.Color.Parse Tests` {}
 
-extension `W3C_SVG2.Types.Color.Parse Tests` {
+extension `W3C.SVG.2.Types.Color.Parse Tests` {
     @Suite
     struct `Hex and rgb colors` {
         private static func parse(
             _ text: String
-        ) throws(W3C_SVG2.Types.Color.Parse<ByteSlice>.Failure) -> W3C_SVG2.Types.Color.Parse<ByteSlice>.Output {
+        ) throws(W3C.SVG.`2`.Types.Color.Parse<ByteSlice>.Failure) -> W3C.SVG.`2`.Types.Color.Parse<ByteSlice>.Output {
             var input = ByteSlice(text)
-            return try W3C_SVG2.Types.Color.Parse<ByteSlice>().parse(&input)
+            return try W3C.SVG.`2`.Types.Color.Parse<ByteSlice>().parse(&input)
         }
 
         @Test
@@ -28,7 +28,7 @@ extension `W3C_SVG2.Types.Color.Parse Tests` {
         @Test
         func `hex colors of other lengths are refused`() {
             for text in ["#", "#a", "#ab", "#abcde", "#abcdeff", "#aabbccddee"] {
-                #expect(throws: W3C_SVG2.Types.Color.Parse<ByteSlice>.Error.invalidHex) {
+                #expect(throws: W3C.SVG.`2`.Types.Color.Parse<ByteSlice>.Error.invalidHex) {
                     try Self.parse(text)
                 }
             }

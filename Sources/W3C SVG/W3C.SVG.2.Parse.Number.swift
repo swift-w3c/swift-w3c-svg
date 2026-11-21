@@ -1,0 +1,102 @@
+public import Parser
+public import W3C
+
+extension W3C.SVG.`2`.Parse {
+
+    public struct Number<Input: Collection.Slice.`Protocol`>: Sendable
+    where Input: Sendable, Input.Element == UInt8 {
+        @inlinable
+        public init() {}
+    }
+}
+
+extension W3C.SVG.`2`.Parse.Number {
+    public typealias Output = Double
+    public typealias Error = __W3C_SVG2ParseNumberError
+}
+
+extension W3C.SVG.`2`.Parse.Number: Parsing {
+
+    public typealias Failure = W3C.SVG.`2`.Parse.Number<Input>.Error
+
+    @inlinable
+    public func parse(_ input: inout Input) throws(Failure) -> Output {
+        var negative = false
+        var hasDigits = false
+
+        if input.startIndex < input.endIndex {
+            let byte = input[input.startIndex]
+            if byte == 0x2D {
+                negative = true
+                input = input[input.index(after: input.startIndex)...]
+            } else if byte == 0x2B {
+                input = input[input.index(after: input.startIndex)...]
+            }
+        }
+
+        var integerPart: Double = 0
+        while input.startIndex < input.endIndex {
+            let byte = input[input.startIndex]
+            guard byte >= 0x30 && byte <= 0x39 else { break }
+            integerPart = integerPart * 10 + Double(byte &- 0x30)
+            input = input[input.index(after: input.startIndex)...]
+            hasDigits = true
+        }
+
+        var fractionalPart: Double = 0
+        if input.startIndex < input.endIndex && input[input.startIndex] == 0x2E {
+            input = input[input.index(after: input.startIndex)...]
+            var divisor: Double = 10
+            while input.startIndex < input.endIndex {
+                let byte = input[input.startIndex]
+                guard byte >= 0x30 && byte <= 0x39 else { break }
+                fractionalPart += Double(byte &- 0x30) / divisor
+                divisor *= 10
+                input = input[input.index(after: input.startIndex)...]
+                hasDigits = true
+            }
+        }
+
+        guard hasDigits else { throw .expectedDigit }
+
+        var value = integerPart + fractionalPart
+
+        if input.startIndex < input.endIndex {
+            let byte = input[input.startIndex]
+            if byte == 0x65 || byte == 0x45 {
+                input = input[input.index(after: input.startIndex)...]
+
+                var expNegative = false
+                if input.startIndex < input.endIndex {
+                    let s = input[input.startIndex]
+                    if s == 0x2D {
+                        expNegative = true
+                        input = input[input.index(after: input.startIndex)...]
+                    } else if s == 0x2B {
+                        input = input[input.index(after: input.startIndex)...]
+                    }
+                }
+
+                var exp = 0
+                while input.startIndex < input.endIndex {
+                    let d = input[input.startIndex]
+                    guard d >= 0x30 && d <= 0x39 else { break }
+                    if exp < 400 { exp = exp * 10 + Int(d &- 0x30) }
+                    input = input[input.index(after: input.startIndex)...]
+                }
+
+                if expNegative {
+                    var divisor: Double = 1
+                    for _ in 0..<exp { divisor *= 10 }
+                    value /= divisor
+                } else {
+                    var multiplier: Double = 1
+                    for _ in 0..<exp { multiplier *= 10 }
+                    value *= multiplier
+                }
+            }
+        }
+
+        return negative ? -value : value
+    }
+}

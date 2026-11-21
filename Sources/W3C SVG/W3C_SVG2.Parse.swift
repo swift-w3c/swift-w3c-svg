@@ -1,5 +1,0 @@
-import Parser
-
-extension W3C_SVG2 {
-    public enum Parse {}
-}
