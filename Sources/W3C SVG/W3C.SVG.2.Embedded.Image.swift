@@ -13,7 +13,7 @@ extension W3C.SVG.`2`.Embedded {
 
         public let height: W3C.SVG.`2`.Height?
 
-        public let href: RFC_3987.IRI.Reference?
+        public let href: IETF.RFC.`3987`.IRI.Reference?
 
         public let preserveAspectRatio: String?
 
@@ -22,7 +22,7 @@ extension W3C.SVG.`2`.Embedded {
             y: W3C.SVG.`2`.Y? = nil,
             width: W3C.SVG.`2`.Width? = nil,
             height: W3C.SVG.`2`.Height? = nil,
-            href: RFC_3987.IRI.Reference? = nil,
+            href: IETF.RFC.`3987`.IRI.Reference? = nil,
             preserveAspectRatio: String? = nil
         ) {
             self.x = x

@@ -374,7 +374,7 @@ extension `W3C.SVG.2.Document.Use Tests` {
     struct Test {
         @Test
         func `Use creation`() throws {
-            let use = W3C.SVG.`2`.Document.Use(href: try RFC_3987.IRI.Reference("#icon"), x: 50, y: 50)
+            let use = W3C.SVG.`2`.Document.Use(href: try IETF.RFC.`3987`.IRI.Reference("#icon"), x: 50, y: 50)
             #expect(use.href?.value == "#icon")
             #expect(use.x == 50)
             #expect(use.y == 50)
@@ -388,7 +388,7 @@ extension `W3C.SVG.2.Document.Use Tests` {
         @Test
         func `Use with dimensions`() throws {
             let use = W3C.SVG.`2`.Document.Use(
-                href: try RFC_3987.IRI.Reference("#icon"),
+                href: try IETF.RFC.`3987`.IRI.Reference("#icon"),
                 x: 10,
                 y: 20,
                 width: 100,
@@ -430,7 +430,7 @@ extension `W3C.SVG.2.PaintServers.LinearGradient Tests` {
         func `LinearGradient with href`() throws {
             let gradient = W3C.SVG.`2`.PaintServers.LinearGradient(
                 id: "gradient2",
-                href: try RFC_3987.IRI.Reference("#gradient1")
+                href: try IETF.RFC.`3987`.IRI.Reference("#gradient1")
             )
             #expect(gradient.href?.value == "#gradient1")
         }

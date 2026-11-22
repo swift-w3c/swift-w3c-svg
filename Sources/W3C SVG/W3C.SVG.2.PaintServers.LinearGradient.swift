@@ -15,7 +15,7 @@ extension W3C.SVG.`2`.PaintServers {
 
         public let y2: String?
 
-        public let href: RFC_3987.IRI.Reference?
+        public let href: IETF.RFC.`3987`.IRI.Reference?
 
         public let gradientUnits: GradientUnits?
 
@@ -29,7 +29,7 @@ extension W3C.SVG.`2`.PaintServers {
             y1: String? = nil,
             x2: String? = nil,
             y2: String? = nil,
-            href: RFC_3987.IRI.Reference? = nil,
+            href: IETF.RFC.`3987`.IRI.Reference? = nil,
             gradientUnits: GradientUnits? = nil,
             gradientTransform: String? = nil,
             spreadMethod: SpreadMethod? = nil

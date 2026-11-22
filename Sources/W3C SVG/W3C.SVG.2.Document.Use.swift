@@ -5,7 +5,7 @@ extension W3C.SVG.`2`.Document {
 
     public struct Use: SVGElementType, Sendable, Equatable {
 
-        public let href: RFC_3987.IRI.Reference?
+        public let href: IETF.RFC.`3987`.IRI.Reference?
 
         public let x: W3C.SVG.`2`.X?
 
@@ -16,7 +16,7 @@ extension W3C.SVG.`2`.Document {
         public let height: W3C.SVG.`2`.Height?
 
         public init(
-            href: RFC_3987.IRI.Reference? = nil,
+            href: IETF.RFC.`3987`.IRI.Reference? = nil,
             x: W3C.SVG.`2`.X? = nil,
             y: W3C.SVG.`2`.Y? = nil,
             width: W3C.SVG.`2`.Width? = nil,

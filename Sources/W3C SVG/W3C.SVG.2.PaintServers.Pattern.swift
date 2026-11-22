@@ -17,7 +17,7 @@ extension W3C.SVG.`2`.PaintServers {
 
         public let viewBox: W3C.SVG.`2`.Types.ViewBox?
 
-        public let href: RFC_3987.IRI.Reference?
+        public let href: IETF.RFC.`3987`.IRI.Reference?
 
         public let patternUnits: Units?
 
@@ -34,7 +34,7 @@ extension W3C.SVG.`2`.PaintServers {
             width: W3C.SVG.`2`.Width? = nil,
             height: W3C.SVG.`2`.Height? = nil,
             viewBox: W3C.SVG.`2`.Types.ViewBox? = nil,
-            href: RFC_3987.IRI.Reference? = nil,
+            href: IETF.RFC.`3987`.IRI.Reference? = nil,
             patternUnits: Units? = nil,
             patternContentUnits: Units? = nil,
             patternTransform: String? = nil,

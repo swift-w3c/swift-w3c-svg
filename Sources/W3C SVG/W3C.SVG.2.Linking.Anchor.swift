@@ -5,7 +5,7 @@ extension W3C.SVG.`2`.Linking {
 
     public struct Anchor: SVGElementType, Sendable, Equatable {
 
-        public let href: RFC_3987.IRI.Reference?
+        public let href: IETF.RFC.`3987`.IRI.Reference?
 
         public let target: String?
 
@@ -22,7 +22,7 @@ extension W3C.SVG.`2`.Linking {
         public let referrerpolicy: String?
 
         public init(
-            href: RFC_3987.IRI.Reference? = nil,
+            href: IETF.RFC.`3987`.IRI.Reference? = nil,
             target: String? = nil,
             download: String? = nil,
             ping: String? = nil,
