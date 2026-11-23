@@ -1,7 +1,7 @@
 public import RFC_3987
 public import W3C
 
-extension W3C.SVG.`2`.PaintServers {
+extension W3C.SVG.`2`.Paint {
 
     public struct LinearGradient: SVGElementType, Sendable, Equatable {
 
@@ -17,11 +17,11 @@ extension W3C.SVG.`2`.PaintServers {
 
         public let href: IETF.RFC.`3987`.IRI.Reference?
 
-        public let gradientUnits: GradientUnits?
+        public let gradientUnits: Units?
 
         public let gradientTransform: String?
 
-        public let spreadMethod: SpreadMethod?
+        public let spreadMethod: Spread?
 
         public init(
             id: String? = nil,
@@ -30,9 +30,9 @@ extension W3C.SVG.`2`.PaintServers {
             x2: String? = nil,
             y2: String? = nil,
             href: IETF.RFC.`3987`.IRI.Reference? = nil,
-            gradientUnits: GradientUnits? = nil,
+            gradientUnits: Units? = nil,
             gradientTransform: String? = nil,
-            spreadMethod: SpreadMethod? = nil
+            spreadMethod: Spread? = nil
         ) {
             self.id = id
             self.x1 = x1
@@ -47,7 +47,7 @@ extension W3C.SVG.`2`.PaintServers {
     }
 }
 
-extension W3C.SVG.`2`.PaintServers.LinearGradient {
+extension W3C.SVG.`2`.Paint.LinearGradient {
 
     public static let tagName = "linearGradient"
 

@@ -1,7 +1,7 @@
 public import RFC_3987
 public import W3C
 
-extension W3C.SVG.`2`.PaintServers {
+extension W3C.SVG.`2`.Paint {
 
     public struct Pattern: SVGElementType, Sendable, Equatable {
 
@@ -55,7 +55,7 @@ extension W3C.SVG.`2`.PaintServers {
     }
 }
 
-extension W3C.SVG.`2`.PaintServers.Pattern {
+extension W3C.SVG.`2`.Paint.Pattern {
 
     public static let tagName = "pattern"
 

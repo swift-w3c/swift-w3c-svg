@@ -12,20 +12,20 @@ extension `W3C_SVG2_ Tests` {
 
 extension `W3C_SVG2_ Tests`.`W3C SVG2 - Basic Functionality` {
     @Suite
-    struct `PaintServers - Gradient Units and Spread Methods` {
+    struct `Paint - Gradient Units and Spread Methods` {
         @Test
         func `LinearGradient GradientUnits`() {
-            let userSpace = W3C.SVG.`2`.PaintServers.LinearGradient.GradientUnits.userSpaceOnUse
-            let objectBBox = W3C.SVG.`2`.PaintServers.LinearGradient.GradientUnits.objectBoundingBox
+            let userSpace = W3C.SVG.`2`.Paint.LinearGradient.Units.userSpaceOnUse
+            let objectBBox = W3C.SVG.`2`.Paint.LinearGradient.Units.objectBoundingBox
             #expect(userSpace.rawValue == "userSpaceOnUse")
             #expect(objectBBox.rawValue == "objectBoundingBox")
         }
 
         @Test
         func `LinearGradient SpreadMethod`() {
-            let pad = W3C.SVG.`2`.PaintServers.LinearGradient.SpreadMethod.pad
-            let reflect = W3C.SVG.`2`.PaintServers.LinearGradient.SpreadMethod.reflect
-            let repeatSpread = W3C.SVG.`2`.PaintServers.LinearGradient.SpreadMethod.repeat
+            let pad = W3C.SVG.`2`.Paint.LinearGradient.Spread.pad
+            let reflect = W3C.SVG.`2`.Paint.LinearGradient.Spread.reflect
+            let repeatSpread = W3C.SVG.`2`.Paint.LinearGradient.Spread.repeat
             #expect(pad.rawValue == "pad")
             #expect(reflect.rawValue == "reflect")
             #expect(repeatSpread.rawValue == "repeat")
@@ -33,17 +33,17 @@ extension `W3C_SVG2_ Tests`.`W3C SVG2 - Basic Functionality` {
 
         @Test
         func `RadialGradient GradientUnits`() {
-            let userSpace = W3C.SVG.`2`.PaintServers.RadialGradient.GradientUnits.userSpaceOnUse
-            let objectBBox = W3C.SVG.`2`.PaintServers.RadialGradient.GradientUnits.objectBoundingBox
+            let userSpace = W3C.SVG.`2`.Paint.RadialGradient.Units.userSpaceOnUse
+            let objectBBox = W3C.SVG.`2`.Paint.RadialGradient.Units.objectBoundingBox
             #expect(userSpace.rawValue == "userSpaceOnUse")
             #expect(objectBBox.rawValue == "objectBoundingBox")
         }
 
         @Test
         func `RadialGradient SpreadMethod`() {
-            let pad = W3C.SVG.`2`.PaintServers.RadialGradient.SpreadMethod.pad
-            let reflect = W3C.SVG.`2`.PaintServers.RadialGradient.SpreadMethod.reflect
-            let repeatSpread = W3C.SVG.`2`.PaintServers.RadialGradient.SpreadMethod.repeat
+            let pad = W3C.SVG.`2`.Paint.RadialGradient.Spread.pad
+            let reflect = W3C.SVG.`2`.Paint.RadialGradient.Spread.reflect
+            let repeatSpread = W3C.SVG.`2`.Paint.RadialGradient.Spread.repeat
             #expect(pad.rawValue == "pad")
             #expect(reflect.rawValue == "reflect")
             #expect(repeatSpread.rawValue == "repeat")
@@ -51,8 +51,8 @@ extension `W3C_SVG2_ Tests`.`W3C SVG2 - Basic Functionality` {
 
         @Test
         func `Pattern Units`() {
-            let userSpace = W3C.SVG.`2`.PaintServers.Pattern.Units.userSpaceOnUse
-            let objectBBox = W3C.SVG.`2`.PaintServers.Pattern.Units.objectBoundingBox
+            let userSpace = W3C.SVG.`2`.Paint.Pattern.Units.userSpaceOnUse
+            let objectBBox = W3C.SVG.`2`.Paint.Pattern.Units.objectBoundingBox
             #expect(userSpace.rawValue == "userSpaceOnUse")
             #expect(objectBBox.rawValue == "objectBoundingBox")
         }
@@ -400,14 +400,14 @@ extension `W3C.SVG.2.Document.Use Tests` {
     }
 }
 
-enum `W3C.SVG.2.PaintServers.LinearGradient Tests` {}
+enum `W3C.SVG.2.Paint.LinearGradient Tests` {}
 
-extension `W3C.SVG.2.PaintServers.LinearGradient Tests` {
+extension `W3C.SVG.2.Paint.LinearGradient Tests` {
     @Suite
     struct Test {
         @Test
         func `LinearGradient creation`() {
-            let gradient = W3C.SVG.`2`.PaintServers.LinearGradient(
+            let gradient = W3C.SVG.`2`.Paint.LinearGradient(
                 id: "myGradient",
                 x1: "0%",
                 y1: "0%",
@@ -423,12 +423,12 @@ extension `W3C.SVG.2.PaintServers.LinearGradient Tests` {
 
         @Test
         func `LinearGradient tag name`() {
-            #expect(W3C.SVG.`2`.PaintServers.LinearGradient.tagName == "linearGradient")
+            #expect(W3C.SVG.`2`.Paint.LinearGradient.tagName == "linearGradient")
         }
 
         @Test
         func `LinearGradient with href`() throws {
-            let gradient = W3C.SVG.`2`.PaintServers.LinearGradient(
+            let gradient = W3C.SVG.`2`.Paint.LinearGradient(
                 id: "gradient2",
                 href: try IETF.RFC.`3987`.IRI.Reference("#gradient1")
             )
@@ -437,14 +437,14 @@ extension `W3C.SVG.2.PaintServers.LinearGradient Tests` {
     }
 }
 
-enum `W3C.SVG.2.PaintServers.RadialGradient Tests` {}
+enum `W3C.SVG.2.Paint.RadialGradient Tests` {}
 
-extension `W3C.SVG.2.PaintServers.RadialGradient Tests` {
+extension `W3C.SVG.2.Paint.RadialGradient Tests` {
     @Suite
     struct Test {
         @Test
         func `RadialGradient creation`() {
-            let gradient = W3C.SVG.`2`.PaintServers.RadialGradient(
+            let gradient = W3C.SVG.`2`.Paint.RadialGradient(
                 id: "radialGrad",
                 cx: "50%",
                 cy: "50%",
@@ -458,12 +458,12 @@ extension `W3C.SVG.2.PaintServers.RadialGradient Tests` {
 
         @Test
         func `RadialGradient tag name`() {
-            #expect(W3C.SVG.`2`.PaintServers.RadialGradient.tagName == "radialGradient")
+            #expect(W3C.SVG.`2`.Paint.RadialGradient.tagName == "radialGradient")
         }
 
         @Test
         func `RadialGradient with focal point`() {
-            let gradient = W3C.SVG.`2`.PaintServers.RadialGradient(
+            let gradient = W3C.SVG.`2`.Paint.RadialGradient(
                 id: "radial",
                 cx: "50%",
                 cy: "50%",
@@ -479,38 +479,38 @@ extension `W3C.SVG.2.PaintServers.RadialGradient Tests` {
     }
 }
 
-enum `W3C.SVG.2.PaintServers.Stop Tests` {}
+enum `W3C.SVG.2.Paint.Stop Tests` {}
 
-extension `W3C.SVG.2.PaintServers.Stop Tests` {
+extension `W3C.SVG.2.Paint.Stop Tests` {
     @Suite
     struct Test {
         @Test
         func `Stop creation`() {
-            let stop = W3C.SVG.`2`.PaintServers.Stop(offset: "50%")
+            let stop = W3C.SVG.`2`.Paint.Stop(offset: "50%")
             #expect(stop.offset == "50%")
         }
 
         @Test
         func `Stop tag name`() {
-            #expect(W3C.SVG.`2`.PaintServers.Stop.tagName == "stop")
+            #expect(W3C.SVG.`2`.Paint.Stop.tagName == "stop")
         }
 
         @Test
         func `Stop with numeric offset`() {
-            let stop = W3C.SVG.`2`.PaintServers.Stop(offset: "0.5")
+            let stop = W3C.SVG.`2`.Paint.Stop(offset: "0.5")
             #expect(stop.offset == "0.5")
         }
     }
 }
 
-enum `W3C.SVG.2.PaintServers.Pattern Tests` {}
+enum `W3C.SVG.2.Paint.Pattern Tests` {}
 
-extension `W3C.SVG.2.PaintServers.Pattern Tests` {
+extension `W3C.SVG.2.Paint.Pattern Tests` {
     @Suite
     struct Test {
         @Test
         func `Pattern creation`() {
-            let pattern = W3C.SVG.`2`.PaintServers.Pattern(
+            let pattern = W3C.SVG.`2`.Paint.Pattern(
                 id: "dots",
                 x: 0,
                 y: 0,
@@ -526,12 +526,12 @@ extension `W3C.SVG.2.PaintServers.Pattern Tests` {
 
         @Test
         func `Pattern tag name`() {
-            #expect(W3C.SVG.`2`.PaintServers.Pattern.tagName == "pattern")
+            #expect(W3C.SVG.`2`.Paint.Pattern.tagName == "pattern")
         }
 
         @Test
         func `Pattern with viewBox`() {
-            let pattern = W3C.SVG.`2`.PaintServers.Pattern(
+            let pattern = W3C.SVG.`2`.Paint.Pattern(
                 id: "pattern",
                 width: 20,
                 height: 20,
@@ -542,51 +542,51 @@ extension `W3C.SVG.2.PaintServers.Pattern Tests` {
     }
 }
 
-enum `W3C.SVG.2.Painting.LineCap Tests` {}
+enum `W3C.SVG.2.Painting.Line.Cap Tests` {}
 
-extension `W3C.SVG.2.Painting.LineCap Tests` {
+extension `W3C.SVG.2.Painting.Line.Cap Tests` {
     @Suite
     struct Test {
         @Test
         func `LineCap butt`() {
-            let lineCap = W3C.SVG.`2`.Painting.LineCap.butt
+            let lineCap = W3C.SVG.`2`.Painting.Line.Cap.butt
             #expect(lineCap.rawValue == "butt")
         }
 
         @Test
         func `LineCap round`() {
-            let lineCap = W3C.SVG.`2`.Painting.LineCap.round
+            let lineCap = W3C.SVG.`2`.Painting.Line.Cap.round
             #expect(lineCap.rawValue == "round")
         }
 
         @Test
         func `LineCap square`() {
-            let lineCap = W3C.SVG.`2`.Painting.LineCap.square
+            let lineCap = W3C.SVG.`2`.Painting.Line.Cap.square
             #expect(lineCap.rawValue == "square")
         }
     }
 }
 
-enum `W3C.SVG.2.Painting.LineJoin Tests` {}
+enum `W3C.SVG.2.Painting.Line.Join Tests` {}
 
-extension `W3C.SVG.2.Painting.LineJoin Tests` {
+extension `W3C.SVG.2.Painting.Line.Join Tests` {
     @Suite
     struct Test {
         @Test
         func `LineJoin miter`() {
-            let lineJoin = W3C.SVG.`2`.Painting.LineJoin.miter
+            let lineJoin = W3C.SVG.`2`.Painting.Line.Join.miter
             #expect(lineJoin.rawValue == "miter")
         }
 
         @Test
         func `LineJoin round`() {
-            let lineJoin = W3C.SVG.`2`.Painting.LineJoin.round
+            let lineJoin = W3C.SVG.`2`.Painting.Line.Join.round
             #expect(lineJoin.rawValue == "round")
         }
 
         @Test
         func `LineJoin bevel`() {
-            let lineJoin = W3C.SVG.`2`.Painting.LineJoin.bevel
+            let lineJoin = W3C.SVG.`2`.Painting.Line.Join.bevel
             #expect(lineJoin.rawValue == "bevel")
         }
     }

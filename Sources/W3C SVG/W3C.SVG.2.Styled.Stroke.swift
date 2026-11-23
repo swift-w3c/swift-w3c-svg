@@ -7,15 +7,15 @@ extension W3C.SVG.`2`.Styled {
 
         public var width: W3C.SVG.`2`.Width?
 
-        public var lineCap: W3C.SVG.`2`.Painting.LineCap?
+        public var lineCap: W3C.SVG.`2`.Painting.Line.Cap?
 
-        public var lineJoin: W3C.SVG.`2`.Painting.LineJoin?
+        public var lineJoin: W3C.SVG.`2`.Painting.Line.Join?
 
         public init(
             color: W3C.SVG.`2`.Types.Color,
             width: W3C.SVG.`2`.Width? = nil,
-            lineCap: W3C.SVG.`2`.Painting.LineCap? = nil,
-            lineJoin: W3C.SVG.`2`.Painting.LineJoin? = nil
+            lineCap: W3C.SVG.`2`.Painting.Line.Cap? = nil,
+            lineJoin: W3C.SVG.`2`.Painting.Line.Join? = nil
         ) {
             self.color = color
             self.width = width

@@ -1,6 +1,6 @@
 public import W3C
 
-extension W3C.SVG.`2`.PaintServers {
+extension W3C.SVG.`2`.Paint {
 
     public struct Stop: SVGElementType, Sendable, Equatable {
 
@@ -22,7 +22,7 @@ extension W3C.SVG.`2`.PaintServers {
     }
 }
 
-extension W3C.SVG.`2`.PaintServers.Stop {
+extension W3C.SVG.`2`.Paint.Stop {
 
     public static let tagName = "stop"
 
